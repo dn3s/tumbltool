@@ -8,8 +8,13 @@ Test and deploy tumblr themes with ease!
 
 ##COMMANDS:
 
-preview: Print an example page using the theme specified in FILE, filled with example material from a JSON file (see -content)
-bundle: Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
+`preview:`
+
+Print an example page using the theme specified in FILE, filled with example material from a JSON file (see -content)
+
+`bundle:`
+
+Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
 
 ##OPTIONS:
 
