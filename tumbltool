@@ -1,0 +1,283 @@
+#!/usr/bin/perl
+use 5.014;
+use strict;
+#use warnings;
+use Data::Dumper;
+use JSON::PP;
+use MIME::Base64;
+use Cwd;
+#use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
+my $cwd=cwd();
+sub parseArgs #parse command-line args, provide defaults
+{
+	my $result={ #HERE BE THE DEFAULTS!
+		"content"=>"$cwd/content.json",
+		"command"=>shift(@ARGV)
+	};
+	foreach(@ARGV) { #PARSE EACH ARG AS -attribute=value
+		if($_=~/-(\w+)(?:=([\w\/._,-]+))?/) { #TODO: MAKE THIS REGEX BETTER
+			$result->{$1}=$2||1; #note that we naively put whatever the user says into the result array. This sucks. However there is the advantage of MORE RECENT ARGS OVERRIDE OLDER ONES
+		}
+		else { #WHOOPS UR ARG DIDNT MATCH MY SCHEME i guess its a theme file???
+			$result->{"theme"}=$_;
+		}
+	}
+	#TODO: enforce mandatory args?? right now it's "enforced" by the script crashing when it needs a value ;)
+	return $result;
+}
+sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way to make the JSON parser work without slurping)
+{
+	my $filename=shift();
+	my $strip=shift();
+	open(my $fh, "<", $filename) or fail("Cannot open file \"$filename\"");
+	$/ = undef;
+	my $result=readline($fh);
+	close($fh);
+	if($strip) {
+		$result=~s/[\r\n\t]//g; #uncomment this for easier debuging (removes newlines and tabs from theme)
+	}
+	return $result;
+}
+sub parseTheme #returns a pretty little tree of the theme. Considering the function works through the file in order, it should be fairly easy to work on a line-by-line basis in the future instead of slurping up the whole thing at the beginning...
+{
+	my $filename=shift();
+	my $strip=shift();
+	my $in=slurp($filename, $strip);
+	my $root={ "children" => [] };#outer hash for convenience/consistency
+	my $currBlock=$root;
+	while((my $match, my $html, my $isBlock, my $closing, my $name) = $in =~ /(^(.*?){((\/)?block:)?([A-z]+)})/s) { #inv0k3 t3h d33p p3rl m4j1ckz
+		$in=substr($in,length($match));#remove the part of the string we "consumed"
+		#K NOW LETS STRUCTURE THIS!
+		push(@{$currBlock->{"children"}}, $html) if $html;#if we slurped up any HTML lets deal with that before we do anything else
+		if(!$isBlock) { #now lets start with the easy case: the token we found is not a block, just an insert thingy.
+			push(@{$currBlock->{"children"}}, {
+				"name"=>$name
+			});
+		}
+		elsif(!$closing) { #this will be a bit more work. The token we found marks the opening of a block! I guess we have to make a block then ;/
+			my $i=push(@{$currBlock->{"children"}}, {
+				"name"=>$name,
+				"parent"=>$currBlock, #We'll need this later to get out of the block. Don't forget to remove this later to keep things clean!
+				"children"=>[]
+			});
+			$currBlock=$currBlock->{"children"}->[$i-1]; #set currBlock equal to the block we just created
+		} #oh. nevermind, that wasn't so bad
+		else { #and NOW, DEAR WATSON, through the PROCESS OF ELIMINATION we can DEDUCE that the TOKEN we have STUMPLED ACROSS... MARKS the END of a BLOCK!
+			my $oldCurr=$currBlock;
+			$currBlock=$currBlock->{"parent"};#now we just pop up one level
+			delete($oldCurr->{"parent"});#clean up the parent ref; we don't need it any more
+		}
+	}
+	push(@{$root->{"children"}},$in);#WHOOPS THE PARSING LOOP DIDN'T GRAB THE LAST BIT OF HTML SINCE IT'S NOT FOLLOWED BY A TUMBLR TAG THINGY (TODO: I should really look up what to call those things so i dont sound like an idiot)
+	return $root->{"children"};#stip off the outer object
+}
+sub parseContent
+{
+	my $filename=shift();
+	return decode_json(slurp("$cwd/$filename")) or fail("JSON decode failed for file $filename");
+}
+sub render #render a demo using $content for filler text, etc
+{
+	my $block=shift();
+	my $content=shift();
+	my $assets=shift();
+	my $inline=shift();
+	my $strip=shift();
+	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block
+		$content->{ucfirst($content->{"PostType"})}=1;
+	}
+	my $result="";
+	foreach my $item (@{$block}) {
+		if(ref($item) eq "HASH") {
+			$result.=renderObject($item, $content, $assets, $inline, $strip);
+		}
+		elsif(!($item=~/^[\r\n\s]*$/)){ #don't concatenate if it's just a blank line; that's leftovers from block declarations. TODO: maybe this should be dealt with in the parse function???
+			$result.=$item;
+		}
+	}
+	return $result;
+}
+sub renderObject #used by render to do most of the heavy lifting
+{
+	my $block=shift();
+	my $content=shift();
+	my $assets=shift();
+	my $inline=shift();
+	my $strip=shift();
+	if($block->{"children"} and $content->{$block->{"name"}}) { #If the block has children, it's not just a placeholder, it's a block. Check if there is anything to go in the block, and if so, render it.
+		if(ref($content->{$block->{"name"}}) eq "ARRAY") {#Is the relevant content an array (eg. posts, tags, etc)?
+			my $result="";
+			foreach my $contentItem (@{$content->{$block->{"name"}}}) { #iterate over said array
+				$result.=render($block->{"children"}, $contentItem, $assets, $inline, $strip); #render the current block for each array item
+			}
+			return $result;
+		}
+		else { #No it's not an array; thank goodness. Just render it
+			return render($block->{"children"}, $content, $assets, $inline, $strip);
+		}
+	}
+	else { #since it's not a block, it's a placeholder.
+		my $result="";
+		if($block->{"name"} eq "tumbltool_assets") {
+			$result=renderAssets($assets, $inline, $strip);
+		}
+		else {
+			$result=$content->{$block->{"name"}} || ""; #so we just print the value from content that corresponds to the block's name (if it exists)
+		}
+		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
+	}
+}
+sub bundle
+{
+	(my $block, my $assets, my $inline, my $strip)=@_;
+	my $result="";
+	foreach my $item (@{$block}) {
+		if(ref($item) eq "HASH") {
+			$result.=bundleObject($item, $assets, $inline, $strip);
+		}
+		else {
+			$result.=$item;
+		}
+	}
+	return $result;
+}
+sub bundleObject
+{
+	(my $block, my $assets, my $inline, my $strip)=@_;
+	my $name=$block->{"name"};
+	if($name eq "tumbltool_assets") {
+		return renderAssets($assets, $inline, $strip);
+	}
+	elsif($block->{"children"}) {
+		return "{block:$name".bundle($block->{"children"},$assets,$inline,$strip)."{/block:$name}";
+	}
+	else {
+		return "{$name}";
+	}
+}
+sub renderAssets
+{
+	my $assets=shift();
+	my $inline=shift();
+	my $strip=shift();
+	my $result="";
+	foreach my $name (@{$assets}) {
+		$result.=renderAsset($name, ($inline and !($name=~/^http:\/\/.+$/)), $strip);
+	}
+	return $result;
+}
+sub renderAsset
+{
+	my $uri=shift();
+	my $inline=shift();
+	my $strip=shift();
+	my $n=$strip?"":"\n";
+	my $before="";
+	my $after="";
+	my $asset=$inline?slurp("$cwd/$uri",$strip):$uri;
+	if($uri=~/\.css$/){
+		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+		$after=$inline?"$n</style>":"\" />";
+	}
+	elsif($uri=~/\.js$/){
+		$before=$inline?"<script>$n":"<script src=\"";
+		$after=$inline?"$n</script>":"\"></script>";
+	}
+	return "$n$before$asset$after$n";
+}
+sub fail
+{
+	my $message=shift();
+	print qq{
+$message
+Usage: tumbltool <COMMAND> [OPTIONS] FILE
+Test and deploy tumblr themes with ease!
+
+COMMANDS:
+preview             Print an example page using the theme specified
+                    in FILE, filled with example material from a
+                    JSON file (see -content)
+bundle              Bundle up a theme with any needed assets
+                    into a single file to be pasted into Tumblr.
+                    Useful for a sort of ghetto deployment system.
+OPTIONS:
+  -assets=file1[,file2...fileN]
+                    Specify stylesheets and/or scripts to include in
+                    the document, in the form of a comma-separated
+                    list of local paths or URIs. Local paths are
+                    relative to the current working directory. Files
+                    will be included either inline or linked,
+                    depending on the -inline option, while URIs will
+                    be linked always. They will be included at the
+                    special {tumbltool_assets} tag in your theme
+                    file, so make sure to add that tag (probably at
+                    the end of your theme's <head>). You are
+                    responsible for keeping your shell from breaking
+                    up this list into multiple arguments; I
+                    recommend putting the whole list in quotes.
+  -content=file.json
+                    Specify the JSON file to provide the example
+                    content. Defaults to "content.json" in your
+                    current directory.
+  -dataURI          Output your test page as a data URI, handy for
+                    previewing in a browser really easily- for
+                    example:
+                    "tumbltool -dataURI theme.html | xargs firefox"
+  -help=TOPIC       Print help on a specific topic. Possible topics
+                    are: content, theme, and usage. Default: usage.
+  -inline           Include all local files specified in -assets
+                    inline, using <script> or <style> tags, instead
+                    of the default behavior of linking to them with
+                    <link> or <script> tags. Handy for a nice
+                    one-step deploy, but hurts performance as users
+                    can't cache your stylesheets/scripts, since
+                    they are transmitted with every page load.
+  -strip            Remove unnecessary whitespace. Useful for
+                    keeping file sizes down (for marginal
+                    performance boost?)
+  -theme=FILE       Alternate syntax for specifying the theme file.
+}
+}
+sub main
+{
+	my $args=parseArgs();
+	my $assets=[];
+	if($args->{"assets"}) {
+		my @assets=split(/,/,$args->{"assets"});
+		$assets=\@assets;
+	}
+	my $strip=$args->{"strip"} or $args->{"dataURI"};
+	my $inline=$args->{"inline"} or $args->{"dataURI"};
+	my $command=$args->{"command"};
+	if($command eq "preview") {
+		my $theme=parseTheme($args->{"theme"}, $strip);
+		my $content=parseContent($args->{"content"});
+		if($args->{"dataURI"}) {
+			print("data:text/html;base64,");
+			print(encode_base64(render($theme,$content,$assets,$inline,$strip),""));
+		}
+		else {
+			print(render($theme,$content,$assets,$inline,$strip));
+		}
+		print("\n");
+	}
+	elsif($command eq "bundle") {
+		my $theme=parseTheme($args->{"theme"}, $strip);
+		print(bundle($theme,$assets,$inline,$strip));
+		print("\n");
+	}
+	elsif($command eq "dbg") {
+		my $theme=parseTheme($args->{"theme"}, $strip);
+		my $content=parseContent($args->{"content"});
+		print("Assets:\n");
+		print(Dumper($assets));
+		print("Parsed Content:\n");
+		print(Dumper($content));
+		print("Parsed Theme:\n");
+		print(Dumper($theme));
+	}
+	else {
+		fail("Unknown command: \"$command\"\n");
+	}
+}
+main();

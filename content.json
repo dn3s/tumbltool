@@ -1,0 +1,20 @@
+{
+	"Title":"Test Blog",
+	"MetaDescription":"An example of what this theme looks like",
+	"Description":"An example of what this theme looks like",
+	"NextPage":true,
+	"PreviousPage":true,
+	"Archive":true,
+	"Posts":[
+		{
+			"PostType":"text",
+			"Title":"I Like Cats",
+			"Body":"I really do like cats quite a lot"
+		},
+		{
+			"PostType":"text",
+			"Title":"I Like Dogs",
+			"Body":"I really do like cats quite a lot, but I am also a fan of Dogs"
+		}
+	]
+}
