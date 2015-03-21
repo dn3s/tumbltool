@@ -6,7 +6,7 @@ Usage: tumbltool <COMMAND> [OPTIONS] FILE
 
 Test and deploy tumblr themes with ease!
 
-##COMMANDS:
+##Commands:
 
 `preview:`
 
@@ -16,7 +16,7 @@ Print an example page using the theme specified in FILE, filled with example mat
 
 Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
 
-##OPTIONS:
+##Options:
 
 `-assets=file1[,file2...fileN]`
 
