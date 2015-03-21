@@ -1,12 +1,15 @@
 #Tumbltool
 
-```
-Usage: tumbltool <COMMAND> [OPTIONS] FILE
-```
+Test and deploy tumblr themes with ease! _WARNING: Work in progress. Refer to Issues below._
 
-Test and deploy tumblr themes with ease!
+##Installation
 
-##Commands:
+
+##Usage
+
+`Usage: tumbltool <COMMAND> [OPTIONS] FILE`
+
+###Commands:
 
 `preview:`
 
@@ -16,7 +19,7 @@ Print an example page using the theme specified in FILE, filled with example mat
 
 Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
 
-##Options:
+###Options:
 
 `-assets=file1[,file2...fileN]`
 
@@ -41,3 +44,11 @@ Remove unnecessary whitespace. Useful for keeping file sizes down (for marginal 
 `-theme=FILE`
 
 Alternate syntax for specifying the theme file.
+
+##Issues
+
+This is not by any means a finished product; it is merely a tool I hacked together because I needed it. Also I am still quite a novice at perl. Once it is a bit more useable/stable, I'll move the issues section to the bottom.
+
+- The built-in help sucks. I need to figure out a better system for help.
+- The argument parsing is terrible and needs to be re-done. Probably using `getopt` or something, which might also deal with the help issue as well.
+- Figure out a better system for the default content file; either inline it in the script or put it somewhere proper, like `~/.config` or `/etc`, or, better yet, have a search path!
