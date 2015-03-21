@@ -1,9 +1,10 @@
 #Tumbltool
 
-Test and deploy tumblr themes with ease! _WARNING: Work in progress. Refer to Issues below._
+Test and deploy tumblr themes with ease! _WARNING: Work in progress. Refer to ISSUES below._
 
 ##Installation
 
+You will need perl 5 installed, as well as the `JSON:PP` module from CPAN. Then just put `tumbltool` somewhere in your `$PATH` and fire away. For more convenient previews, put `content.json` in the same directory as your theme (although this behavior will change soon; see ISSUES).
 
 ##Usage
 
@@ -52,3 +53,4 @@ This is not by any means a finished product; it is merely a tool I hacked togeth
 - The built-in help sucks. I need to figure out a better system for help.
 - The argument parsing is terrible and needs to be re-done. Probably using `getopt` or something, which might also deal with the help issue as well.
 - Figure out a better system for the default content file; either inline it in the script or put it somewhere proper, like `~/.config` or `/etc`, or, better yet, have a search path!
+- Document the schema for the content file, and also put a bit more content in the default file.
