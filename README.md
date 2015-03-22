@@ -45,12 +45,3 @@ Remove unnecessary whitespace. Useful for keeping file sizes down (for marginal 
 `-theme=FILE`
 
 Alternate syntax for specifying the theme file.
-
-##Issues
-
-This is not by any means a finished product; it is merely a tool I hacked together because I needed it. Also I am still quite a novice at perl. Once it is a bit more useable/stable, I'll move the issues section to the bottom.
-
-- The built-in help sucks. I need to figure out a better system for help.
-- The argument syntax and parsing is terrible and needs to be re-done, probably using something standard like `getopt` or something, which might also deal with the help issue as well. Right now, for example, it doesn't care if you include a bunch of malformed/invalid args.
-- Figure out a better system for the default content file; either inline it in the script or put it somewhere proper, like `~/.config` or `/etc`, or, better yet, have a search path!
-- Document the schema for the content file, and also put a bit more content in the default file.
