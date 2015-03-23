@@ -26,7 +26,7 @@ my $cwd=cwd();
 sub parseArgs #parse command-line args, provide defaults
 {
 	my $result={ #HERE BE THE DEFAULTS!
-		"content"=>"$cwd/content.json",
+		"content"=>path("content.json"),
 		"command"=>shift(@ARGV)
 	};
 	foreach(@ARGV) { #PARSE EACH ARG AS -attribute=value
@@ -39,6 +39,11 @@ sub parseArgs #parse command-line args, provide defaults
 	}
 	#TODO: enforce mandatory args?? right now it's "enforced" by the script crashing when it needs a value ;)
 	return $result;
+}
+sub path
+{
+	my $in=shift();
+	return ($in=~/^\//)?$in:"$cwd/$in";
 }
 sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way to make the JSON parser work without slurping)
 {
@@ -89,7 +94,7 @@ sub parseTheme #returns a pretty little tree of the theme. Considering the funct
 sub parseContent
 {
 	my $filename=shift();
-	return decode_json(slurp("$cwd/$filename")) or fail("JSON decode failed for file $filename");
+	return decode_json(slurp(path($filename))) or fail("JSON decode failed for file $filename");
 }
 sub render #render a demo using $content for filler text, etc
 {
@@ -189,7 +194,7 @@ sub renderAsset
 	my $n=$strip?"":"\n";
 	my $before="";
 	my $after="";
-	my $asset=$inline?slurp("$cwd/$uri",$strip):$uri;
+	my $asset=$inline?slurp(path($uri),$strip):$uri;
 	if($uri=~/\.css$/){
 		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 		$after=$inline?"$n</style>":"\" />";
