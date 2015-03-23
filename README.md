@@ -1,6 +1,6 @@
 #Tumbltool
 
-Test and deploy tumblr themes with ease! _WARNING: Work in progress. Refer to the [issues page](https://github.com/dn3s/tumbltool/issues) for current, major problems._
+Test and deploy tumblr themes with ease! _WARNING: Work in progress. Refer to the [issues page](https://github.com/dn3s/tumbltool/issues) for current problems._
 
 ##Installation
 
