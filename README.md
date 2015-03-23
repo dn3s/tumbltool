@@ -8,7 +8,7 @@ You will need perl 5 installed, as well as the `JSON:PP` module [from CPAN](http
 
 ##Usage
 
-`Usage: tumbltool <COMMAND> [OPTIONS] FILE`
+`Usage: tumbltool <COMMAND> [OPTIONS]`
 
 ###Commands:
 
@@ -20,28 +20,36 @@ Print an example page using the theme specified in FILE, filled with example mat
 
 Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
 
+`help`
+
+Show this help text and exit.
+
 ###Options:
 
-`-assets=file1[,file2...fileN]`
+`-c --content: <FILE>`
 
-Specify stylesheets and/or scripts to include in the document, in the form of a comma-separated list of local paths or URIs. Local paths are relative to the current working directory. Files will be included either inline or linked, depending on the -inline option, while URIs will be linked always. They will be included at the special `{tumbltool_assets}` tag in your theme file, so make sure to add that tag (probably at the end of your theme's `<head>`). You are responsible for keeping your shell from breaking up this list into multiple arguments; I recommend putting the whole list in quotes.
+specify content to populate the rendered preview page.
 
-`-content=file.json`
+`-d --dataURI`
 
-Specify the JSON file to provide the example content. Defaults to `content.json` in your current directory.
+Format output as a base64-encoded data URI, meant for piping into a browser (or sending a link to clients I guess)
 
-`-dataURI`
+`-i --include: <FILES>`
 
-Output your test page as a data URI, handy for previewing in a browser really easily- for example: `tumbltool -dataURI theme.html | xargs firefox`
+specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's &lt;head>. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
 
-`-inline`
+`-l --inline:`
 
-Include all local files specified in -assets inline, using inline `<script>` or `<style>` tags, instead of the default behavior of linking to them with `<script>` or `<link>` tags. Handy for a nice one-step deploy, but hurts performance as users can't cache your stylesheets/scripts, since they are transmitted with every page load.
+Include all local files (not URIs though) inline, using &lt;script> or &lt;style> tags, so the preview or bundle is a single, self-contained file. Handy for one-step deployment, but may hurt performance since browsers won't cache stylesheets.
 
-`-strip`
+`-s --strip`
 
-Remove unnecessary whitespace. Useful for keeping file sizes down (for marginal performance boost?)
+Remove unnecessary whitespace. Useful for keeping file sizes down and ease of sharing.
 
-`-theme=FILE`
+`-v --var ATTRIBUTE=VALUE`
 
-Alternate syntax for specifying the theme file.
+Specify custom variables you may have in your theme. (Not yet implemented)
+
+`-t --theme FILE`
+
+Specify the theme file to preview/bundle.
