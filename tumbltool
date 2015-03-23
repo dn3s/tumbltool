@@ -23,10 +23,16 @@ use MIME::Base64;
 use Cwd;
 use Getopt::Long;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
-#define CLI options:
 my $cwd=cwd();
+my $home=$ENV{HOME};
+my $contentPath=[
+	"/etc/tumbltool",
+	"$home/.tumbltool",
+	"$cwd/example_content",
+	"$cwd"
+];
 my $command=shift(); #command comes first, not subject to Getopt stuff
-my $content='';
+my $content='default';
 my $dataURI='';
 my $include=[];
 my $inline='';
@@ -48,10 +54,10 @@ GetOptions(
 if($command eq "preview") {
 	if($dataURI) {
 		print("data:text/html;base64,");
-		print(encode_base64(render(parseTheme($theme, $strip),parseContent($content),$include,$inline,$strip),""));
+		print(encode_base64(render(parseTheme($theme, $strip),parseContent(contentFile($content)),$include,$inline,$strip),""));
 	}
 	else {
-		print(render(parseTheme($theme, $strip),parseContent($content),$include,$inline,$strip));
+		print(render(parseTheme($theme, $strip),parseContent(contentFile($content)),$include,$inline,$strip));
 	}
 	print("\n");
 }
@@ -69,7 +75,24 @@ else {
 	fail("Unknown command: \"$command\"\n");
 }
 
-
+sub contentFile
+{
+	my $in=shift();
+	if($in=~/^\//) {
+		return $in;
+	}
+	elsif($in=~/\.json$/) {
+		return "$cwd/$in";
+	}
+	else {
+		foreach my $dir (@{$contentPath}) {
+			if(-e "$dir/$in.json") {
+				return "$dir/$in.json";
+			}
+		}
+	}
+	return "";
+}
 sub path
 {
 	my $in=shift();
@@ -81,7 +104,7 @@ sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way
 	my $strip=shift();
 	open(my $fh, "<", $filename) or fail("Cannot open file \"$filename\"");
 	$/ = undef;
-	my $result=readline($fh);
+	my $result=readline($fh) or fail("Cannot read file \"$filename\"");
 	close($fh);
 	if($strip) {
 		$result=~s/[\r\n\t]//g;
