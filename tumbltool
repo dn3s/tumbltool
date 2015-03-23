@@ -54,7 +54,7 @@ sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way
 	my $result=readline($fh);
 	close($fh);
 	if($strip) {
-		$result=~s/[\r\n\t]//g; #uncomment this for easier debuging (removes newlines and tabs from theme)
+		$result=~s/[\r\n\t]//g;
 	}
 	return $result;
 }
@@ -66,7 +66,7 @@ sub parseTheme #returns a pretty little tree of the theme. Considering the funct
 	my $root={ "children" => [] };#outer hash for convenience/consistency
 	my $currBlock=$root;
 	while((my $match, my $html, my $isBlock, my $closing, my $name) = $in =~ /(^(.*?){((\/)?block:)?([A-z]+)})/s) { #inv0k3 t3h d33p p3rl m4j1ckz
-		$in=substr($in,length($match));#remove the part of the string we "consumed"
+		$in=substr($in,length($match));#remove the part of the string we "consumed" (TODO: possible optimization here????)
 		#K NOW LETS STRUCTURE THIS!
 		push(@{$currBlock->{"children"}}, $html) if $html;#if we slurped up any HTML lets deal with that before we do anything else
 		if(!$isBlock) { #now lets start with the easy case: the token we found is not a block, just an insert thingy.
@@ -74,7 +74,7 @@ sub parseTheme #returns a pretty little tree of the theme. Considering the funct
 				"name"=>$name
 			});
 		}
-		elsif(!$closing) { #this will be a bit more work. The token we found marks the opening of a block! I guess we have to make a block then ;/
+		elsif(!$closing) { #this will be a bit more work. The token we found marks the opening of a block! I guess we have to make a block then ;(
 			my $i=push(@{$currBlock->{"children"}}, {
 				"name"=>$name,
 				"parent"=>$currBlock, #We'll need this later to get out of the block. Don't forget to remove this later to keep things clean!
