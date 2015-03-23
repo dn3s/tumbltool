@@ -22,6 +22,7 @@ use JSON::PP;
 use MIME::Base64;
 use Cwd;
 use Getopt::Long;
+use File::Basename;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
 my $cwd=cwd();
 my $home=$ENV{HOME};
@@ -31,6 +32,7 @@ my $contentPath=[
 	"$cwd/example_content",
 	"$cwd"
 ];
+my $realContentPath="";
 my $command=shift(); #command comes first, not subject to Getopt stuff
 my $content='default';
 my $dataURI='';
@@ -79,14 +81,17 @@ sub contentFile
 {
 	my $in=shift();
 	if($in=~/^\//) {
+		$realContentPath=dirname($in);
 		return $in;
 	}
 	elsif($in=~/\.json$/) {
+		$realContentPath="$cwd";
 		return "$cwd/$in";
 	}
 	else {
 		foreach my $dir (@{$contentPath}) {
 			if(-e "$dir/$in.json") {
+				$realContentPath="$dir";
 				return "$dir/$in.json";
 			}
 		}
