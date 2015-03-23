@@ -1,5 +1,5 @@
 {
-	"Title":"Test Blog",
+	"Title":"Example Blog",
 	"MetaDescription":"An example of what this theme looks like",
 	"Description":"An example of what this theme looks like",
 	"NextPage":true,
@@ -8,8 +8,30 @@
 	"Posts":[
 		{
 			"PostType":"text",
-			"Title":"I Like Cats",
-			"Body":"I really do like cats quite a lot"
+			"Title":"Example Content",
+			"Body":"Here is some example content!",
+			"Date":true,
+			"ShortDayOfWeek":"Mon",
+			"ShortMonth":"Oct",
+			"DayOfMonth":"25",
+			"DayOfMonthSuffix":"th",
+			"NoteCount":true,
+			"NoteCountWithLabel":"9001 notes",
+			"HasTags":true,
+			"Tags":[
+				{
+					"TagURL":"",
+					"Tag":"Cool"
+				},
+				{
+					"TagURL":"",
+					"Tag":"Content"
+				},
+				{
+					"TagURL":"",
+					"Tag":"Web Scale"
+				}
+			]
 		},
 		{
 			"PostType":"text",
