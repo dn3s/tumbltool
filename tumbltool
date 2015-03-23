@@ -195,7 +195,7 @@ sub bundleObject
 {
 	(my $block, my $assets, my $inline, my $strip)=@_;
 	my $name=$block->{"name"};
-	if($name eq "tumbltool_assets") {
+	if($name eq "tumbltool_includes") {
 		return renderAssets($assets, $inline, $strip);
 	}
 	elsif($block->{"children"}) {
