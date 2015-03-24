@@ -4,7 +4,7 @@ Test and deploy tumblr themes with ease! _WARNING: Work in progress. Refer to th
 
 ##Installation
 
-You will need perl 5 installed, as well as the `JSON:PP` module [from CPAN](http://search.cpan.org/~makamaka/JSON-PP-2.27300/lib/JSON/PP.pm) (your distribution should also provide a package). Then just put `tumbltool` somewhere in your `$PATH` and fire away. For more convenient previews, put `content.json` in the same directory as your theme (although this behavior will change soon; see [issues](https://github.com/dn3s/tumbltool/issues)).
+You will need perl 5 installed, as well as the `JSON:PP` module [from CPAN](http://search.cpan.org/~makamaka/JSON-PP-2.27300/lib/JSON/PP.pm) (your distribution should also provide a package). Then just put `tumbltool` somewhere in your `$PATH`, and rename the `example_content` directory either to `/etc/tumbltool` or `$HOME/.tumbltool` (or just keep it in your working directory, but that's messy)
 
 ##Usage
 
@@ -14,7 +14,7 @@ You will need perl 5 installed, as well as the `JSON:PP` module [from CPAN](http
 
 `preview:`
 
-Print an example page using the theme specified in FILE, filled with example material from a JSON file (see -content)
+Print an example page using the theme specified in FILE, filled with example material from a JSON file (see `-content`)
 
 `bundle:`
 
@@ -28,7 +28,7 @@ Show this help text and exit.
 
 `-c --content: <FILE>`
 
-specify content to populate the rendered preview page.
+specify content to populate the rendered preview page, either as an absolute or relative path to a JSON file, or the name of one of the bundled content packages (currently only "default" is available).
 
 `-d --dataURI`
 
@@ -36,7 +36,7 @@ Format output as a base64-encoded data URI, meant for piping into a browser (or 
 
 `-i --include: <FILES>`
 
-specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's &lt;head>. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
+specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's `&lt;head>`. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
 
 `-l --inline:`
 
