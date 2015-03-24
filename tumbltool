@@ -23,6 +23,9 @@ use MIME::Base64;
 use Cwd;
 use Getopt::Long;
 use File::Basename;
+use HTML::Strip;
+use HTML::Entities;
+use URI::Escape;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
 my $cwd=cwd();
 my $home=$ENV{HOME};
@@ -202,7 +205,50 @@ sub renderObject #used by render to do most of the heavy lifting
 sub renderText
 {
 	(my $content, my $block)=@_;
-	return $content->{$block->{"name"}} || "";
+	#First, lets extract the prefix, if any
+	$block->{"name"}=~/^(Plaintext|JS|JSPlaintext|URLEncoded|RGB)(.+)$/;
+	my $prefix=$1;
+	my $name=$2;
+	return formatText($prefix, $content->{$name} || "");
+}
+sub jsQuote
+{
+	my $text=shift();
+	$text=~s/\\/\\\\/g;
+	$text=~s/'/\\'/g;
+	return "'$text'";
+}
+sub stripHTML
+{
+	my $text=shift();
+	my $hs=HTML::Strip->new(emit_spaces=>0);
+	return $hs->parse(encode_entities($text));
+}
+sub formatText
+{
+	(my $format, my $text)=@_;
+	if($format eq "Plaintext") {
+		return stripHTML($text);
+	}
+	elsif($format eq "JS") {
+		return jsQuote($text);
+	}
+	elsif($format eq "JSPlaintext") {
+		return jsQuote(stripHTML($text));
+	}
+	elsif($format eq "URLEncoded") {
+		return uri_escape_utf8($text);
+	}
+	elsif($format eq "RGB") {
+		$text=~/#?(..)(..)(..)/;
+		my $r=hex($1);
+		my $g=hex($2);
+		my $b=hex($3);
+		return ("$r,$g,$b");
+	}
+	else {
+		return $text;
+	}
 }
 sub bundle
 {
