@@ -109,8 +109,7 @@ sub path
 }
 sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way to make the JSON parser work without slurping)
 {
-	my $filename=shift();
-	my $strip=shift();
+	(my $filename, my $strip)=@_;
 	open(my $fh, "<", $filename) or fail("Cannot open file \"$filename\"");
 	$/ = undef;
 	my $result=readline($fh) or fail("Cannot read file \"$filename\"");
@@ -122,8 +121,7 @@ sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way
 }
 sub parseTheme #returns a pretty little tree of the theme. Considering the function works through the file in order, it should be fairly easy to work on a line-by-line basis in the future instead of slurping up the whole thing at the beginning...
 {
-	my $filename=shift();
-	my $strip=shift();
+	(my $filename, my $strip)=@_;
 	my $in=slurp($filename, $strip);
 	my $root={ "children" => [] };#outer hash for convenience/consistency
 	my $currBlock=$root;
@@ -160,12 +158,8 @@ sub parseContent
 }
 sub render #render a demo using $content for filler text, etc
 {
-	my $block=shift();
-	my $content=shift();
-	my $assets=shift();
-	my $inline=shift();
-	my $strip=shift();
-	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block
+	(my $block, my $content, my $assets, my $inline, my $strip)=@_;
+	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block TODO: better solution for special cases; there will be a lot of them
 		$content->{ucfirst($content->{"PostType"})}=1;
 	}
 	my $result="";
@@ -181,11 +175,7 @@ sub render #render a demo using $content for filler text, etc
 }
 sub renderObject #used by render to do most of the heavy lifting
 {
-	my $block=shift();
-	my $content=shift();
-	my $assets=shift();
-	my $inline=shift();
-	my $strip=shift();
+	(my $block, my $content, my $assets, my $inline, my $strip)=@_;
 	if($block->{"children"} and $content->{$block->{"name"}}) { #If the block has children, it's not just a placeholder, it's a block. Check if there is anything to go in the block, and if so, render it.
 		if(ref($content->{$block->{"name"}}) eq "ARRAY") {#Is the relevant content an array (eg. posts, tags, etc)?
 			my $result="";
@@ -204,10 +194,15 @@ sub renderObject #used by render to do most of the heavy lifting
 			$result=renderAssets($assets, $inline, $strip);
 		}
 		else {
-			$result=$content->{$block->{"name"}} || ""; #so we just print the value from content that corresponds to the block's name (if it exists)
+			$result=renderText($content, $block); #so we just print the value from content that corresponds to the block's name (if it exists)
 		}
 		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
 	}
+}
+sub renderText
+{
+	(my $content, my $block)=@_;
+	return $content->{$block->{"name"}} || "";
 }
 sub bundle
 {
@@ -239,9 +234,7 @@ sub bundleObject
 }
 sub renderAssets
 {
-	my $assets=shift();
-	my $inline=shift();
-	my $strip=shift();
+	(my $assets, my $inline, my $strip)=@_;
 	my $result="";
 	foreach my $name (@{$assets}) {
 		$result.=renderAsset($name, ($inline and !($name=~/^http:\/\/.+$/)), $strip);
@@ -250,9 +243,7 @@ sub renderAssets
 }
 sub renderAsset
 {
-	my $uri=shift();
-	my $inline=shift();
-	my $strip=shift();
+	(my $uri, my $inline, my $strip)=@_;
 	my $n=$strip?"":"\n";
 	my $before="";
 	my $after="";
