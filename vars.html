@@ -42,6 +42,10 @@
 	{
 		background: rgba(0,255,0,0.2);
 	}
+	td.partial
+	{
+		background: rgba(255,255,0,0.2);
+	}
 	td.no
 	{
 		background: rgba(255,0,0,0.2);
@@ -1739,8 +1743,8 @@
 <tr>
 	<td>{block:Date} {/block:Date}</td>
 	<td>Rendered for all posts.Always wrap dates in this block so they will be properly hidden on non-post pages.</td>
-	<td class="no">no</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{block:NewDayDate} {/block:NewDayDate}</td>
@@ -1764,145 +1768,145 @@
 	<td>{DayOfMonthWithZero}</td>
 	<td>&#8220;01&#8221; to &#8220;31&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{DayOfWeek}</td>
 	<td>&#8220;Monday&#8221; through &#8220;Sunday&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{ShortDayOfWeek}</td>
 	<td>&#8220;Mon&#8221; through &#8220;Sun&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{DayOfWeekNumber}</td>
 	<td>&#8220;1&#8221; through &#8220;7&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{DayOfMonthSuffix}</td>
 	<td>&#8220;st&#8221;, &#8220;nd&#8221;, &#8220;rd&#8221;, &#8220;th&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{DayOfYear}</td>
 	<td>&#8220;1&#8221; through &#8220;365&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{WeekOfYear}</td>
 	<td>&#8220;1&#8221; through &#8220;52&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{Month}</td>
 	<td>&#8220;January&#8221; through &#8220;December&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{ShortMonth}</td>
 	<td>&#8220;Jan&#8221; through &#8220;Dec&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{MonthNumber}</td>
 	<td>&#8220;1&#8221; through &#8220;12&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{MonthNumberWithZero}</td>
 	<td>&#8220;01&#8221; through &#8220;12&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{Year}</td>
 	<td>&#8220;2007&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{ShortYear}</td>
 	<td>&#8220;07&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{AmPm}</td>
 	<td>&#8220;am&#8221; or &#8220;pm&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{CapitalAmPm}</td>
 	<td>&#8220;AM&#8221; or &#8220;PM&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{12Hour}</td>
 	<td>&#8220;1&#8221; through &#8220;12&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{24Hour}</td>
 	<td>&#8220;0&#8221; through &#8220;23&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{12HourWithZero}</td>
 	<td>&#8220;01&#8221; through &#8220;12&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{24HourWithZero}</td>
 	<td>&#8220;00&#8221; through &#8220;23&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{Minutes}</td>
 	<td>&#8220;0&#8221; through &#8220;59&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{Seconds}</td>
 	<td>&#8220;0&#8221; through &#8220;59&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{Beats}</td>
 	<td>&#8220;0&#8221; through &#8220;999&#8221;</td>
 	<td class="partial">partial</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{Timestamp}</td>
 	<td>&#8220;1172705619&#8221;</td>
 	<td class="yes">yes</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 <tr>
 	<td>{TimeAgo}</td>
 	<td>A contextual time.e.g., &#8220;1 minute ago&#8221;, &#8220;2 hours ago&#8221;, &#8220;3 weeks ago&#8221;, etc.</td>
 	<td class="partial">partial</td>
-	<td class="no">no</td>
+	<td class="yes">yes</td>
 </tr>
 </tbody>
 </table>
