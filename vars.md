@@ -305,8 +305,8 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{Question} | The question for this post.May contain heavily filtered HTML|yes|no|
-|{Answer} | The answer for this post.May contain HTML|yes|no|
+|{Question} | The question for this post. May contain heavily filtered HTML|yes|no|
+|{Answer} | The answer for this post. May contain HTML|yes|no|
 |{Asker} | Simple HTML text link with the asker's username and URL, or the plain text string "Anonymous".|yes|no|
 |{AskerPortraitURL-16} | Portrait photo URL for the asker. 16-pixels by 16-pixels.|yes|no|
 |{AskerPortraitURL-24} | Portrait photo URL for the asker. 24-pixels by 24-pixels.|yes|no|
@@ -317,16 +317,16 @@
 |{AskerPortraitURL-96} | Portrait photo URL for the asker. 96-pixels by 96-pixels.|yes|no|
 |{AskerPortraitURL-128} | Portrait photo URL for the asker. 128-pixels by 128-pixels.|yes|no|
 |{block:Answerer}{/block:Answerer} | Rendered if post contains a reblogged answer.|yes|no|
-|{Answerer} | Simple HTML text link with the reblogged answerer's username and URL.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-16} | Portrait photo URL for the reblogged answerer. 16-pixels by 16-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.')|yes|no|
-|{AnswererPortraitURL-24} | Portrait photo URL for the reblogged answerer. 24-pixels by 24-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-30} | Portrait photo URL for the reblogged answerer. 30-pixels by 30-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-40} | Portrait photo URL for the reblogged answerer. 40-pixels by 40-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-48} | Portrait photo URL for the reblogged answerer. 48-pixels by 48-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-64} | Portrait photo URL for the reblogged answerer. 64-pixels by 64-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-96} | Portrait photo URL for the reblogged answerer. 96-pixels by 96-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{AnswererPortraitURL-128} | Portrait photo URL for the reblogged answerer. 128-pixels by 128-pixels.Only exists within {block:Answerer}{/block:Answerer} | and if post has been reblogged.|yes|no|
-|{Replies} | Reblog chain. If not a reblog {Replies} | is an alias for {Answer}|yes|no|
+|{Answerer} | Simple HTML text link with the reblogged answerer's username and URL.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-16} | Portrait photo URL for the reblogged answerer. 16-pixels by 16-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.')|yes|no|
+|{AnswererPortraitURL-24} | Portrait photo URL for the reblogged answerer. 24-pixels by 24-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-30} | Portrait photo URL for the reblogged answerer. 30-pixels by 30-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-40} | Portrait photo URL for the reblogged answerer. 40-pixels by 40-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-48} | Portrait photo URL for the reblogged answerer. 48-pixels by 48-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-64} | Portrait photo URL for the reblogged answerer. 64-pixels by 64-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-96} | Portrait photo URL for the reblogged answerer. 96-pixels by 96-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{AnswererPortraitURL-128} | Portrait photo URL for the reblogged answerer. 128-pixels by 128-pixels.Only exists within {block:Answerer}{/block:Answerer} and if post has been reblogged.|yes|no|
+|{Replies} | Reblog chain. If not a reblog {Replies} is an alias for {Answer}|yes|no|
 
 ###POST DATE
 
