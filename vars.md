@@ -1,7 +1,7 @@
 ###GLOBAL
 
 |Tag|Description|Supported|Exists in Example Content|
-|---|---|---|
+|---|---|---|---|
 |{Title} | The HTML-safe title of your blog.|yes|no|
 |{Description} | The description of your blog. (may include HTML)|yes|no|
 |{MetaDescription} | The HTML-safe description of your blog.e.g., &lt;meta name="description" content="{MetaDescription}" />|yes|no|
@@ -25,8 +25,8 @@
 
 ###SETTINGS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{TitleFont} | The font used for your blog title.|yes|no|
 |{TitleFontWeight} | The weight of your title font ("normal" or "bold").|yes|no|
 |{BackgroundColor} | The background color of your blog.|yes|no|
@@ -45,8 +45,8 @@
 
 ###VISIBILITY/FEATURES
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Pagination}{/block:Pagination} | Rendered if there is a "previous" or "next" page.|yes|no|
 |{block:PreviousPage}{/block:PreviousPage} | Rendered if there is a "previous" page (newer posts) to navigate to.|yes|no|
 |{block:NextPage}{/block:NextPage} | Rendered if there is a "next" page (older posts) to navigate to.|yes|no|
@@ -61,8 +61,8 @@
 
 ###JUMP CONTENT???
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:JumpPagination length="5"} | {/block:JumpPagination} | Rendered for each page greater than the current page minus one-half length up to current page plus one-half length.|yes|no|
 |{block:CurrentPage} | {/block:CurrentPage} | Rendered when jump page is the current page.|yes|no|
 |{block:JumpPage} | {/block:JumpPage} | Rendered when jump page is not the current page.|yes|no|
@@ -71,8 +71,8 @@
 
 ###CUSTOM PAGES
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:HasPages} | {/block:HasPages} | Rendered if you have defined any custom pages.|yes|no|
 |{block:Pages} | {/block:Pages} | Rendered for each custom page.|yes|no|
 |{URL} | The URL for this page.|yes|no|
@@ -80,8 +80,8 @@
 
 ###NEXT/PREV PAGE LINKS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:PermalinkPagination} | Rendered if there is a "previous" or "next" post.|yes|no|
 |{block:PreviousPost} | {/block:PreviousPost} | Rendered if there is a "previous" post to navigate to.|yes|no|
 |{block:NextPost} | {/block:NextPost} | Rendered if there is a "next" post to navigate to.|yes|no|
@@ -90,8 +90,8 @@
 
 ###POST STUFF
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Posts} | {/block:Posts} | This block gets rendered for each post in reverse chronological order. The number of posts that appear per-page can be configured in the Customize area for the blog on the Advanced tab.|yes|yes|
 |{block:Posts inlineMediaWidth="500"} | {/block:Posts} | Width for inline media in the post body.Minimum: 250px|no|no|
 |{block:Posts inlineNestedMediaWidth="250"} | {/block:Posts} | Width for inline media in the reblog chain.Minimum: 250px (must be smaller than or same as inlineMediaWidth)|no|no|
@@ -118,8 +118,8 @@
 
 ###REBLOGS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:RebloggedFrom} | {/block:RebloggedFrom} | Rendered if a post was reblogged from another post.|yes|no|
 |{ReblogParentName} | The username of the blog this post was reblogged from.|yes|no|
 |{ReblogParentTitle} | The title of the blog this post was reblogged from.|yes|no|
@@ -147,16 +147,16 @@
 
 ###TEXT POSTS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Title} | {/block:Title} | Rendered if there is a title for this post.|yes|yes|
 |{Title} | The title of this post.|yes|yes|
 |{Body} | The content of this post.|yes|yes|
 
 ###PHOTO POSTS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{PhotoAlt} | The HTML-safe version of the caption (if one exists) of this post.|yes|no|
 |{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
@@ -189,23 +189,23 @@
 
 ###LINK POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{LinkOpenTag} | An HTML open anchor-tag with Javascript to activate the Panorama lightbox.|no|no|
 |{LinkCloseTag} | A closing anchor-tag.|no|no|
 
 ###PANORAMA POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{PhotoURL-Panorama} | URL for the panorama photo of this post.These images can be very big. (2560+ pixels wide)|yes|no|
 |{PhotoWidth-Panorama} | Width for the panorama size photo.|yes|no|
 |{PhotoHeight-Panorama} | Height for the panorama size photo.|yes|no|
 
 ###PHOTOSET POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
 |{Photoset} | Embed code for a responsive Photoset that shrinks to fit the container (max. 700-pixels wide).|no|no|
@@ -220,8 +220,8 @@
 
 ###QUOTE POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{Quote} | The content of this post.|yes|no|
 |{block:Source} | {/block:Source} | Rendered if there is a source for this post.|yes|no|
 |{Source} | The source for this post.May contain HTML|yes|no|
@@ -229,8 +229,8 @@
 
 ###LINK POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{URL} | The URL of this post.|yes|no|
 |{Name} | The name of this post.Defaults to the URL if no name is entered.|yes|no|
 |{Target} | Should be included inside the A-tags of Link posts.Output target="_blank" if you've enabled "Open links in new window".|yes|no|
@@ -243,8 +243,8 @@
 
 ###CHAT POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Title} | {/block:Title} | Rendered if there is a title for this post.|yes|no|
 |{Title} | The title of this post.|yes|no|
 |{block:Lines} | {/block:Lines} | Rendered for each line of this post.|yes|no|
@@ -257,8 +257,8 @@
 
 ###AUDIO POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
 |{block:AudioEmbed} | {/block:AudioEmbed} | Rendered if an embedded audio player is available.|no|no|
@@ -283,8 +283,8 @@
 
 ###VIDEO POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
 |{Video-700} | Embed-code for the content of this post.700-pixels wide.|no|no|
@@ -303,8 +303,8 @@
 
 ###QA POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{Question} | The question for this post.May contain heavily filtered HTML|yes|no|
 |{Answer} | The answer for this post.May contain HTML|yes|no|
 |{Asker} | Simple HTML text link with the asker's username and URL, or the plain text string "Anonymous".|yes|no|
@@ -330,8 +330,8 @@
 
 ###POST DATE
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Date} | {/block:Date} | Rendered for all posts.Always wrap dates in this block so they will be properly hidden on non-post pages.|no|no|
 |{block:NewDayDate} | {/block:NewDayDate} | Rendered for posts that are the first to be listed for a given day.|no|no|
 |{block:SameDayDate} | {/block:SameDayDate} | Rendered for subsequent posts listed for a given day.|no|no|
@@ -363,8 +363,8 @@
 
 ###POST NOTES
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:PostNotes} | {/block:PostNotes} | Rendered on permalink pages if this post has notes.|no|no|
 |{PostNotes} | Standard HTML output of this post's notes. Only rendered on permalink pages.|no|no|
 |{PostNotes-16} | Standard HTML output of this post's notes with 16x16 sized avatars. Only rendered on permalink pages.|no|no|
@@ -375,8 +375,8 @@
 
 ###POST TAGS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:HasTags} | {/block:HasTags} | Rendered inside {block:Posts} | if post has tags.|no|no|
 |{block:Tags} | {/block:Tags} | Rendered for each of a post's tags.|yes|yes|
 |{Tag} | The name of this tag.|yes|yes|
@@ -386,8 +386,8 @@
 
 ###POST SOURCE
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:ContentSource} | {/block:ContentSource} | Rendered if a source is specified for a post's content.|yes|no|
 |{SourceURL} | URL of the attributed source.|yes|no|
 |{block:SourceLogo} | {/block:SourceLogo} | Rendered if a logo exists for the content source.|yes|no|
@@ -399,8 +399,8 @@
 
 ###SUBMITTED POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Submission} | {/block:Submission} | Rendered if a post is a submission.|yes|no|
 |{Submitter} | The name of the submitting blog.|yes|no|
 |{SubmitterURL} | URL to submitter's blog.|yes|no|
@@ -415,8 +415,8 @@
 
 ###GROUP POST
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:GroupMembers} | {/block:GroupMembers} | Rendered on additional public group blogs.|yes|no|
 |{block:GroupMember} | {/block:GroupMember} | Rendered for each additional public group blog member.|yes|no|
 |{GroupMemberName} | The username of the member's blog.|yes|no|
@@ -433,8 +433,8 @@
 
 ###POST AUTHOR
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{PostAuthorName} | The username of the author of a post to an additional group blog.|yes|no|
 |{PostAuthorTitle} | The title of the author's blog for a post to an additional group blog.|yes|no|
 |{PostAuthorURL} | The blog URL for the author of a post to an additional group blog.|yes|no|
@@ -449,8 +449,8 @@
 
 ###DAY PAGE
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:DayPage} | {/block:DayPage} | Rendered on day pages.|no|no|
 |{block:DayPagination} | {/block:DayPagination} | Rendered if there is a "previous" or "next" day page.|no|no|
 |{block:PreviousDayPage} | {/block:PreviousDayPage} | Rendered if there is a "previous" day page to navigate to.|no|no|
@@ -460,8 +460,8 @@
 
 ###TAG PAGE
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:TagPage} | {/block:TagPage} | Rendered on tag pages.|no|no|
 |{Tag} | The name of this tag.|no|no|
 |{URLSafeTag} | A URL safe version of this tag.|no|no|
@@ -470,8 +470,8 @@
 
 ###SEARCH PAGE
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{SearchQuery} | The current search query.|no|no|
 |{URLSafeSearchQuery} | A URL-safe version of the current search query for use in links and Javascript.|no|no|
 |{block:SearchPage} | Rendered on search pages.|no|no|
@@ -480,8 +480,8 @@
 
 ###FOLLOWS
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Following} | {/block:Following} | Rendered if you're following other blogs.|yes|no|
 |{block:Followed} | {/block:Followed} | Rendered for each blog you're following.|yes|no|
 |{FollowedName} | The username of the blog you're following.|yes|no|
@@ -498,8 +498,8 @@
 
 ###LIKES
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Likes} | {/block:Likes} | Rendered if you are sharing your likes.|no|no|
 |{Likes} | Standard HTML output of your likes.|no|no|
 |{Likes limit="5"} | Standard HTML output of your last 5 likes.Maximum: 10
@@ -508,32 +508,32 @@
 
 ###LIKE BUTTON?
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{LikeButton} | Default Like button.|no|no|
 |{LikeButton color="grey"} | Like button color.Grey, White, or Black. Like button will always be red if visitor has liked the post.|no|no|
 |{LikeButton size="20"} | Like button size.Maximum: 100|no|no|
 
 ###REBLOG BUTTON
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{ReblogButton} | Default Reblog button.|no|no|
 |{ReblogButton color="grey"} | Reblog button color.Grey, White, or Black.|no|no|
 |{ReblogButton size="20"} | Reblog button size.Maximum: 100|no|no|
 
 ###TWITTER
 
-|Tag|Description|Supported|
-|---|---|---|
+|Tag|Description|Supported|Exists in Example Content|
+|---|---|---|---|
 |{block:Twitter} | {/block:Twitter} | Rendered if you have Twitter integration enabled.|no|no|
 |{TwitterUsername} | Your Twitter username.|no|no|
 
 
 ###PREFIXES
 
-|Prefix|Supported|
-|---|---|
+|Prefix|Supported|Exists in Example Content|
+|---|---|---|
 |Plaintext Prefix any theme variable with Plaintext to output the string with HTML-tags stripped and appropriate characters converted to HTML-entities so they’re safe to include in HTML attributes, etc.|no|
 |Javascript Prefix any theme variable with JS to output a Javascript string (wrapped in quotes).|no|
 |Javascript Plaintext Prefix any theme variable with JSPlaintext to output a Javascript string (wrapped in quotes) with HTML-tags stripped and appropriate characters converted to HTML-entities.|no|
