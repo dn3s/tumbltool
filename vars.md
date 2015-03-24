@@ -1,3 +1,9 @@
+#Variables
+
+A list of all the variables and blocks listed in Tumblr's documentation. Each variable is marked with its support status in tumbltool. The _Supported_ column indicates that no modifications to the core script need to be made to support it, while the _Exists in Example Content_ column indicates that it has already been implemented in the example content.
+
+Note that I don't plan on adding support for certain features like social media buttons and tumblr stuff. Things like video embeds will require more work and probably won't happen anytime soon.
+
 ###GLOBAL
 
 |Tag|Description|Supported|Exists in Example Content|
