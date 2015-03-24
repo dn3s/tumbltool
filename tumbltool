@@ -94,6 +94,10 @@ sub contentFile
 				$realContentPath="$dir";
 				return "$dir/$in.json";
 			}
+			elsif(-e "$dir/$in/data.json") {
+				$realContentPath="$dir/$in";
+				return "$dir/$in/data.json";
+			}
 		}
 	}
 	return "";
