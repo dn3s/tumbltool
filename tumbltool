@@ -26,6 +26,7 @@ use File::Basename;
 use HTML::Strip;
 use HTML::Entities;
 use URI::Escape;
+use Time::Piece;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
 my $cwd=cwd();
 my $home=$ENV{HOME};
@@ -206,10 +207,59 @@ sub renderText
 {
 	(my $content, my $block)=@_;
 	#First, lets extract the prefix, if any
-	$block->{"name"}=~/^(Plaintext|JS|JSPlaintext|URLEncoded|RGB)(.+)$/;
+	$block->{"name"}=~/^(Plaintext|JS|JSPlaintext|URLEncoded|RGB)?(.+)$/;
 	my $prefix=$1;
-	my $name=$2;
-	return formatText($prefix, $content->{$name} || "");
+	my $name=$2 or $1;
+	my $text=$content->{$name};
+	my $text=date($name, $content->{"Date"}) or $text;
+	return formatText($prefix, $text || "");
+}
+sub date
+{
+	(my $name, my $text)=@_;
+	my $date=localtime($text);
+	my $formats={
+		"DayOfMonth"          => "%e",
+		"DayOfMonthWithZero"  => "%d",
+		"DayOfWeek"           => "%A",
+		"ShortDayOfWeek"      => "%a",
+		"DayOfWeekNumber"     => "%u",
+		"DayOfMonthSuffix"    => "th",
+		"DayOfYear"           => "%j",
+		"WeekOfYear"          => "%W",
+		"Month"               => "%B",
+		"ShortMonth"          => "%b",
+		"MonthNumber"         => "%e",
+		"MonthNumberWithZero" => "%m",
+		"Year"                => "%Y",
+		"ShortYear"           => "%y",
+		"AmPm"                => "%P",
+		"CapitalAmPm"         => "%p",
+		"12Hour"              => "%I",
+		"24Hour"              => "%k",
+		"12HourWithZero"      => "%l",
+		"24HourWithZero"      => "%H",
+		"Minutes"             => "%M",
+		"Seconds"             => "%S",
+		"Beats"               => "249",
+		"Timestamp"           => "%s",
+		"TimeAgo"             => "100 years ago",
+	};
+	my $format=$formats->{$name};
+	if($name eq "DayOfMonthSuffix") {
+		my $d=$date->strftime("%e");
+		return "th" if($d>=11 and $d<=13);
+		return "st" if($d % 10 == 1);
+		return "nd" if($d % 10 == 2);
+		return "rd" if($d % 10 == 3);
+		return "th";
+	}
+	elsif($format) {
+		return $date->strftime($format);
+	}
+	else {
+		return "";
+	}
 }
 sub jsQuote
 {

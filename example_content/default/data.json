@@ -10,7 +10,7 @@
 			"PostType":"text",
 			"Title":"Example Content",
 			"Body":"Here is some example content!",
-			"Date":true,
+			"Date":"1427235399",
 			"ShortDayOfWeek":"Mon",
 			"ShortMonth":"Oct",
 			"DayOfMonth":"25",
