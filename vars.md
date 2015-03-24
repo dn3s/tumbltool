@@ -92,35 +92,35 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Posts} | {/block:Posts} | This block gets rendered for each post in reverse chronological order. The number of posts that appear per-page can be configured in the Customize area for the blog on the Advanced tab.|yes|yes|
-|{block:Posts inlineMediaWidth="500"} | {/block:Posts} | Width for inline media in the post body.Minimum: 250px|no|no|
-|{block:Posts inlineNestedMediaWidth="250"} | {/block:Posts} | Width for inline media in the reblog chain.Minimum: 250px (must be smaller than or same as inlineMediaWidth)|no|no|
-|{block:Text} | {/block:Text} | Rendered for Text posts.|yes|yes|
-|{block:Photo} | {/block:Photo} | Rendered for Photo posts.|yes|no|
-|{block:Panorama} | {/block:Panorama} | Rendered for Panorama posts.|yes|no|
-|{block:Photoset} | {/block:Photoset} | Rendered for Photoset posts.|yes|no|
-|{block:Quote} | {/block:Quote} | Rendered for Quote posts.|yes|no|
-|{block:Link} | {/block:Link} | Rendered for Link posts.|yes|no|
-|{block:Chat} | {/block:Chat} | Rendered for Conversation posts.|yes|no|
-|{block:Audio} | {/block:Audio} | Rendered for Audio posts.|yes|no|
-|{block:Video} | {/block:Video} | Rendered for Video posts.|yes|no|
-|{block:Answer} | {/block:Answer} | Rendered for Answer posts.|yes|no|
-|{PostType} | The name of the current post type.|yes|partial|
-|{Permalink} | The permalink for a post.Example: "http://sample.tumblr.com/post/123"|yes|no|
-|{ShortURL} | A shorter URL that redirects to this post.Example: "http://tumblr.com/xpv5qtavm"|yes|no|
-|{PostID} | The numeric ID for a post.Example: 1234567 |no|no|
-|{TagsAsClasses} | An HTML class-attribute friendly list of the post's tags.Example: "humor office new_york_city"By "HTML class-attribute friendly," we mean that it conforms to HTML specifications for class-attributes. Mostly, it should begin with a letter, followed by letters, digits, hyphens, or underscores. Letters need to be from the English alphabet, as international or non-English characters may give unexpected results. For posts imported from other sites, an HTML-friendly version of the source domain will also be included, with periods in the domain replaced by underscores.Example: "twitter_com", "digg_com", etc.The class-attribute "reblog" will be included automatically if the post was reblogged from another post.|no|no|
-|{block:Post[1-15]} | {/block:Post[1-15]} | Rendered for the post at the specified offset.This makes it possible to insert an advertisement or design element in the middle of your posts.Example: {block:Post5}I'm the fifth post!{/block:Post5} | will only be rendered on the fifth post being displayed.|no|no|
-|{block:Odd} | {/block:Odd} | Rendered for every one of the current page's odd-numbered posts.|no|no|
-|{block:Even} | {/block:Even} | Rendered for every one of the current page's even-numbered posts.|no|no|
-|{block:More} | {/block:More} | Rendered on index pages for posts with Read More breaks.|no|no|
-|{PostNotesURL} | URL to an HTML partial of this post's Notes. Useful for loading Notes via AJAX.|no|no|
+|{block:Posts} {/block:Posts} | This block gets rendered for each post in reverse chronological order. The number of posts that appear per-page can be configured in the Customize area for the blog on the Advanced tab.|yes|yes|
+|{block:Posts inlineMediaWidth="500"} {/block:Posts} | Width for inline media in the post body.Minimum: 250px|no|no|
+|{block:Posts inlineNestedMediaWidth="250"} {/block:Posts} | Width for inline media in the reblog chain.Minimum: 250px (must be smaller than or same as inlineMediaWidth)|no|no|
+|{block:Text} {/block:Text} | Rendered for Text posts.|yes|yes|
+|{block:Photo} {/block:Photo} | Rendered for Photo posts.|yes|no|
+|{block:Panorama} {/block:Panorama} | Rendered for Panorama posts.|yes|no|
+|{block:Photoset} {/block:Photoset} | Rendered for Photoset posts.|yes|no|
+|{block:Quote} {/block:Quote} | Rendered for Quote posts.|yes|no|
+|{block:Link} {/block:Link} | Rendered for Link posts.|yes|no|
+|{block:Chat} {/block:Chat} | Rendered for Conversation posts.|yes|no|
+|{block:Audio} {/block:Audio} | Rendered for Audio posts.|yes|no|
+|{block:Video} {/block:Video} | Rendered for Video posts.|yes|no|
+|{block:Answer} {/block:Answer} | Rendered for Answer posts.|yes|no|
+|{PostType} The name of the current post type.|yes|partial|
+|{Permalink} The permalink for a post.Example: "http://sample.tumblr.com/post/123"|yes|no|
+|{ShortURL} A shorter URL that redirects to this post.Example: "http://tumblr.com/xpv5qtavm"|yes|no|
+|{PostID} The numeric ID for a post.Example: 1234567 |no|no|
+|{TagsAsClasses} An HTML class-attribute friendly list of the post's tags.Example: "humor office new_york_city"By "HTML class-attribute friendly," we mean that it conforms to HTML specifications for class-attributes. Mostly, it should begin with a letter, followed by letters, digits, hyphens, or underscores. Letters need to be from the English alphabet, as international or non-English characters may give unexpected results. For posts imported from other sites, an HTML-friendly version of the source domain will also be included, with periods in the domain replaced by underscores.Example: "twitter_com", "digg_com", etc.The class-attribute "reblog" will be included automatically if the post was reblogged from another post.|no|no|
+|{block:Post[1-15]} {/block:Post[1-15]} | Rendered for the post at the specified offset.This makes it possible to insert an advertisement or design element in the middle of your posts.Example: {block:Post5}I'm the fifth post!{/block:Post5} | will only be rendered on the fifth post being displayed.|no|no|
+|{block:Odd} {/block:Odd} | Rendered for every one of the current page's odd-numbered posts.|no|no|
+|{block:Even} {/block:Even} | Rendered for every one of the current page's even-numbered posts.|no|no|
+|{block:More} {/block:More} | Rendered on index pages for posts with Read More breaks.|no|no|
+|{PostNotesURL} URL to an HTML partial of this post's Notes. Useful for loading Notes via AJAX.|no|no|
 
 ###REBLOGS
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:RebloggedFrom} | {/block:RebloggedFrom} | Rendered if a post was reblogged from another post.|yes|no|
+|{block:RebloggedFrom} {/block:RebloggedFrom} | Rendered if a post was reblogged from another post.|yes|no|
 |{ReblogParentName} | The username of the blog this post was reblogged from.|yes|no|
 |{ReblogParentTitle} | The title of the blog this post was reblogged from.|yes|no|
 |{ReblogParentURL} | The URL for the blog this post was reblogged from.|yes|no|
