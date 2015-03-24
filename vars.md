@@ -11,7 +11,7 @@
 |{CustomCSS} | Any custom CSS code added on your Customize page.|yes|no|
 |{block:PermalinkPage}{/block:PermalinkPage} | Rendered on post permalink pages.Useful for embedding comment widgets
 |{block:IndexPage}{/block:IndexPage} | Rendered on index (post) pages.|yes|no|
-|{block:PostTitle}{PostTitle}{/block:PostTitle} | Rendered on permalink pages.(Useful for displaying the current post's title in the page title)Example: &lt;title>{Title}{block:PostTitle} | - {PostTitle}{/block:PostTitle}&lt;/title>|yes|no|
+|{block:PostTitle}{PostTitle}{/block:PostTitle} | Rendered on permalink pages.|yes|no|
 |{block:PostSummary}{PostSummary}{/block:PostSummary} | Identical to {PostTitle}, but will automatically generate a summary if a title doesn't exist.|yes|no|
 |{PortraitURL-16} | Portrait photo URL for your blog. 16-pixels by 16-pixels.|no|no|
 |{PortraitURL-24} | Portrait photo URL for your blog. 24-pixels by 24-pixels.|no|no|
