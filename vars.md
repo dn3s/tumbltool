@@ -54,7 +54,7 @@
 |{NextPage} | URL for the "next" page (older posts).|yes|yes|
 |{CurrentPage} | Current page number.|yes|yes|
 |{TotalPages} | Total page count.|yes|yes|
-|{block:SubmissionsEnabled} | {/block:SubmissionsEnabled} | Rendered if Submissions are enabled.|yes|no|
+|{block:SubmissionsEnabled} {/block:SubmissionsEnabled} | Rendered if Submissions are enabled.|yes|no|
 |{SubmitLabel} | The customizable label for the Submit link.Example: "Submit"|yes|no|
 |{block:AskEnabled}{/block:AskEnabled} | Rendered if asking questions is enabled.|yes|no|
 |{AskLabel} | The customizable label for the Ask link.Example: "Ask me anything"|yes|no|
@@ -63,9 +63,9 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:JumpPagination length="5"} | {/block:JumpPagination} | Rendered for each page greater than the current page minus one-half length up to current page plus one-half length.|yes|no|
-|{block:CurrentPage} | {/block:CurrentPage} | Rendered when jump page is the current page.|yes|no|
-|{block:JumpPage} | {/block:JumpPage} | Rendered when jump page is not the current page.|yes|no|
+|{block:JumpPagination length="5"} {/block:JumpPagination} | Rendered for each page greater than the current page minus one-half length up to current page plus one-half length.|yes|no|
+|{block:CurrentPage} {/block:CurrentPage} | Rendered when jump page is the current page.|yes|no|
+|{block:JumpPage} {/block:JumpPage} | Rendered when jump page is not the current page.|yes|no|
 |{PageNumber} | Page number for jump page.|yes|no|
 |{URL} | URL for jump page.|yes|no|
 
@@ -73,8 +73,8 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:HasPages} | {/block:HasPages} | Rendered if you have defined any custom pages.|yes|no|
-|{block:Pages} | {/block:Pages} | Rendered for each custom page.|yes|no|
+|{block:HasPages} {/block:HasPages} | Rendered if you have defined any custom pages.|yes|no|
+|{block:Pages} {/block:Pages} | Rendered for each custom page.|yes|no|
 |{URL} | The URL for this page.|yes|no|
 |{Label} | The label for this page.|yes|no|
 
@@ -83,8 +83,8 @@
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
 |{block:PermalinkPagination} | Rendered if there is a "previous" or "next" post.|yes|no|
-|{block:PreviousPost} | {/block:PreviousPost} | Rendered if there is a "previous" post to navigate to.|yes|no|
-|{block:NextPost} | {/block:NextPost} | Rendered if there is a "next" post to navigate to.|yes|no|
+|{block:PreviousPost} {/block:PreviousPost} | Rendered if there is a "previous" post to navigate to.|yes|no|
+|{block:NextPost} {/block:NextPost} | Rendered if there is a "next" post to navigate to.|yes|no|
 |{PreviousPost} | URL for the "previous" (newer) post.|yes|no|
 |{NextPost} | URL for the "next" (older) post.|yes|no|
 
@@ -110,7 +110,7 @@
 |{ShortURL} A shorter URL that redirects to this post.Example: "http://tumblr.com/xpv5qtavm"|yes|no|
 |{PostID} The numeric ID for a post.Example: 1234567 |no|no|
 |{TagsAsClasses} An HTML class-attribute friendly list of the post's tags.Example: "humor office new_york_city"By "HTML class-attribute friendly," we mean that it conforms to HTML specifications for class-attributes. Mostly, it should begin with a letter, followed by letters, digits, hyphens, or underscores. Letters need to be from the English alphabet, as international or non-English characters may give unexpected results. For posts imported from other sites, an HTML-friendly version of the source domain will also be included, with periods in the domain replaced by underscores.Example: "twitter_com", "digg_com", etc.The class-attribute "reblog" will be included automatically if the post was reblogged from another post.|no|no|
-|{block:Post[1-15]} {/block:Post[1-15]} | Rendered for the post at the specified offset.This makes it possible to insert an advertisement or design element in the middle of your posts.Example: {block:Post5}I'm the fifth post!{/block:Post5} | will only be rendered on the fifth post being displayed.|no|no|
+|{block:Post[1-15]} {/block:Post[1-15]} | Rendered for the post at the specified offset.This makes it possible to insert an advertisement or design element in the middle of your posts.|no|no|
 |{block:Odd} {/block:Odd} | Rendered for every one of the current page's odd-numbered posts.|no|no|
 |{block:Even} {/block:Even} | Rendered for every one of the current page's even-numbered posts.|no|no|
 |{block:More} {/block:More} | Rendered on index pages for posts with Read More breaks.|no|no|
@@ -143,13 +143,13 @@
 |{ReblogRootPortraitURL-64} | Portrait photo URL for the blog this post was created by. 64-pixels by 64-pixels.|yes|no|
 |{ReblogRootPortraitURL-96} | Portrait photo URL for the blog this post was created by. 96-pixels by 96-pixels.|yes|no|
 |{ReblogRootPortraitURL-128} | Portrait photo URL for the blog this post was created by. 128-pixels by 128-pixels.|yes|no|
-|{block:NotReblog} | {/block:NotReblog} | Rendered if a post was not reblogged from another post.|yes|no|
+|{block:NotReblog} {/block:NotReblog} | Rendered if a post was not reblogged from another post.|yes|no|
 
 ###TEXT POSTS
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Title} | {/block:Title} | Rendered if there is a title for this post.|yes|yes|
+|{block:Title} {/block:Title} | Rendered if there is a title for this post.|yes|yes|
 |{Title} | The title of this post.|yes|yes|
 |{Body} | The content of this post.|yes|yes|
 
@@ -158,7 +158,7 @@
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
 |{PhotoAlt} | The HTML-safe version of the caption (if one exists) of this post.|yes|no|
-|{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
+|{block:Caption} {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
 |{block:LinkURL} | Rendered if this photo has a click-through set.|yes|no|
 |{LinkURL} | A click-through URL for this photo.Defaults to media permalink if one is not set.|yes|no|
@@ -177,11 +177,11 @@
 |{PhotoWidth-100} | Width for the 100px size photo.|yes|no|
 |{PhotoHeight-100} | Height for the 100px size photo.|yes|no|
 |{PhotoURL-75sq} | URL for a square version of the photo of this post.75-pixels by 75-pixels.|yes|no|
-|{block:HighRes} | {/block:HighRes} | Rendered if there is a high-res or panorama photo for a post.|yes|no|
+|{block:HighRes} {/block:HighRes} | Rendered if there is a high-res or panorama photo for a post.|yes|no|
 |{PhotoURL-HighRes} | URL for the high-res or panorama sized photo of this post. No wider than 1280px or 2560px respectively.Use {PhotoURL-1280}, {PhotoWidth-1280}, and {PhotoHeight-1280} | to access the 1280 media directly.|yes|no|
 |{PhotoWidth-HighRes} | Width for the high-res size photo.|yes|no|
 |{PhotoHeight-HighRes} | Height for the high-res size photo.|yes|no|
-|{block:Exif} | {/block:Exif} | Rendered if this photo has Exif data.|yes|no|
+|{block:Exif} {/block:Exif} | Rendered if this photo has Exif data.|yes|no|
 |{block:Camera}{Camera}{/block:Camera} | Rendered if this photo's Exif data contains camera info.|yes|no|
 |{block:Aperture}{Aperture}{/block:Aperture} | Rendered if this photo's Exif data contains aperture info.|yes|no|
 |{block:Exposure}{Exposure}{/block:Exposure} | Rendered if this photo's Exif data contains exposure info.|yes|no|
@@ -206,7 +206,7 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
+|{block:Caption} {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
 |{Photoset} | Embed code for a responsive Photoset that shrinks to fit the container (max. 700-pixels wide).|no|no|
 |{Photoset-700} | Embed code for a 700-pixel wide photoset.|no|no|
@@ -216,14 +216,14 @@
 |{PhotoCount} | The number of photos in the Photoset.|no|no|
 |{PhotosetLayout} | An integer representation of the Photoset layout.|no|no|
 |{JSPhotosetLayout} | JavaScript array of the Photoset column counts.|no|no|
-|{block:Photos} | {/block:Photos} | Rendered for each of the Photoset photos. Each contains the same variables as {block:Photo}
+|{block:Photos} {/block:Photos} | Rendered for each of the Photoset photos. Each contains the same variables as {block:Photo}
 
 ###QUOTE POST
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
 |{Quote} | The content of this post.|yes|no|
-|{block:Source} | {/block:Source} | Rendered if there is a source for this post.|yes|no|
+|{block:Source} {/block:Source} | Rendered if there is a source for this post.|yes|no|
 |{Source} | The source for this post.May contain HTML|yes|no|
 |{Length} | "short", "medium", or "long", depending on the length of the quote.|yes|no|
 
@@ -234,21 +234,21 @@
 |{URL} | The URL of this post.|yes|no|
 |{Name} | The name of this post.Defaults to the URL if no name is entered.|yes|no|
 |{Target} | Should be included inside the A-tags of Link posts.Output target="_blank" if you've enabled "Open links in new window".|yes|no|
-|{block:Host} | {/block:Host} | Rendered if there is a host for this post (if both URL and name exists).|yes|no|
+|{block:Host} {/block:Host} | Rendered if there is a host for this post (if both URL and name exists).|yes|no|
 |{Host} | The host name of the URL, sans 'www'. For example tumblr.com |no|no|
-|{block:Thumbnail} | {/block:Thumbnail} | Rendered if there is an image thumbnail for the post.|yes|no|
+|{block:Thumbnail} {/block:Thumbnail} | Rendered if there is an image thumbnail for the post.|yes|no|
 |{Thumbnail} | Link thumbnail URL.|yes|no|
-|{block:Description} | {/block:Description} | Rendered if there is a description for this post.|yes|no|
+|{block:Description} {/block:Description} | Rendered if there is a description for this post.|yes|no|
 |{Description} | The description for this post.|yes|no|
 
 ###CHAT POST
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Title} | {/block:Title} | Rendered if there is a title for this post.|yes|no|
+|{block:Title} {/block:Title} | Rendered if there is a title for this post.|yes|no|
 |{Title} | The title of this post.|yes|no|
-|{block:Lines} | {/block:Lines} | Rendered for each line of this post.|yes|no|
-|{block:Label} | {/block:Label} | Rendered if a label was extracted for the current line of this post.|yes|no|
+|{block:Lines} {/block:Lines} | Rendered for each line of this post.|yes|no|
+|{block:Label} {/block:Label} | Rendered if a label was extracted for the current line of this post.|yes|no|
 |{Label} | The label (if one was extracted) for the current line of this post.|yes|no|
 |{Name} | The username (if one was extracted) for the current line of this post.|yes|no|
 |{Line} | The current line of this post.|yes|no|
@@ -259,22 +259,22 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
+|{block:Caption} {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
-|{block:AudioEmbed} | {/block:AudioEmbed} | Rendered if an embedded audio player is available.|no|no|
+|{block:AudioEmbed} {/block:AudioEmbed} | Rendered if an embedded audio player is available.|no|no|
 |{AudioEmbed} | Embed-code for the content of this post. Defaults to 500-pixels wide.|no|no|
 |{AudioEmbed-250} | Embed-code for the content of this post. 250-pixels wide.|no|no|
 |{AudioEmbed-400} | Embed-code for the content of this post. 400-pixels wide.|no|no|
 |{AudioEmbed-500} | Embed-code for the content of this post. 500-pixels wide.|no|no|
 |{AudioEmbed-640} | Embed-code for the content of this post. 640-pixels wide.|no|no|
-|{block:AudioPlayer} | {/block:AudioPlayer} | Rendered if a native audio player is available|no|no|
+|{block:AudioPlayer} {/block:AudioPlayer} | Rendered if a native audio player is available|no|no|
 |{AudioPlayer} | Default audio player.|no|no|
 |{RawAudioURL} | URL for this post's audio file.iPhone Themes only.|no|no|
-|{block:PlayCount} | {/block:PlayCount} | Rendered if there is a play count for the audio.|yes|no|
+|{block:PlayCount} {/block:PlayCount} | Rendered if there is a play count for the audio.|yes|no|
 |{PlayCount} | The number of times this post has been played.|yes|no|
 |{FormattedPlayCount} | The number of times this post has been played, formatted with commas.e.g., "12,309"|no|no|
 |{PlayCountWithLabel} | The number of times this post has been played, formatted with commas and pluralized labele.g., "12,309 plays"|no|no|
-|{block:ExternalAudio} | {/block:ExternalAudio} | Rendered if this post uses an externally hosted MP3.Useful for adding a "Download" link|yes|no|
+|{block:ExternalAudio} {/block:ExternalAudio} | Rendered if this post uses an externally hosted MP3.Useful for adding a "Download" link|yes|no|
 |{ExternalAudioURL} | The external MP3 URL, if this post uses an externally hosted MP3.|yes|no|
 |{block:AlbumArt}{AlbumArtURL}{/block:AlbumArt} | Rendered if this audio file's ID3 info contains album art.|yes|no|
 |{block:Artist}{Artist}{/block:Artist} | Rendered if this audio file's ID3 info contains the artist name.|yes|no|
@@ -285,7 +285,7 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Caption} | {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
+|{block:Caption} {/block:Caption} | Rendered if there is a caption for this post.|yes|no|
 |{Caption} | The caption for this post.|yes|no|
 |{Video-700} | Embed-code for the content of this post.700-pixels wide.|no|no|
 |{Video-500} | Embed-code for the content of this post.500-pixels wide.|no|no|
@@ -332,9 +332,9 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Date} | {/block:Date} | Rendered for all posts.Always wrap dates in this block so they will be properly hidden on non-post pages.|no|no|
-|{block:NewDayDate} | {/block:NewDayDate} | Rendered for posts that are the first to be listed for a given day.|no|no|
-|{block:SameDayDate} | {/block:SameDayDate} | Rendered for subsequent posts listed for a given day.|no|no|
+|{block:Date} {/block:Date} | Rendered for all posts.Always wrap dates in this block so they will be properly hidden on non-post pages.|no|no|
+|{block:NewDayDate} {/block:NewDayDate} | Rendered for posts that are the first to be listed for a given day.|no|no|
+|{block:SameDayDate} {/block:SameDayDate} | Rendered for subsequent posts listed for a given day.|no|no|
 |{DayOfMonth} | "1" to "31"|no|no|
 |{DayOfMonthWithZero} | "01" to "31"|no|no|
 |{DayOfWeek} | "Monday" through "Sunday"|no|no|
@@ -365,11 +365,11 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:PostNotes} | {/block:PostNotes} | Rendered on permalink pages if this post has notes.|no|no|
+|{block:PostNotes} {/block:PostNotes} | Rendered on permalink pages if this post has notes.|no|no|
 |{PostNotes} | Standard HTML output of this post's notes. Only rendered on permalink pages.|no|no|
 |{PostNotes-16} | Standard HTML output of this post's notes with 16x16 sized avatars. Only rendered on permalink pages.|no|no|
 |{PostNotes-64} | Standard HTML output of this post's notes with 64x64 sized avatars. Only rendered on permalink pages.|no|no|
-|{block:NoteCount} | {/block:NoteCount} | Rendered if this post has notes.Always wrap note counts in this block so they will be properly hidden on non-post pages.|no|no|
+|{block:NoteCount} {/block:NoteCount} | Rendered if this post has notes.Always wrap note counts in this block so they will be properly hidden on non-post pages.|no|no|
 |{NoteCount} | The number of this post's notes.|yes|no|
 |{NoteCountWithLabel} | The number of this post's notes with pluralized label.e.g., "24 notes"|no|no|
 
@@ -377,8 +377,8 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:HasTags} | {/block:HasTags} | Rendered inside {block:Posts} | if post has tags.|no|no|
-|{block:Tags} | {/block:Tags} | Rendered for each of a post's tags.|yes|yes|
+|{block:HasTags} {/block:HasTags} | Rendered inside {block:Posts} | if post has tags.|no|no|
+|{block:Tags} {/block:Tags} | Rendered for each of a post's tags.|yes|yes|
 |{Tag} | The name of this tag.|yes|yes|
 |{URLSafeTag} | A URL safe version of this tag.|no|no|
 |{TagURL} | The tag page URL with other posts that share this tag.|yes|yes|
@@ -388,20 +388,20 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:ContentSource} | {/block:ContentSource} | Rendered if a source is specified for a post's content.|yes|no|
+|{block:ContentSource} {/block:ContentSource} | Rendered if a source is specified for a post's content.|yes|no|
 |{SourceURL} | URL of the attributed source.|yes|no|
-|{block:SourceLogo} | {/block:SourceLogo} | Rendered if a logo exists for the content source.|yes|no|
+|{block:SourceLogo} {/block:SourceLogo} | Rendered if a logo exists for the content source.|yes|no|
 |{BlackLogoURL} | URL of the source's logo.|yes|no|
 |{LogoWidth} | Width of the source's logo.|yes|no|
 |{LogoHeight} | Height of the source's logo.|yes|no|
 |{SourceTitle} | Title of the content source.|yes|no|
-|{block:NoSourceLogo} | {/block:NoSourceLogo} | Rendered if no source logo exists.|no|no|
+|{block:NoSourceLogo} {/block:NoSourceLogo} | Rendered if no source logo exists.|no|no|
 
 ###SUBMITTED POST
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Submission} | {/block:Submission} | Rendered if a post is a submission.|yes|no|
+|{block:Submission} {/block:Submission} | Rendered if a post is a submission.|yes|no|
 |{Submitter} | The name of the submitting blog.|yes|no|
 |{SubmitterURL} | URL to submitter's blog.|yes|no|
 |{SubmitterPortraitURL-16} | Portrait photo URL for the submitter. 16-pixels by 16-pixels.|yes|no|
@@ -417,8 +417,8 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:GroupMembers} | {/block:GroupMembers} | Rendered on additional public group blogs.|yes|no|
-|{block:GroupMember} | {/block:GroupMember} | Rendered for each additional public group blog member.|yes|no|
+|{block:GroupMembers} {/block:GroupMembers} | Rendered on additional public group blogs.|yes|no|
+|{block:GroupMember} {/block:GroupMember} | Rendered for each additional public group blog member.|yes|no|
 |{GroupMemberName} | The username of the member's blog.|yes|no|
 |{GroupMemberTitle} | The title of the member's blog.|yes|no|
 |{GroupMemberURL} | The URL for the member's blog.|yes|no|
@@ -451,10 +451,10 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:DayPage} | {/block:DayPage} | Rendered on day pages.|no|no|
-|{block:DayPagination} | {/block:DayPagination} | Rendered if there is a "previous" or "next" day page.|no|no|
-|{block:PreviousDayPage} | {/block:PreviousDayPage} | Rendered if there is a "previous" day page to navigate to.|no|no|
-|{block:NextDayPage} | {/block:NextDayPage} | Rendered if there is a "next" day page to navigate to.|no|no|
+|{block:DayPage} {/block:DayPage} | Rendered on day pages.|no|no|
+|{block:DayPagination} {/block:DayPagination} | Rendered if there is a "previous" or "next" day page.|no|no|
+|{block:PreviousDayPage} {/block:PreviousDayPage} | Rendered if there is a "previous" day page to navigate to.|no|no|
+|{block:NextDayPage} {/block:NextDayPage} | Rendered if there is a "next" day page to navigate to.|no|no|
 |{PreviousDayPage} | URL for the "previous" day page.|no|no|
 |{NextDayPage} | URL for the "next" day page.|no|no|
 
@@ -462,7 +462,7 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:TagPage} | {/block:TagPage} | Rendered on tag pages.|no|no|
+|{block:TagPage} {/block:TagPage} | Rendered on tag pages.|no|no|
 |{Tag} | The name of this tag.|no|no|
 |{URLSafeTag} | A URL safe version of this tag.|no|no|
 |{TagURL} | The tag page URL with other posts that share this tag.|no|no|
@@ -482,8 +482,8 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Following} | {/block:Following} | Rendered if you're following other blogs.|yes|no|
-|{block:Followed} | {/block:Followed} | Rendered for each blog you're following.|yes|no|
+|{block:Following} {/block:Following} | Rendered if you're following other blogs.|yes|no|
+|{block:Followed} {/block:Followed} | Rendered for each blog you're following.|yes|no|
 |{FollowedName} | The username of the blog you're following.|yes|no|
 |{FollowedTitle} | The title of the blog you're following.|yes|no|
 |{FollowedURL} | The URL for the blog you're following.|yes|no|
@@ -500,7 +500,7 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Likes} | {/block:Likes} | Rendered if you are sharing your likes.|no|no|
+|{block:Likes} {/block:Likes} | Rendered if you are sharing your likes.|no|no|
 |{Likes} | Standard HTML output of your likes.|no|no|
 |{Likes limit="5"} | Standard HTML output of your last 5 likes.Maximum: 10
 |{Likes width="200"} | Standard HTML output of your likes with Audio and Video players scaled to 200-pixels wide.Scale images with CSS max-width or similar.|no|no|
@@ -526,7 +526,7 @@
 
 |Tag|Description|Supported|Exists in Example Content|
 |---|---|---|---|
-|{block:Twitter} | {/block:Twitter} | Rendered if you have Twitter integration enabled.|no|no|
+|{block:Twitter} {/block:Twitter} | Rendered if you have Twitter integration enabled.|no|no|
 |{TwitterUsername} | Your Twitter username.|no|no|
 
 
