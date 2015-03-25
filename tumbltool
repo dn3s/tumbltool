@@ -210,8 +210,7 @@ sub renderText
 	$block->{"name"}=~/^(Plaintext|JS|JSPlaintext|URLEncoded|RGB)?(.+)$/;
 	my $prefix=$1;
 	my $name=$2 or $1;
-	my $text=$content->{$name};
-	my $text=date($name, $content->{"Date"}) or $text;
+	my $text=date($name, $content->{"Date"}) // $content->{$name};
 	return formatText($prefix, $text || "");
 }
 sub date
@@ -258,7 +257,7 @@ sub date
 		return $date->strftime($format);
 	}
 	else {
-		return "";
+		return;
 	}
 }
 sub jsQuote

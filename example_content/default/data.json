@@ -11,11 +11,7 @@
 			"Title":"Example Content",
 			"Body":"Here is some example content!",
 			"Date":"1427235399",
-			"ShortDayOfWeek":"Mon",
-			"ShortMonth":"Oct",
-			"DayOfMonth":"25",
-			"DayOfMonthSuffix":"th",
-			"NoteCount":true,
+			"NoteCount":"9001",
 			"NoteCountWithLabel":"9001 notes",
 			"HasTags":true,
 			"Tags":[
