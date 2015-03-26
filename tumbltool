@@ -122,6 +122,7 @@ sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way
 	close($fh);
 	if($strip) {
 		$result=~s/[\r\n\t]//g;
+		$result=~s/<!--.*-->//g;
 	}
 	return $result;
 }
