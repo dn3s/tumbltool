@@ -344,7 +344,7 @@ sub renderAsset
 	my $n=$strip?"":"\n";
 	my $before="";
 	my $after="";
-	my $asset=$inline?slurp(path($uri),$strip):$uri;
+	my $asset=$inline?slurp(path($uri)):$uri;
 	$asset=minify(input=>$asset) if $strip; #Somehow minify magically knows if it's CSS or JS???
 	if($uri=~/\.css$/){
 		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
