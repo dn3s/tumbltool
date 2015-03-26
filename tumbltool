@@ -27,6 +27,8 @@ use HTML::Strip;
 use HTML::Entities;
 use URI::Escape;
 use Time::Piece;
+use CSS::Minifier;
+use JavaScript::Minifier;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
 my $cwd=cwd();
 my $home=$ENV{HOME};
@@ -343,6 +345,7 @@ sub renderAsset
 	my $before="";
 	my $after="";
 	my $asset=$inline?slurp(path($uri),$strip):$uri;
+	$asset=minify(input=>$asset) if $strip; #Somehow minify magically knows if it's CSS or JS???
 	if($uri=~/\.css$/){
 		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 		$after=$inline?"$n</style>":"\" />";
