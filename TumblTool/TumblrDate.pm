@@ -32,10 +32,11 @@ my $formats={
 };
 sub tumblrDate
 {
-	(my $varName, my $val)=@_;
+	(my $varName, my $content)=@_;
+	my $date=$content->{"date"};
 	return rand(1000) if($varName eq "Beats");
-	return ordinalSuffix($val) if($varName eq "DayOfMonthSuffix");
-	return localtime($val)->strftime($formats->{$varName}) if($formats->{$varName});
+	return ordinalSuffix($date) if($varName eq "DayOfMonthSuffix");
+	return localtime($date)->strftime($formats->{$varName}) if($formats->{$varName});
 	return;
 }
 sub ordinalSuffix

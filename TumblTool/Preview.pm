@@ -58,7 +58,7 @@ sub renderVar
 {
 	(my $content, my $varName)=@_;
 	my $text=(
-		tumblrDate($varName, $content->{"Date"}) //
+		tumblrDate($varName, $content) //
 		$content->{$varName}
 	);
 	return tumblrPrefix($varName, $text || "");
