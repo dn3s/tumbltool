@@ -29,6 +29,7 @@ use URI::Escape;
 use Time::Piece;
 use CSS::Minifier;
 use JavaScript::Minifier;
+use TumblTool::ThemeParser;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
 my $cwd=cwd();
 my $home=$ENV{HOME};
@@ -62,15 +63,15 @@ GetOptions(
 if($command eq "preview") {
 	if($dataURI) {
 		print("data:text/html;base64,");
-		print(encode_base64(render(parseTheme($theme, $strip),parseContent(contentFile($content)),$include,$inline,$strip),""));
+		print(encode_base64(render(parseTheme(slurp($theme, $strip)),parseContent(contentFile($content)),$include,$inline,$strip),""));
 	}
 	else {
-		print(render(parseTheme($theme, $strip),parseContent(contentFile($content)),$include,$inline,$strip));
+		print(render(parseTheme(slurp($theme, $strip)),parseContent(contentFile($content)),$include,$inline,$strip));
 	}
 	print("\n");
 }
 elsif($command eq "bundle") {
-	print(bundle(parseTheme($theme, $strip),$include,$inline,$strip));
+	print(bundle(parseTheme(slurp($theme, $strip)),$include,$inline,$strip));
 	print("\n");
 }
 elsif($command eq "help") {
@@ -121,42 +122,10 @@ sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way
 	my $result=readline($fh) or fail("Cannot read file \"$filename\"");
 	close($fh);
 	if($strip) {
-		$result=~s/[\r\n\t]//g;
-		$result=~s/<!--.*-->//g;
+		$result=~s/[\r\n\t]//g;#remove newlines, tabs
+		$result=~s/<!--(?!if ).*?-->//g;#remove comments, unless they start with "if" because it might then be an IE conditional comment
 	}
 	return $result;
-}
-sub parseTheme #returns a pretty little tree of the theme. Considering the function works through the file in order, it should be fairly easy to work on a line-by-line basis in the future instead of slurping up the whole thing at the beginning...
-{
-	(my $filename, my $strip)=@_;
-	my $in=slurp($filename, $strip);
-	my $root={ "children" => [] };#outer hash for convenience/consistency
-	my $currBlock=$root;
-	while((my $match, my $html, my $isBlock, my $closing, my $name) = $in =~ /(^(.*?){((\/)?block:)?([A-z]+)})/s) { #inv0k3 t3h d33p p3rl m4j1ckz
-		$in=substr($in,length($match));#remove the part of the string we "consumed" (TODO: possible optimization here????)
-		#K NOW LETS STRUCTURE THIS!
-		push(@{$currBlock->{"children"}}, $html) if $html;#if we slurped up any HTML lets deal with that before we do anything else
-		if(!$isBlock) { #now lets start with the easy case: the token we found is not a block, just an insert thingy.
-			push(@{$currBlock->{"children"}}, {
-				"name"=>$name
-			});
-		}
-		elsif(!$closing) { #this will be a bit more work. The token we found marks the opening of a block! I guess we have to make a block then ;(
-			my $i=push(@{$currBlock->{"children"}}, {
-				"name"=>$name,
-				"parent"=>$currBlock, #We'll need this later to get out of the block. Don't forget to remove this later to keep things clean!
-				"children"=>[]
-			});
-			$currBlock=$currBlock->{"children"}->[$i-1]; #set currBlock equal to the block we just created
-		} #oh. nevermind, that wasn't so bad
-		else { #and NOW, DEAR WATSON, through the PROCESS OF ELIMINATION we can DEDUCE that the TOKEN we have STUMPLED ACROSS... MARKS the END of a BLOCK!
-			my $oldCurr=$currBlock;
-			$currBlock=$currBlock->{"parent"};#now we just pop up one level
-			delete($oldCurr->{"parent"});#clean up the parent ref; we don't need it any more
-		}
-	}
-	push(@{$root->{"children"}},$in);#WHOOPS THE PARSING LOOP DIDN'T GRAB THE LAST BIT OF HTML SINCE IT'S NOT FOLLOWED BY A TUMBLR TAG THINGY (TODO: I should really look up what to call those things so i dont sound like an idiot)
-	return $root->{"children"};#stip off the outer object
 }
 sub parseContent
 {
