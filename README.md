@@ -14,51 +14,43 @@ You will need perl 5 installed, as well as the `JSON::PP`, `CSS::Minify`, `JavaS
 
 ##Usage
 
-`Usage: tumbltool <COMMAND> [OPTIONS]`
+```
+Usage: tumbltool <COMMAND> [OPTIONS]
 
-###Commands:
+Commands:
 
-`preview:`
+preview
+Print an example page using the theme specified in FILE, filled with example material from a JSON file (see -content)
 
-Print an example page using the theme specified in FILE, filled with example material from a JSON file (see `-content`)
-
-`bundle:`
-
+bundle
 Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
 
-`help`
-
+help
 Show this help text and exit.
 
-###Options:
+Options:
 
-`-c --content: <FILE>`
+-c --content <FILE>
+Specify content to populate the rendered preview page, either as an absolute or relative path to a JSON file, or the name of one of the bundled content packages (currently only "default" is available).
 
-specify content to populate the rendered preview page, either as an absolute or relative path to a JSON file, or the name of one of the bundled content packages (currently only "default" is available).
+-d --dataURI
+Format output as a base64-encoded data URI, meant for piping into a browser (or sending a link to clients I guess). Example: tumbltool preview --theme your_file_here -dataURI | xargs firefox
 
-`-d --dataURI`
+-i --include <FILES>
+specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's <head>. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
 
-Format output as a base64-encoded data URI, meant for piping into a browser (or sending a link to clients I guess). Example: `tumbltool preview --theme your_file_here -dataURI | xargs firefox`
+-l --inline
+Include all local files (not URIs though) inline, using <script> or <style> tags, so the preview or bundle is a single, self-contained file. Also inlines images as Data URIs. Handy for one-step deployment and easy previews, but may hurt performance since browsers won't cache stylesheets, images, or scripts.
 
-`-i --include: <FILES>`
-
-specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's `&lt;head>`. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
-
-`-l --inline:`
-
-Include all local files (not URIs though) inline, using &lt;script> or &lt;style> tags, so the preview or bundle is a single, self-contained file. Handy for one-step deployment, but may hurt performance since browsers won't cache stylesheets.
-
-`-s --strip`
-
+-s --strip
 Remove unnecessary whitespace, and minify scripts and stylesheets. Useful for keeping file sizes down and ease of sharing.
 
-`-v --var ATTRIBUTE=VALUE`
-
+-v --var ATTRIBUTE=VALUE
 Specify custom variables you may have in your theme. (Not yet implemented)
 
-`-t --theme FILE`
-
+-t --theme FILE
 Specify the theme file to preview/bundle.
+```
 
 ##Contributing
 

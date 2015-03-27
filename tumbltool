@@ -15,7 +15,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 use strict;
-use warnings;
+#use warnings;
 use JSON;
 use Getopt::Long;
 use TumblTool::ThemeParser;
@@ -26,46 +26,44 @@ use TumblTool::DataURI;
 use TumblTool::Slurp;
 use TumblTool::Fail;
 use TumblTool::ImageURL;
-#use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
 my $command = shift(); #command comes first, not subject to Getopt stuff
-my $content = 'default';
-my $dataURI = '';
-my $include = [];
-my $inline  = '';
-my $strip   = '';
-my $theme   = '';
-my $help    = '';
-my $vars    = {};
-#Getopt::Long::Configure("bundling");
+#here are a couple chances to bail out before doing anything
+fail("No command spefified!") if(!$command);
+fail() if($command eq "help");
+fail("Unknown command: \"$command\"\n") if(!($command eq "preview" or $command eq "bundle"));
+#OK lets get started
+my $content   = 'default';
+my $dataURI   = '';
+my $includes  = [];
+my $inline    = '';
+my $strip     = '';
+my $themeFile = '';
+my $vars      = {};
 GetOptions(
-	"include|i=s{1,}" => $include,
-	"content|c=s"     => \$content,
-	"dataURI|d"       => \$dataURI,
-	"inline|l!"       => \$inline,
-	"strip|s!"        => \$strip,
-	"var|v=s%"        => \$vars,
-	"theme|t=s"       => \$theme,
-	"help|h|?"        => \$help
-) or die; #TODO: snag the last arg as theme if it exists
+	"includes|i=s{1,}" =>  $includes,
+	"content|c=s"      => \$content,
+	"dataURI|d"        => \$dataURI,
+	"inline|l!"        => \$inline,
+	"strip|s!"         => \$strip,
+	"var|v=s%"         => \$vars,
+	"theme|t=s"        => \$themeFile,
+) or fail();
+#configure the modules according to CLI options
+my $theme=parseTheme(slurp($themeFile, $strip));
 my $contentRoot=getContentDir($content);
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inline});
-TumblTool::Preview::configure({"includes"=>$include, "inline"=>$inline, "strip"=>$strip, "contentRoot"=>$contentRoot});
+TumblTool::Preview::configure({"includes"=>$includes, "inline"=>$inline, "strip"=>$strip, "contentRoot"=>$contentRoot});
+TumblTool::Bundle::configure({"includes"=>$includes, "inline"=>$inline, "strip"=>$strip});
 if($command eq "preview") {
 	my $content=decode_json(slurp(getContentFile($content)));
-	my $out=render(parseTheme(slurp($theme, $strip)),$content);
+	my $out=render($theme,$content);
 	$out=dataURI("text/html", $out) if($dataURI);
 	print("$out\n");
 }
 elsif($command eq "bundle") {
-	print(bundle(parseTheme(slurp($theme, $strip)),$include,$inline,$strip));
-	print("\n");
+	fail("Invalid Option: --dataURI doens't make sense for bundle") if($dataURI);
+	fail("Invalid Option: --content doesn't make sense for bundle") if($content and !($content eq "default"));
+	my $out=(bundle($theme));
+	print("$out\n");
 }
-elsif($command eq "help") {
-	fail();
-}
-elsif($command eq "") {
-	fail("No command spefified!");
-}
-else {
-	fail("Unknown command: \"$command\"\n");
-}
+exit(0);

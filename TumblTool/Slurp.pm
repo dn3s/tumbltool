@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::Slurp;
 use base 'Exporter';
 use TumblTool::Fail;

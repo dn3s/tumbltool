@@ -13,9 +13,9 @@ use base 'Exporter';
 our @EXPORT=('processIncludes');
 sub processIncludes
 {
-	(my $assets, my $inline, my $strip)=@_;
+	(my $includes, my $inline, my $strip)=@_;
 	my $result="";
-	foreach my $name (@{$assets}) {
+	foreach my $name (@{$includes}) {
 		$result.=include($name, ($inline and !($name=~/^http:\/\/.+$/)), $strip);
 	}
 	return $result;
@@ -26,8 +26,8 @@ sub include
 	my $n=$strip?"":"\n";
 	my $before="";
 	my $after="";
-	my $asset=$inline?slurp(getFile($uri),$strip):$uri;
-	$asset=minify(input=>$asset) if $strip; #Somehow minify magically knows if it's CSS or JS???
+	my $include=$inline?slurp(getFile($uri),$strip):getFile($uri);
+	$include=minify(input=>$include) if $strip; #Somehow minify magically knows if it's CSS or JS???
 	if($uri=~/\.css$/){
 		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
 		$after=$inline?"$n</style>":"\" />";
@@ -36,5 +36,5 @@ sub include
 		$before=$inline?"<script>$n":"<script src=\"";
 		$after=$inline?"$n</script>":"\"></script>";
 	}
-	return "$n$before$asset$after$n";
+	return "$n$before$include$after$n";
 }
