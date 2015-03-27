@@ -17,29 +17,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 use strict;
 #use warnings;
-use Data::Dumper;
 use JSON;
 use MIME::Base64;
-use Cwd;
 use Getopt::Long;
 use File::Basename;
-use HTML::Strip;
-use HTML::Entities;
-use URI::Escape;
-use Time::Piece;
-use CSS::Minifier;
-use JavaScript::Minifier;
 use TumblTool::ThemeParser;
+use TumblTool::Preview;
+use TumblTool::Bundle;
+use TumblTool::PathUtils;
+use TumblTool::Slurp;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
-my $cwd=cwd();
-my $home=$ENV{HOME};
-my $contentPath=[
-	"/etc/tumbltool",
-	"$home/.tumbltool",
-	"$cwd/example_content",
-	"$cwd"
-];
-my $realContentPath="";
 my $command=shift(); #command comes first, not subject to Getopt stuff
 my $content='default';
 my $dataURI='';
@@ -66,7 +53,7 @@ if($command eq "preview") {
 		print(encode_base64(render(parseTheme(slurp($theme, $strip)),parseContent(contentFile($content)),$include,$inline,$strip),""));
 	}
 	else {
-		print(render(parseTheme(slurp($theme, $strip)),parseContent(contentFile($content)),$include,$inline,$strip));
+		print(render(parseTheme(slurp($theme, $strip)),parseContent(getContentFile($content)),$include,$inline,$strip));
 	}
 	print("\n");
 }
@@ -83,248 +70,10 @@ elsif($command eq "") {
 else {
 	fail("Unknown command: \"$command\"\n");
 }
-
-sub contentFile
-{
-	my $in=shift();
-	if($in=~/^\//) {
-		$realContentPath=dirname($in);
-		return $in;
-	}
-	elsif($in=~/\.json$/) {
-		$realContentPath="$cwd";
-		return "$cwd/$in";
-	}
-	else {
-		foreach my $dir (@{$contentPath}) {
-			if(-e "$dir/$in.json") {
-				$realContentPath="$dir";
-				return "$dir/$in.json";
-			}
-			elsif(-e "$dir/$in/data.json") {
-				$realContentPath="$dir/$in";
-				return "$dir/$in/data.json";
-			}
-		}
-	}
-	return "";
-}
-sub path
-{
-	my $in=shift();
-	return ($in=~/^\//)?$in:"$cwd/$in";
-}
-sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way to make the JSON parser work without slurping)
-{
-	(my $filename, my $strip)=@_;
-	open(my $fh, "<", $filename) or fail("Cannot open file \"$filename\"");
-	$/ = undef;
-	my $result=readline($fh) or fail("Cannot read file \"$filename\"");
-	close($fh);
-	if($strip) {
-		$result=~s/[\r\n\t]//g;#remove newlines, tabs
-		$result=~s/<!--(?!if ).*?-->//g;#remove comments, unless they start with "if" because it might then be an IE conditional comment
-	}
-	return $result;
-}
 sub parseContent
 {
 	my $filename=shift();
-	return decode_json(slurp(path($filename))) or fail("JSON decode failed for file $filename");
-}
-sub render #render a demo using $content for filler text, etc
-{
-	(my $block, my $content, my $assets, my $inline, my $strip)=@_;
-	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block TODO: better solution for special cases; there will be a lot of them
-		$content->{ucfirst($content->{"PostType"})}=1;
-	}
-	my $result="";
-	foreach my $item (@{$block}) {
-		if(ref($item) eq "HASH") {
-			$result.=renderObject($item, $content, $assets, $inline, $strip);
-		}
-		elsif(!($item=~/^[\r\n\s]*$/)){ #don't concatenate if it's just a blank line; that's leftovers from block declarations. TODO: maybe this should be dealt with in the parse function???
-			$result.=$item;
-		}
-	}
-	return $result;
-}
-sub renderObject #used by render to do most of the heavy lifting
-{
-	(my $block, my $content, my $assets, my $inline, my $strip)=@_;
-	if($block->{"children"} and $content->{$block->{"name"}}) { #If the block has children, it's not just a placeholder, it's a block. Check if there is anything to go in the block, and if so, render it.
-		if(ref($content->{$block->{"name"}}) eq "ARRAY") {#Is the relevant content an array (eg. posts, tags, etc)?
-			my $result="";
-			foreach my $contentItem (@{$content->{$block->{"name"}}}) { #iterate over said array
-				$result.=render($block->{"children"}, $contentItem, $assets, $inline, $strip); #render the current block for each array item
-			}
-			return $result;
-		}
-		else { #No it's not an array; thank goodness. Just render it
-			return render($block->{"children"}, $content, $assets, $inline, $strip);
-		}
-	}
-	else { #since it's not a block, it's a placeholder.
-		my $result="";
-		if($block->{"name"} eq "tumbltool_assets") {
-			$result=renderAssets($assets, $inline, $strip);
-		}
-		else {
-			$result=renderText($content, $block); #so we just print the value from content that corresponds to the block's name (if it exists)
-		}
-		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
-	}
-}
-sub renderText
-{
-	(my $content, my $block)=@_;
-	#First, lets extract the prefix, if any
-	$block->{"name"}=~/^(Plaintext|JS|JSPlaintext|URLEncoded|RGB)?(.+)$/;
-	my $prefix=$1;
-	my $name=$2 or $1;
-	my $text=date($name, $content->{"Date"}) // $content->{$name};
-	return formatText($prefix, $text || "");
-}
-sub date
-{
-	(my $name, my $text)=@_;
-	my $date=localtime($text);
-	my $formats={
-		"DayOfMonth"          => "%e",
-		"DayOfMonthWithZero"  => "%d",
-		"DayOfWeek"           => "%A",
-		"ShortDayOfWeek"      => "%a",
-		"DayOfWeekNumber"     => "%u",
-		"DayOfMonthSuffix"    => "th",
-		"DayOfYear"           => "%j",
-		"WeekOfYear"          => "%W",
-		"Month"               => "%B",
-		"ShortMonth"          => "%b",
-		"MonthNumber"         => "%e",
-		"MonthNumberWithZero" => "%m",
-		"Year"                => "%Y",
-		"ShortYear"           => "%y",
-		"AmPm"                => "%P",
-		"CapitalAmPm"         => "%p",
-		"12Hour"              => "%I",
-		"24Hour"              => "%k",
-		"12HourWithZero"      => "%l",
-		"24HourWithZero"      => "%H",
-		"Minutes"             => "%M",
-		"Seconds"             => "%S",
-		"Beats"               => "249",
-		"Timestamp"           => "%s",
-		"TimeAgo"             => "100 years ago",
-	};
-	my $format=$formats->{$name};
-	if($name eq "DayOfMonthSuffix") {
-		my $d=$date->strftime("%e");
-		return "th" if($d>=11 and $d<=13);
-		return "st" if($d % 10 == 1);
-		return "nd" if($d % 10 == 2);
-		return "rd" if($d % 10 == 3);
-		return "th";
-	}
-	elsif($format) {
-		return $date->strftime($format);
-	}
-	else {
-		return;
-	}
-}
-sub jsQuote
-{
-	my $text=shift();
-	$text=~s/\\/\\\\/g;
-	$text=~s/'/\\'/g;
-	return "'$text'";
-}
-sub stripHTML
-{
-	my $text=shift();
-	my $hs=HTML::Strip->new(emit_spaces=>0);
-	return $hs->parse(encode_entities($text));
-}
-sub formatText
-{
-	(my $format, my $text)=@_;
-	if($format eq "Plaintext") {
-		return stripHTML($text);
-	}
-	elsif($format eq "JS") {
-		return jsQuote($text);
-	}
-	elsif($format eq "JSPlaintext") {
-		return jsQuote(stripHTML($text));
-	}
-	elsif($format eq "URLEncoded") {
-		return uri_escape_utf8($text);
-	}
-	elsif($format eq "RGB") {
-		$text=~/#?(..)(..)(..)/;
-		my $r=hex($1);
-		my $g=hex($2);
-		my $b=hex($3);
-		return ("$r,$g,$b");
-	}
-	else {
-		return $text;
-	}
-}
-sub bundle
-{
-	(my $block, my $assets, my $inline, my $strip)=@_;
-	my $result="";
-	foreach my $item (@{$block}) {
-		if(ref($item) eq "HASH") {
-			$result.=bundleObject($item, $assets, $inline, $strip);
-		}
-		else {
-			$result.=$item;
-		}
-	}
-	return $result;
-}
-sub bundleObject
-{
-	(my $block, my $assets, my $inline, my $strip)=@_;
-	my $name=$block->{"name"};
-	if($name eq "tumbltool_includes") {
-		return renderAssets($assets, $inline, $strip);
-	}
-	elsif($block->{"children"}) {
-		return "{block:$name".bundle($block->{"children"},$assets,$inline,$strip)."{/block:$name}";
-	}
-	else {
-		return "{$name}";
-	}
-}
-sub renderAssets
-{
-	(my $assets, my $inline, my $strip)=@_;
-	my $result="";
-	foreach my $name (@{$assets}) {
-		$result.=renderAsset($name, ($inline and !($name=~/^http:\/\/.+$/)), $strip);
-	}
-	return $result;
-}
-sub renderAsset
-{
-	(my $uri, my $inline, my $strip)=@_;
-	my $n=$strip?"":"\n";
-	my $before="";
-	my $after="";
-	my $asset=$inline?slurp(path($uri),$strip):$uri;
-	$asset=minify(input=>$asset) if $strip; #Somehow minify magically knows if it's CSS or JS???
-	if($uri=~/\.css$/){
-		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
-		$after=$inline?"$n</style>":"\" />";
-	}
-	elsif($uri=~/\.js$/){
-		$before=$inline?"<script>$n":"<script src=\"";
-		$after=$inline?"$n</script>":"\"></script>";
-	}
-	return "$n$before$asset$after$n";
+	return decode_json(slurp(getFile($filename))) or fail("JSON decode failed for file $filename");
 }
 sub fail
 {
