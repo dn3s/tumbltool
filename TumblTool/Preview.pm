@@ -14,7 +14,7 @@ our @EXPORT=('render');
 sub render #render a demo using $content for filler text, etc
 {
 	(my $block, my $content, my $assets, my $inline, my $strip)=@_;
-	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block TODO: better solution for special cases; there will be a lot of them
+	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block TODO: as I implement more of the API this will need to be a module
 		$content->{ucfirst($content->{"PostType"})}=1;
 	}
 	my $result="";
@@ -58,8 +58,8 @@ sub renderVar
 {
 	(my $content, my $varName)=@_;
 	my $text=(
-		formatDate($varName, $content->{"Date"}) //
+		tumblrDate($varName, $content->{"Date"}) //
 		$content->{$varName}
 	);
-	return prefix($varName, $text || "");
+	return tumblrPrefix($varName, $text || "");
 }

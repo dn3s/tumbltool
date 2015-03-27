@@ -5,8 +5,8 @@ use HTML::Strip;
 use HTML::Entities;
 use URI::Escape;
 use base 'Exporter';
-our @EXPORT=('prefix');
-sub prefix
+our @EXPORT=('tumblrPrefix');
+sub tumblrPrefix
 {
 	(my $varName, my $val)=@_;
 	if($varName=~/^RGB/) {
