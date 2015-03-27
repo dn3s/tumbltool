@@ -5,6 +5,7 @@
 	"NextPage":true,
 	"PreviousPage":true,
 	"Archive":true,
+	"Portrait":"cat.jpg",
 	"Posts":[
 		{
 			"PostType":"text",

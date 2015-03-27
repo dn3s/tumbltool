@@ -8,7 +8,7 @@ sub parseTheme
 	(my $theme)=@_;
 	my $root={ "children" => [] };
 	my $currBlock=$root;
-	while((my $match, my $html, my $isBlock, my $closing, my $name) = $theme =~ /(^(.*?){((\/)?block:)?([A-z]+)})/s) {
+	while((my $match, my $html, my $isBlock, my $closing, my $name) = $theme =~ /(^(.*?){((\/)?block:)?([A-z0-9-]+?)})/s) {
 		$theme=substr($theme,length($match));#remove the part of the string we "consumed"
 		push(@{$currBlock->{"children"}}, $html) if $html;#if we slurped up any HTML lets deal with that before we do anything else
 		if(!$isBlock) { #now lets start with the easy case: the token we found is not a block, just a variable.

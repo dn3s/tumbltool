@@ -17,44 +17,44 @@
 use strict;
 use warnings;
 use JSON;
-use MIME::Base64;
 use Getopt::Long;
 use TumblTool::ThemeParser;
 use TumblTool::Preview;
 use TumblTool::Bundle;
 use TumblTool::PathUtils;
+use TumblTool::DataURI;
 use TumblTool::Slurp;
+use TumblTool::Fail;
+use TumblTool::ImageURL;
 #use sTre4M oF CoNCiOUsN3SS-StYLe C0mMeENTs (srry);
-my $command=shift(); #command comes first, not subject to Getopt stuff
-my $content='default';
-my $dataURI='';
-my $include=[];
-my $inline='';
-my $strip='';
-my $theme='';
-my $help='';
-my $vars={};
+my $command = shift(); #command comes first, not subject to Getopt stuff
+my $content = 'default';
+my $dataURI = '';
+my $include = [];
+my $inline  = '';
+my $strip   = '';
+my $theme   = '';
+my $help    = '';
+my $vars    = {};
 #Getopt::Long::Configure("bundling");
 GetOptions(
 	"include|i=s{1,}" => $include,
-	"content|c=s" => \$content,
-	"dataURI|d" => \$dataURI,
-	"inline|l!" => \$inline,
-	"strip|s!" => \$strip,
-	"var|v=s%" => \$vars,
-	"theme|t=s" => \$theme,
-	"help|h|?" => \$help
+	"content|c=s"     => \$content,
+	"dataURI|d"       => \$dataURI,
+	"inline|l!"       => \$inline,
+	"strip|s!"        => \$strip,
+	"var|v=s%"        => \$vars,
+	"theme|t=s"       => \$theme,
+	"help|h|?"        => \$help
 ) or die; #TODO: snag the last arg as theme if it exists
+my $contentRoot=getContentDir($content);
+TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inline});
+TumblTool::Preview::configure({"includes"=>$include, "inline"=>$inline, "strip"=>$strip, "contentRoot"=>$contentRoot});
 if($command eq "preview") {
 	my $content=decode_json(slurp(getContentFile($content)));
-	if($dataURI) {
-		print("data:text/html;base64,");
-		print(encode_base64(render(parseTheme(slurp($theme, $strip)),$content,$include,$inline,$strip),""));
-	}
-	else {
-		print(render(parseTheme(slurp($theme, $strip)),$content,$include,$inline,$strip));
-	}
-	print("\n");
+	my $out=render(parseTheme(slurp($theme, $strip)),$content);
+	$out=dataURI("text/html", $out) if($dataURI);
+	print("$out\n");
 }
 elsif($command eq "bundle") {
 	print(bundle(parseTheme(slurp($theme, $strip)),$include,$inline,$strip));
@@ -68,63 +68,4 @@ elsif($command eq "") {
 }
 else {
 	fail("Unknown command: \"$command\"\n");
-}
-sub fail
-{
-	my $message=shift();
-	if($message){
-		print("Fatal Error: $message\n");
-	}
-	print qq{
-usage: tumbltool <COMMAND> [OPTIONS]
-
-Test and deploy tumblr themes with ease!
-
-Commands:
-preview
-                    Print an example page using the theme specified
-                    in FILE, filled with example material from a
-                    JSON file (see -content)
-bundle
-                    Bundle up a theme with any needed assets
-                    into a single file to be pasted into Tumblr.
-                    Useful for a sort of ghetto deployment system.
-help
-                    Show this help text and exit.
-Options:
--c --content: <FILE>
-                    specify content to populate the
-                    rendered preview page.
--d --dataURI
-                    format output as a base64-encoded
-                    data URI, meant for piping into a browser (or
-                    sending a link to clients I guess)
--i --include: <FILES>
-                    specify CSS or Javscript file(s)
-                    to add to the theme, included at the special
-                    {tumbltool_includes} tag in your theme file
-                    (so make sure to add it, presumably at the
-                    end of your theme's <head>. Multiple files
-                    can be specified as a space-separated list,
-                    or this argument can be added multiple
-                    times. You can supply absolute paths,
-                    relative paths, or URIs.
--l --inline:
-                    Include all local files (not URIs though)
-                    inline, using <script> or <style> tags,
-                    so the preview or bundle is a single,
-                    self-contained file. Handy for one-step
-                    deployment, but may hurt performance
-                    since browsers won't cache stylesheets.
--s --strip
-                    Remove unnecessary whitespace. Useful
-                    for keeping file sizes down and ease
-                    of sharing.
--v --var ATTRIBUTE=VALUE
-                    Specify custom variables you may have
-                    in your theme. (Not yet implemented)
--t --theme FILE
-                    Specify the theme file to
-                    preview/bundle.
-}
 }

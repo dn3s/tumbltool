@@ -17,7 +17,7 @@ my $contentPath=[
 ];
 sub getContentDir
 {
-	return dirname(shift());
+	return dirname(getContentFile(shift()));
 }
 sub getContentFile
 {

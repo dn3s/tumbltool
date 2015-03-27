@@ -2,6 +2,7 @@ use strict;
 use warnings;
 package TumblTool::Slurp;
 use base 'Exporter';
+use TumblTool::Fail;
 our @EXPORT=('slurp');
 sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way to make the JSON parser work without slurping)
 {

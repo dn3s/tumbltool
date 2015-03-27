@@ -49,3 +49,4 @@ sub ordinalSuffix
 	return "rd" if($d % 10 == 3);
 	return "th";
 }
+1;
