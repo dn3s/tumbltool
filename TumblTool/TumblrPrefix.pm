@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::TumblrPrefix;
 use HTML::Strip;
 use HTML::Entities;

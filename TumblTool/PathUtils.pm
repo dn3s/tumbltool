@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::PathUtils;
 use base 'Exporter';
 our @EXPORT=('getContentDir', 'getContentFile', 'getFile');

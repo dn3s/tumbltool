@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::TumblrPortrait;
 use base 'Exporter';
 use TumblTool::ImageURL;

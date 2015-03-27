@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::DataURI;
 use MIME::Base64;
 use TumblTool::Slurp;

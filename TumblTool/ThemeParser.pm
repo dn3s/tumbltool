@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::ThemeParser;
 use base 'Exporter';
 our @EXPORT=('parseTheme');

@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::Preview;
 use URI::Escape;
 use CSS::Minifier;

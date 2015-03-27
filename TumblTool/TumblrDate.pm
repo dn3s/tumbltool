@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::TumblrDate;
 use Time::Piece;
 use base 'Exporter';

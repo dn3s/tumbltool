@@ -24,6 +24,7 @@ use TumblTool::Bundle;
 use TumblTool::PathUtils;
 use TumblTool::DataURI;
 use TumblTool::Slurp;
+use TumblTool::Minify;
 use TumblTool::Fail;
 use TumblTool::ImageURL;
 my $command = shift(); #command comes first, not subject to Getopt stuff
@@ -49,7 +50,10 @@ GetOptions(
 	"theme|t=s"        => \$themeFile,
 ) or fail();
 #configure the modules according to CLI options
-my $theme=parseTheme(slurp($themeFile, $strip));
+my $themeTxt=slurp($themeFile, $strip);
+$themeTxt=collapseLines($themeTxt) if($strip);
+$themeTxt=removeHTMLComments($themeTxt,1) if($strip);
+my $theme=parseTheme($themeTxt);
 my $contentRoot=getContentDir($content);
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inline});
 TumblTool::Preview::configure({"includes"=>$includes, "inline"=>$inline, "strip"=>$strip, "contentRoot"=>$contentRoot});

@@ -1,5 +1,5 @@
 use strict;
-use warnings;
+#use warnings;
 package TumblTool::Bundle;
 use base 'Exporter';
 our @EXPORT=('bundle');
