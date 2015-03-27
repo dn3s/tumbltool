@@ -6,7 +6,7 @@ use HTML::Entities;
 use URI::Escape;
 use CSS::Minifier;
 use JavaScript::Minifier;
-use TumblTool::FormatDate;
+use TumblTool::TumblrDate;
 use TumblTool::PathUtils;
 use TumblTool::Slurp;
 use base 'Exporter';

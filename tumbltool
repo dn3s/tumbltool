@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-
 #    TUMBLTOOL! Test and deploy Tumblr themes with ease!
 #    Copyright (C) 2015 Devon Sawatzky.
 #
@@ -16,11 +15,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 use strict;
-#use warnings;
+use warnings;
 use JSON;
 use MIME::Base64;
 use Getopt::Long;
-use File::Basename;
 use TumblTool::ThemeParser;
 use TumblTool::Preview;
 use TumblTool::Bundle;
@@ -48,12 +46,13 @@ GetOptions(
 	"help|h|?" => \$help
 ) or die; #TODO: snag the last arg as theme if it exists
 if($command eq "preview") {
+	my $content=decode_json(slurp(getContentFile($content)));
 	if($dataURI) {
 		print("data:text/html;base64,");
-		print(encode_base64(render(parseTheme(slurp($theme, $strip)),parseContent(contentFile($content)),$include,$inline,$strip),""));
+		print(encode_base64(render(parseTheme(slurp($theme, $strip)),$content,$include,$inline,$strip),""));
 	}
 	else {
-		print(render(parseTheme(slurp($theme, $strip)),parseContent(getContentFile($content)),$include,$inline,$strip));
+		print(render(parseTheme(slurp($theme, $strip)),$content,$include,$inline,$strip));
 	}
 	print("\n");
 }
@@ -69,11 +68,6 @@ elsif($command eq "") {
 }
 else {
 	fail("Unknown command: \"$command\"\n");
-}
-sub parseContent
-{
-	my $filename=shift();
-	return decode_json(slurp(getFile($filename))) or fail("JSON decode failed for file $filename");
 }
 sub fail
 {

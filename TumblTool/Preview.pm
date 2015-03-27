@@ -1,15 +1,14 @@
 use strict;
 use warnings;
 package TumblTool::Preview;
-use HTML::Strip;
-use HTML::Entities;
 use URI::Escape;
 use CSS::Minifier;
 use JavaScript::Minifier;
-use TumblTool::FormatDate;
+use TumblTool::TumblrDate;
 use TumblTool::PathUtils;
 use TumblTool::Slurp;
 use TumblTool::Include;
+use TumblTool::TumblrPrefix;
 use base 'Exporter';
 our @EXPORT=('render');
 sub render #render a demo using $content for filler text, etc
@@ -62,31 +61,5 @@ sub renderVar
 		formatDate($varName, $content->{"Date"}) //
 		$content->{$varName}
 	);
-	return applyPrefix($varName, $text || "");
-}
-sub applyPrefix
-{
-	(my $varName, my $val)=@_;
-	if($varName=~/^RGB/) {
-		$val=~/#?(..)(..)(..)/;
-		return ("$1,$2,$3");
-	}
-	return stripHTML($val)          if($varName=~/^Plaintext/  );
-	return jsQuote($val)            if($varName=~/^JS/         );
-	return jsQuote(stripHTML($val)) if($varName=~/^JSPlaintext/);
-	return uri_escape_utf8($val)    if($varName=~/^URLEncoded/ );
-	return $val;
-}
-sub jsQuote
-{
-	my $text=shift();
-	$text=~s/\\/\\\\/g;
-	$text=~s/'/\\'/g;
-	return "'$text'";
-}
-sub stripHTML
-{
-	my $text=shift();
-	my $hs=HTML::Strip->new(emit_spaces=>0);
-	return $hs->parse(encode_entities($text));
+	return prefix($varName, $text || "");
 }

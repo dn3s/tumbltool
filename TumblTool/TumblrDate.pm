@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-package TumblTool::FormatDate;
+package TumblTool::TumblrDate;
 use Time::Piece;
 use base 'Exporter';
 our @EXPORT=('formatDate');

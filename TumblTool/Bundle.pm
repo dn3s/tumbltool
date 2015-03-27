@@ -10,7 +10,7 @@ sub bundle
 	my $result="";
 	foreach my $item (@{$block}) {
 		if(ref($item) eq "HASH") {
-			$result.=bundleObject($item, $assets, $inline, $strip);
+			$result.=bundleBlock($item, $assets, $inline, $strip);
 		}
 		else {
 			$result.=$item;
@@ -18,17 +18,11 @@ sub bundle
 	}
 	return $result;
 }
-sub bundleObject
+sub bundleBlock
 {
 	(my $block, my $assets, my $inline, my $strip)=@_;
 	my $name=$block->{"name"};
-	if($name eq "tumbltool_includes") {
-		return processIncludes($assets, $inline, $strip);
-	}
-	elsif($block->{"children"}) {
-		return "{block:$name".bundle($block->{"children"},$assets,$inline,$strip)."{/block:$name}";
-	}
-	else {
-		return "{$name}";
-	}
+	return processIncludes($assets, $inline, $strip) if($name eq "tumbltool_includes");
+	return "{block:$name".bundle($block->{"children"},$assets,$inline,$strip)."{/block:$name}" if($block->{"children"});
+	return "{$name}";
 }
