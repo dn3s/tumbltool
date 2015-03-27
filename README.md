@@ -10,7 +10,7 @@ Also, this has only been tested on Linux (Specifically ArchLinux). Theoretically
 
 ##Installation
 
-You will need perl 5 installed, as well as the `JSON::PP`, `CSS::Minify`, `JavaScript::Minify`, `HTML::Entities`, `HTML::Escape`, and `URI::Escape` modules from CPAN (your distribution should also provide packages). Then just put `tumbltool` somewhere in your `$PATH`, and rename the `example_content` directory either to `/etc/tumbltool` or `$HOME/.tumbltool` (or just keep it in your working directory, but that's messy)
+You will need perl 5 installed, as well as the `JSON::PP`, `CSS::Minify`, `JavaScript::Minify`, `HTML::Entities`, `HTML::Escape`, and `URI::Escape` modules from CPAN (your distribution should also provide packages). Put the `TumblTool` directory in your perl installation's `@INC` path. Then just put `tumbltool` somewhere in your `$PATH`, and rename the `example_content` directory either to `/etc/tumbltool` or `$HOME/.tumbltool` (or just keep it in your working directory, but that's messy)
 
 ##Usage
 
