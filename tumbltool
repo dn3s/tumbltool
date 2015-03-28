@@ -24,7 +24,7 @@ use TumblTool::Bundle;
 use TumblTool::PathUtils;
 use TumblTool::DataURI;
 use TumblTool::Slurp;
-use TumblTool::Minify;
+use TumblTool::TextTransforms;
 use TumblTool::Fail;
 use TumblTool::ImageURL;
 my $command = shift(); #command comes first, not subject to Getopt stuff

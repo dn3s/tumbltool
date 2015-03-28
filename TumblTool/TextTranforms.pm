@@ -1,10 +1,13 @@
 use strict;
 #use warnings;
-package TumblTool::Minify;
+package TumblTool::TextTransforms;
 use CSS::Minifier;
 use JavaScript::Minifier;
+use HTML::Strip;
+use HTML::Entities;
+use URI::Escape;
 use base 'Exporter';
-our @EXPORT=('collapseLines', 'removeHTMLComments', 'minifyCSS', 'minifyJS');
+our @EXPORT=('collapseLines', 'removeHTMLComments', 'minifyCSS', 'minifyJS', 'jsQuote', 'stripHTML', 'encodeURIComponent');
 
 sub collapseLines
 {
@@ -29,5 +32,22 @@ sub minifyJS
 {
 	my $js=shift();
 	return JavaScript::Minifier::minify(input=>$js);
+}
+sub jsQuote
+{
+	my $text=shift();
+	$text=~s/\\/\\\\/g;
+	$text=~s/'/\\'/g;
+	return "'$text'";
+}
+sub stripHTML
+{
+	my $text=shift();
+	my $hs=HTML::Strip->new(emit_spaces=>0);
+	return $hs->parse(encode_entities($text));
+}
+sub encodeURIComponent
+{
+	return uri_escape_utf8(shift());
 }
 1;

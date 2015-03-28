@@ -4,7 +4,7 @@ package TumblTool::Include;
 use HTML::Strip;
 use HTML::Entities;
 use URI::Escape;
-use TumblTool::Minify;
+use TumblTool::TextTransforms;
 use TumblTool::TumblrDate;
 use TumblTool::PathUtils;
 use TumblTool::Slurp;

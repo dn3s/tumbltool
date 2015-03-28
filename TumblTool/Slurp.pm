@@ -3,7 +3,6 @@ use strict;
 package TumblTool::Slurp;
 use base 'Exporter';
 use TumblTool::Fail;
-use TumblTool::Minify;
 our @EXPORT=('slurp');
 sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way to make the JSON parser work without slurping)
 {
@@ -12,6 +11,5 @@ sub slurp #yum. needed both by parseTheme and parseContent (unless there's a way
 	$/ = undef;
 	my $result=readline($fh) or fail("Cannot read file \"$filename\"");
 	close($fh);
-	$result=collapseLines($result) if($strip);
 	return $result;
 }
