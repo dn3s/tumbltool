@@ -57,7 +57,9 @@ absolute or relative path to a JSON file, or the name of one of the
 bundled content packages (currently only "default" is available).
 
 -d -data-uri
-Format output as a base64-encoded data URI
+Format output as a base64-encoded data URI. Note that this forces
+all local files to be inlined, as relative paths don't work in a data
+URI page.
 
 -i -include <FILES>
 specify CSS or Javscript file(s) to add to the theme, included at the

@@ -30,7 +30,7 @@ Shrink the HTML as much as possible. Shortcut for -collapse-html-lines -strip-ht
 Specify content to populate the rendered preview page, either as an absolute or relative path to a JSON file, or the name of one of the bundled content packages (currently only "default" is available).
 
 -d -data-uri
-Format output as a base64-encoded data URI 
+Format output as a base64-encoded data URI. Note that this forces all local files to be inlined, as relative paths don't work in a data URI page. 
 
 -i -include <FILES>
 specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's <head>. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
