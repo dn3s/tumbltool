@@ -50,9 +50,11 @@ my $collapseHTML;
 my $stripHTMLComments;
 my $preserveConditionalComments;
 my $pipe;
+my $outFile;
 GetOptions(
 	"content|c=s"             => \$content,
 	"data-uri|d"              => \$dataURI,
+	"outfile|o=s"             => \$outFile,
 	"include|i=s{1,}"         =>  $includes,
 	"inline|l!"               => \$inline,
 	"inline-css|lc!"          => \$inlineCSS,
@@ -69,6 +71,7 @@ GetOptions(
 	"theme|t=s"               => \$themeFile,
 	"pipe||p"                 => \$pipe,
 ) or fail();
+#cascade CLI options
 if(defined($pipe)) {
 	setIfUnset(\$tiny,    $pipe);
 	setIfUnset(\$inline,  $pipe);
@@ -84,21 +87,29 @@ if(defined($minifyHTML)) {
 	setIfUnset(\$stripHTMLComments, $minifyHTML);
 	setIfUnset(\$preserveConditionalComments, !$minifyHTML);
 }
+if($dataURI) {#force everything inline; linking doesn't work in data URIs
+	$inline=1;
+	$inlineCSS=1;
+	$inlineJS=1;
+	$inlineIMG=1;
+}
 if(defined($inline)) {
 	setIfUnset(\$inlineCSS, $inline);
 	setIfUnset(\$inlineJS,  $inline);
 	setIfUnset(\$inlineIMG, $inline);
 }
 #configure the modules according to CLI options
-my $themeTxt=slurp($themeFile);
-$themeTxt=collapseLines($themeTxt) if($collapseHTML);
-$themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHTMLComments);
-my $theme=parseTheme($themeTxt);
 my $contentRoot=getContentDir($content);
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
 TumblTool::Preview::configure({"contentRoot"=>$contentRoot});
 TumblTool::Bundle::configure({});
+#parse theme, compress as needed
+my $themeTxt=slurp($themeFile);
+$themeTxt=collapseLines($themeTxt) if($collapseHTML);
+$themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHTMLComments);
+my $theme=parseTheme($themeTxt);
+#run appropriate command
 if($command eq "preview") {
 	my $content=decode_json(slurp(getContentFile($content)));
 	my $out=render($theme,$content);

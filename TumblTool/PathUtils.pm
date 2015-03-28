@@ -15,6 +15,12 @@ my $contentPath=[
 	"$cwd/example_content",
 	"$cwd"
 ];
+sub configure
+{
+	my $options=shift();
+	$includes     = $options->{"includes"    } // $includes;
+	$collapseHTML = $options->{"collapseHTML"} // $collapseHTML;
+}
 sub getContentDir
 {
 	return dirname(getContentFile(shift()));
