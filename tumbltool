@@ -103,7 +103,6 @@ my $contentRoot=getContentDir($content);
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
 TumblTool::Preview::configure({"contentRoot"=>$contentRoot});
-TumblTool::Bundle::configure({});
 #parse theme, compress as needed
 my $themeTxt=slurp($themeFile);
 $themeTxt=collapseLines($themeTxt) if($collapseHTML);
