@@ -63,7 +63,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 			$result=processIncludes($includes);
 		}
 		else {
-			$result=renderVar($content, $block->{"name"});
+			$result=printVar($content, $block->{"name"});
 		}
 		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
 	}

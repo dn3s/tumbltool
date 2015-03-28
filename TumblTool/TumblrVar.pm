@@ -5,14 +5,14 @@ use TumblTool::TumblrPrefix;
 use TumblTool::TumblrDate;
 use TumblTool::TumblrPortrait;
 use base 'Exporter';
-our @EXPORT=('renderVar');
+our @EXPORT=('printVar');
 my $contentRoot='';
 sub configure
 {
 	my $options=shift();
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
-sub renderVar
+sub printVar
 {
 	(my $content, my $varName)=@_;
 	my $text=(
