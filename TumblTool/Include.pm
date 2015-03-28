@@ -36,24 +36,31 @@ sub processIncludes
 }
 sub include
 {
-	(my $uri)=@_;
-	my $isURL=($uri=~/^http:\/\/.+$/);
+	(my $file)=@_;
+	$file=~/\.(css|js)$/;
+	my $type=$1;
+	my $isURI=($file=~/^http:\/\/.+$/);
+	my $inline=(($type eq "css" and $inlineCSS) or ($type eq "js" and $inlineJS)) and !$isURI;
 	my $n=$collapseHTML?"":"\n";
 	my $before="";
-	my $after="";
 	my $include="";
-	if($uri=~/\.css$/){
-		$include=($inlineCSS and !$isURL)?slurp(getFile($uri)):getFile($uri);
-		$before=$inlineCSS?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
-		$after=$inlineCSS?"$n</style>":"\" />";
-		$include=minifyCSS($include) if $minifyCSS; #Somehow minify magically knows if it's CSS or JS???
+	my $after="";
+	if($inline){
+		$include=slurp(getFile($file))
 	}
-	elsif($uri=~/\.js$/){
-		$include=($inlineJS and !$isURL)?slurp(getFile($uri)):getFile($uri);
-		$before=$inlineJS?"<script>$n":"<script src=\"";
-		$after=$inlineJS?"$n</script>":"\"></script>";
-		$include=minifyJS($include) if $minifyJS; #Somehow minify magically knows if it's CSS or JS???
+	else{
+		$include=getLinkToFile(getFile($file));
 	}
-	return "$n$before$include$after$n";
+	if($type eq "css"){
+		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+		$include=minifyCSS($include) if($inline and $minifyCSS);
+		$after=$inline?"$n</style>":"\" />";
+	}
+	elsif($type eq "js"){
+		$before=$inline?"<script>$n":"<script src=\"";
+		$include=minifyJS($include) if($inline and $minifyJS);
+		$after=$inline?"$n</script>":"\"></script>";
+	}
+	return "${n}${before}${include}${after}${n}";
 }
 1;

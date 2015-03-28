@@ -54,3 +54,4 @@ sub getLinkToFile
 	#if that involves traversing upward, copy/symlink it in??
 	return $file; #TODO: implement
 }
+1;
