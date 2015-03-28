@@ -114,9 +114,9 @@ I am new to Github, as well as Git in general, so apologies if I fumble the proc
 - The first way doesn't even require knowledge of perl; just adding more material to the `data.json` file helps improve the quality of previews we render. Either add to the current one (`example_content/default/data.json`), or create a new fictional blog (perhaps `example_content/hipster`, `example_content/cat_enthusiast`, `example_content/tech_startup`, for example). Just make sure any content used is original, public domain, or otherwise appropriately licensed for use in this project. The JSON schema should be fairly straightforward, but I will answer any questions.
 - The other way is to help implement the API. Take a look at [vars.html](https://github.com/dn3s/tumbltool/blob/master/vars.html) to get a sense of what's left to implement. Take a look at [TumblTool/TumblrDate.pm](https://github.com/dn3s/tumbltool/blob/master/TumblTool/TumblrDate.pm) for an example. The essentials are:
 	- Make a perl module, named `TumblrX` (in CamelCase), where X is a word that describes the portion of the Tumblr Theme API it will implement.
-	- Export a single subroutine, named similarly to the module, but with the first letter lowercase (you are allowed globals, other subs, etc, but don't export them)
-	- The subroutine will accept two parameters:
+	- Have a subroutine named printVar, which will accept three parameters:
 		- The first one, `$varName`, is a scalar containing the name of the Tumblr Theme variable
 		- The second one, `$content`, is a hash reference to the content object being rendered.
+		- The second one, `$contentRoot`, is a scalar containing the directory of the content file, for constructing image paths, etc.
 	- The subroutine will either return nothing (`return;`), or, if appropriate, a string containing the text to be substituted for the theme variable.
-	- `use` the module in `TumblTool/Preview.pm`, and add your sub to the `//`-separated "list" of subs in `renderVar`.
+	- `use` the module in `TumblTool/TumblrVar.pm`, and add your sub to the `//`-separated "list" of subs in `printVar`.
