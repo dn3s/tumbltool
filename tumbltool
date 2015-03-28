@@ -69,22 +69,22 @@ GetOptions(
 	"theme|t=s"               => \$themeFile,
 	"pipe||p"                 => \$pipe,
 ) or fail();
-if($pipe) {
+if(defined($pipe)) {
 	setIfUnset(\$tiny,    $pipe);
 	setIfUnset(\$inline,  $pipe);
 	setIfUnset(\$dataURI, $pipe);
 }
-if($tiny) {
+if(defined($tiny)) {
 	setIfUnset(\$minifyCSS,  $tiny);
 	setIfUnset(\$minifyJS,   $tiny);
 	setIfUnset(\$minifyHTML, $tiny);
 }
-if($minifyHTML) {
+if(defined($minifyHTML)) {
 	setIfUnset(\$collapseHTML, $minifyHTML);
 	setIfUnset(\$stripHTMLComments, $minifyHTMl);
 	setIfUnset(\$preserveConditionalComments, !$minifyHTML);
 }
-if($inline) {
+if(defined($inline)) {
 	setIfUnset(\$inlineCSS, $inline);
 	setIfUnset(\$inlineJS,  $inline);
 	setIfUnset(\$inlineIMG, $inline);
