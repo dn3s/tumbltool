@@ -15,11 +15,13 @@ my $contentPath=[
 	"$cwd/example_content",
 	"$cwd"
 ];
+my $outputRoot;
+my $contentRoot;
 sub configure
 {
 	my $options=shift();
-	$includes     = $options->{"includes"    } // $includes;
-	$collapseHTML = $options->{"collapseHTML"} // $collapseHTML;
+	$outputRoot  = $options->{"outputRoot" } // $outputRoot;
+	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
 sub getContentDir
 {
@@ -44,4 +46,11 @@ sub getFile
 {
 	my $name=shift();
 	return ($name=~/^\//)?$name:"$cwd/$name";
+}
+sub getLinkToFile
+{
+	(my $file)=@_;
+	#turn it into a relative path
+	#if that involves traversing upward, copy/symlink it in??
+	return $file; #TODO: implement
 }
