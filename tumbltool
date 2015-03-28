@@ -81,7 +81,7 @@ if(defined($tiny)) {
 }
 if(defined($minifyHTML)) {
 	setIfUnset(\$collapseHTML, $minifyHTML);
-	setIfUnset(\$stripHTMLComments, $minifyHTMl);
+	setIfUnset(\$stripHTMLComments, $minifyHTML);
 	setIfUnset(\$preserveConditionalComments, !$minifyHTML);
 }
 if(defined($inline)) {
