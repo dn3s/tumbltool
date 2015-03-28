@@ -83,6 +83,15 @@ Specify the theme file to preview/bundle.
 Specify custom variables you may have in your theme. (Not yet implemented)
 ```
 
+##Examples
+
+Tumbltool provides a several "shortcut" options that should cover a number of common use cases. Here are some examples, some using the "shortcuts", some not:
+
+- Preview a theme in your browser using a data URI: `tumbltool preview -pipe -theme theme.html -include typography.css colors.css layout.css interaction.js | xargs firefox`
+- If your theme uses large images or really long stylesheets or something, it's probably a bad idea to smush them into data URIs. In this example, we inline everything except images: `tumbltool preview -inline -no-inline-img -theme theme.html -include typograhpy.css colors.css layout.css interaction.js > preview.html; firefox preview.html`
+- Combine and minify all your files and load the result into your clipboard for pasting into Tumblr's theme editor: `tumbltool bundle -tiny -inline -theme theme.html -include typography.css colors.css layout.css interaction.js | xclip`
+- Note that this works if some of your includes are URIs; it detects it's a URI and doesn't try to link to it: `tumbltool bundle -tiny -inline -theme theme.html -include typography.css colors.css layout.css interaction.js http://example.com/jquery_xx.min.js | xclip`
+
 ##Contributing
 
 I am new to Github, as well as Git in general, so apologies if I fumble the process up a bit at first, but contributions are welcome! The main thing left to do is make the previews richer. There are two main ways you can contribute:
