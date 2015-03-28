@@ -2,7 +2,7 @@ use strict;
 #use warnings;
 package TumblTool::PathUtils;
 use base 'Exporter';
-our @EXPORT=('getContentDir', 'getContentFile', 'getFile');
+our @EXPORT=('getContentDir', 'getContentFile', 'getFile', 'getLinkToFile');
 use Cwd;
 use File::Basename;
 

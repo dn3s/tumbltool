@@ -2,6 +2,7 @@ use strict;
 #use warnings;
 package TumblTool::ImageURL;
 use TumblTool::DataURI;
+use TumblTool::PathUtils;
 use base 'Exporter';
 our @EXPORT=('imageURL');
 my $contentRoot="";
@@ -22,7 +23,7 @@ sub imageURL
 		my $suffix=$res?"_$res":"";
 		my $filename="$contentRoot/${name}$suffix.$extension";
 		return dataURIFromFile($filename) if $dataURI;
-		return $filename;
+		return getLinkToFile($filename);
 	}
 	return "";
 }
