@@ -12,16 +12,12 @@ use Data::Dumper;
 use base 'Exporter';
 our @EXPORT=('render');
 my $includes=[];
-my $inlineCSS=0;
-my $inlineJS=0;
 my $strip=0;
 my $contentRoot='';
 sub configure
 {
 	my $options=shift();
 	$includes    = $options->{"includes"   } // $includes;
-	$inlineCSS   = $options->{"inlineCSS"  } // $inlineCSS;
-	$inlineJS    = $options->{"inlineJS"   } // $inlineJS;
 	$strip       = $options->{"strip"      } // $strip;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
