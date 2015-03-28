@@ -20,37 +20,51 @@ Usage: tumbltool <COMMAND> [OPTIONS]
 Commands:
 
 preview
-Print an example page using the theme specified in FILE, filled with example material from a JSON file (see -content)
+Print an example page using the theme specified in FILE, filled with
+example material from a JSON file (see -content)
 
 bundle
-Bundle up a theme with any needed assets into a single file to be pasted into Tumblr. Useful for a sort of ghetto deployment system.
+Bundle up a theme with any needed assets into a single file to be pasted
+into Tumblr. Useful for a sort of ghetto deployment system.
 
 help
 Show this help text and exit.
 
 Options:
-Some options can be prepended with -no, negating their effect. Specific options override more general ones (for example, -no-inline-css will override the more general -inline)
+Some options can be prepended with -no, negating their effect. Specific
+options override more general ones (for example, -no-inline-css will
+override the more general -inline)
 
 -p -pipe
-Generate output for piping into a browser through xargs. Shortcut for -tiny -inline -data-uri
+Generate output for piping into a browser through xargs. Shortcut for
+-tiny -inline -data-uri
 
 -l -[no-]inline
-Smush everything into a single file. Shortcut for -inline-css -inline-js -inline-img
+Smush everything into a single file. Shortcut for -inline-css -inline-js
+-inline-img
 
 -y -[no-]tiny
-Shrink everything as much as possible. Shortcut for -minify-css -minify-js -minify-html
+Shrink everything as much as possible. Shortcut for -minify-css -minify-js
+-minify-html
 
 -mh -[no-]minifyHTML
-Shrink the HTML as much as possible. Shortcut for -collapse-html-lines -strip-html-comments -no-keep-ie-comments
+Shrink the HTML as much as possible. Shortcut for -collapse-html-lines
+-strip-html-comments -no-keep-ie-comments
 
 -c -[no-]content <FILE>
-Specify content to populate the rendered preview page, either as an absolute or relative path to a JSON file, or the name of one of the bundled content packages (currently only "default" is available).
+Specify content to populate the rendered preview page, either as an
+absolute or relative path to a JSON file, or the name of one of the
+bundled content packages (currently only "default" is available).
 
 -d -data-uri
 Format output as a base64-encoded data URI
 
 -i -include <FILES>
-specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's <head>. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
+specify CSS or Javscript file(s) to add to the theme, included at the
+special {tumbltool_includes} tag in your theme file (so make sure to add
+it, presumably at the end of your theme's <head>. Multiple files can
+be specified as a space-separated list, or this argument can be added
+multiple times. You can supply absolute paths, relative paths, or URIs.
 
 -lc -[no-]inline-css
 Print all local (non-URL) stylesheets inline, using <style> tags
@@ -74,7 +88,8 @@ Collapse all HTML code into a single line (for ease of copy/pasting)
 Strip out all HTML comments
 
 -ie -[no-]keep-ie-comments
-When stripping out HTML comments, don't remove IE-style conditional comments
+When stripping out HTML comments, don't remove IE-style conditional
+comments
 
 -t -theme FILE
 Specify the theme file to preview/bundle.

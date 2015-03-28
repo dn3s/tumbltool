@@ -30,7 +30,7 @@ Shrink the HTML as much as possible. Shortcut for -collapse-html-lines -strip-ht
 Specify content to populate the rendered preview page, either as an absolute or relative path to a JSON file, or the name of one of the bundled content packages (currently only "default" is available).
 
 -d -data-uri
-Format output as a base64-encoded data URI
+Format output as a base64-encoded data URI 
 
 -i -include <FILES>
 specify CSS or Javscript file(s) to add to the theme, included at the special {tumbltool_includes} tag in your theme file (so make sure to add it, presumably at the end of your theme's <head>. Multiple files can be specified as a space-separated list, or this argument can be added multiple times. You can supply absolute paths, relative paths, or URIs.
@@ -57,7 +57,8 @@ Collapse all HTML code into a single line (for ease of copy/pasting)
 Strip out all HTML comments
 
 -ie -[no-]keep-ie-comments
-When stripping out HTML comments, don't remove IE-style conditional comments
+When stripping out HTML comments, don't remove IE-style conditional
+comments
 
 -t -theme FILE
 Specify the theme file to preview/bundle.
