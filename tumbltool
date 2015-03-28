@@ -31,33 +31,74 @@ my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
 fail("No command spefified!") if(!$command);
 fail() if($command eq "help");
-fail("Unknown command: \"$command\"\n") if(!($command eq "preview" or $command eq "bundle"));
+fail("Unknown command: \"$command\"\n") if(!($command=~/preview|bundle/));
 #OK lets get started
 my $content   = 'default';
-my $dataURI   = '';
+my $dataURI;
 my $includes  = [];
-my $inline    = '';
-my $strip     = '';
-my $themeFile = '';
+my $inline;
+my $inlineCSS;
+my $inlineJS;
+my $inlineIMG;
+my $tiny;
+my $themeFile;
 my $vars      = {};
+my $minifyCSS;
+my $minifyJS;
+my $minifyHTML;
+my $collapseHTML;
+my $stripHTMLComments;
+my $preserveConditionalComments;
+my $pipe;
 GetOptions(
-	"includes|i=s{1,}" =>  $includes,
-	"content|c=s"      => \$content,
-	"dataURI|d"        => \$dataURI,
-	"inline|l!"        => \$inline,
-	"strip|s!"         => \$strip,
-	"var|v=s%"         => \$vars,
-	"theme|t=s"        => \$themeFile,
+	"content|c=s"             => \$content,
+	"data-uri|d"              => \$dataURI,
+	"include|i=s{1,}"         =>  $includes,
+	"inline|l!"               => \$inline,
+	"inline-css|lc!"          => \$inlineCSS,
+	"inline-js|lj!"           => \$inlineJS,
+	"inline-img|li!"          => \$inlineIMG,
+	"minify-css|mc!"          => \$minifyCSS,
+	"minify-js|mj!"           => \$minifyJS,
+	"minify-html|mh!"         => \$minifyHTML,
+	"collapse-html-lines|hl!" => \$collapseHTML,
+	"strip-html-comments|hc!" => \$stripHTMLComments,
+	"keep-ie-comments|ie!"    => \$preserveConditionalComments,
+	"tiny|y!"                 => \$tiny,
+	"var|v=s%"                => \$vars,
+	"theme|t=s"               => \$themeFile,
+	"pipe||p"                 => \$pipe,
 ) or fail();
+if($pipe) {
+	setIfUnset(\$tiny,    $pipe);
+	setIfUnset(\$inline,  $pipe);
+	setIfUnset(\$dataURI, $pipe);
+}
+if($tiny) {
+	setIfUnset(\$minifyCSS,  $tiny);
+	setIfUnset(\$minifyJS,   $tiny);
+	setIfUnset(\$minifyHTML, $tiny);
+}
+if($minifyHTML) {
+	setIfUnset(\$collapseHTML, $minifyHTML);
+	setIfUnset(\$stripHTMLComments, $minifyHTMl);
+	setIfUnset(\$preserveConditionalComments, !$minifyHTML);
+}
+if($inline) {
+	setIfUnset(\$inlineCSS, $inline);
+	setIfUnset(\$inlineJS,  $inline);
+	setIfUnset(\$inlineIMG, $inline);
+}
 #configure the modules according to CLI options
-my $themeTxt=slurp($themeFile, $strip);
-$themeTxt=collapseLines($themeTxt) if($strip);
-$themeTxt=removeHTMLComments($themeTxt,1) if($strip);
+my $themeTxt=slurp($themeFile);
+$themeTxt=collapseLines($themeTxt) if($collapseHTML);
+$themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHTMLComments);
 my $theme=parseTheme($themeTxt);
 my $contentRoot=getContentDir($content);
-TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inline});
-TumblTool::Preview::configure({"includes"=>$includes, "inline"=>$inline, "strip"=>$strip, "contentRoot"=>$contentRoot});
-TumblTool::Bundle::configure({"includes"=>$includes, "inline"=>$inline, "strip"=>$strip});
+TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
+TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
+TumblTool::Preview::configure({"contentRoot"=>$contentRoot});
+TumblTool::Bundle::configure({});
 if($command eq "preview") {
 	my $content=decode_json(slurp(getContentFile($content)));
 	my $out=render($theme,$content);
@@ -65,9 +106,12 @@ if($command eq "preview") {
 	print("$out\n");
 }
 elsif($command eq "bundle") {
-	fail("Invalid Option: --dataURI doens't make sense for bundle") if($dataURI);
-	fail("Invalid Option: --content doesn't make sense for bundle") if($content and !($content eq "default"));
 	my $out=(bundle($theme));
 	print("$out\n");
 }
 exit(0);
+sub setIfUnset
+{
+	(my $var, my $val)=@_;
+	${$var}=${$var} // $val;
+}

@@ -21,10 +21,13 @@ sub removeHTMLComments
 }
 sub minifyCSS
 {
-	return CSS::Minifier::minify(shift());
+	my $css=shift();
+	$css=~s/[\r\n\s]/ /g;
+	return CSS::Minifier::minify(input=>$css);
 }
 sub minifyJS
 {
-	return JavaScript::Minifier::minify(shift());
+	my $js=shift();
+	return JavaScript::Minifier::minify(input=>$js);
 }
 1;

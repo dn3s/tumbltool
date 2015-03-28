@@ -14,14 +14,16 @@ use Data::Dumper;
 use base 'Exporter';
 our @EXPORT=('render');
 my $includes=[];
-my $inline=0;
+my $inlineCSS=0;
+my $inlineJS=0;
 my $strip=0;
 my $contentRoot='';
 sub configure
 {
 	my $options=shift();
 	$includes    = $options->{"includes"   } // $includes;
-	$inline      = $options->{"inline"     } // $inline;
+	$inlineCSS   = $options->{"inlineCSS"  } // $inlineCSS;
+	$inlineJS    = $options->{"inlineJS"   } // $inlineJS;
 	$strip       = $options->{"strip"      } // $strip;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
@@ -49,7 +51,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 		if(ref($content->{$block->{"name"}}) eq "ARRAY") {#Is the relevant content an array (eg. posts, tags, etc)?
 			my $result="";
 			foreach my $contentItem (@{$content->{$block->{"name"}}}) { #iterate over said array
-				$result.=render($block->{"children"}, $contentItem, $includes, $inline, $strip); #render the current block for each array item
+				$result.=render($block->{"children"}, $contentItem); #render the current block for each array item
 			}
 			return $result;
 		}
@@ -60,7 +62,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 	else { #since it's not a block, it's a placeholder.
 		my $result="";
 		if($block->{"name"} eq "tumbltool_includes") {
-			$result=processIncludes($includes, $inline, $strip);
+			$result=processIncludes($includes);
 		}
 		else {
 			$result=renderVar($content, $block->{"name"});

@@ -10,31 +10,50 @@ use TumblTool::PathUtils;
 use TumblTool::Slurp;
 use base 'Exporter';
 our @EXPORT=('processIncludes');
+my $includes=[];
+my $inlineCSS=0;
+my $inlineJS=0;
+my $minifyCSS=0;
+my $minifyJS=0;
+my $collapseHTML=0;
+sub configure
+{
+	my $options=shift();
+	$includes     = $options->{"includes"    } // $includes;
+	$inlineCSS    = $options->{"inlineCSS"   } // $inlineCSS;
+	$inlineJS     = $options->{"inlineJS"    } // $inlineJS;
+	$minifyCSS    = $options->{"minifyCSS"   } // $minifyCSS;
+	$minifyJS     = $options->{"minifyJS"    } // $minifyJS;
+	$collapseHTML = $options->{"collapseHTML"} // $collapseHTML;
+}
 sub processIncludes
 {
-	(my $includes, my $inline, my $strip)=@_;
 	my $result="";
 	foreach my $name (@{$includes}) {
-		$result.=include($name, ($inline and !($name=~/^http:\/\/.+$/)), $strip);
+		$result.=include($name);
 	}
 	return $result;
 }
 sub include
 {
-	(my $uri, my $inline, my $strip)=@_;
-	my $n=$strip?"":"\n";
+	(my $uri)=@_;
+	my $isURL=($uri=~/^http:\/\/.+$/);
+	my $n=$collapseHTML?"":"\n";
 	my $before="";
 	my $after="";
-	my $include=$inline?slurp(getFile($uri),$strip):getFile($uri);
+	my $include="";
 	if($uri=~/\.css$/){
-		$before=$inline?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
-		$after=$inline?"$n</style>":"\" />";
-		$include=minifyCSS(input=>$include) if $strip; #Somehow minify magically knows if it's CSS or JS???
+		$include=($inlineCSS and !$isURL)?slurp(getFile($uri)):getFile($uri);
+		$before=$inlineCSS?"<style>$n":"<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+		$after=$inlineCSS?"$n</style>":"\" />";
+		$include=minifyCSS($include) if $minifyCSS; #Somehow minify magically knows if it's CSS or JS???
 	}
 	elsif($uri=~/\.js$/){
-		$before=$inline?"<script>$n":"<script src=\"";
-		$after=$inline?"$n</script>":"\"></script>";
-		$include=minifyJS(input=>$include) if $strip; #Somehow minify magically knows if it's CSS or JS???
+		$include=($inlineJS and !$isURL)?slurp(getFile($uri)):getFile($uri);
+		$before=$inlineJS?"<script>$n":"<script src=\"";
+		$after=$inlineJS?"$n</script>":"\"></script>";
+		$include=minifyJS($include) if $minifyJS; #Somehow minify magically knows if it's CSS or JS???
 	}
 	return "$n$before$include$after$n";
 }
+1;
