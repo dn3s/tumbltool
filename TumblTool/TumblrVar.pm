@@ -16,8 +16,8 @@ sub printVar
 {
 	(my $content, my $varName)=@_;
 	my $text=(
-		tumblrDate($varName, $content, $contentRoot) //
-		tumblrPortrait($varName, $content, $contentRoot) //
+		TumblTool::TumblrDate::printVar($varName, $content, $contentRoot) //
+		TumblTool::TumblrPortrait::printVar($varName, $content, $contentRoot) //
 		$content->{$varName}
 	);
 	return tumblrPrefix($varName, $text || "");

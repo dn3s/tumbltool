@@ -2,8 +2,6 @@ use strict;
 #use warnings;
 package TumblTool::TumblrDate;
 use Time::Piece;
-use base 'Exporter';
-our @EXPORT=('tumblrDate');
 my $formats={
 	"DayOfMonth"          => "%e",
 	"DayOfMonthWithZero"  => "%d",
@@ -30,7 +28,7 @@ my $formats={
 	"Timestamp"           => "%s",
 	"TimeAgo"             => "100 years ago",
 };
-sub tumblrDate
+sub printVar
 {
 	(my $varName, my $content)=@_;
 	my $date=$content->{"date"};
