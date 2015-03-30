@@ -35,6 +35,11 @@ Some options can be prepended with -no, negating their effect. Specific
 options override more general ones (for example, -no-inline-css will
 override the more general -inline)
 
+-o -outfile
+Specify the file to write the output to. Paths for stylesheets, images,
+etc.  will be relative to this file. Otherwise the output will be written
+to STDOUT, and paths will be relative to the CWD.
+
 -p -pipe
 Generate output for piping into a browser through xargs. Shortcut for
 -tiny -inline -data-uri
