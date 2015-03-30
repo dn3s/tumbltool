@@ -24,9 +24,7 @@ sub configure
 sub render #render a demo using $content for filler text, etc
 {
 	(my $block, my $content)=@_;
-	if($content->{"PostType"}) {#special case for Posts. Mark the type of post as True so it'll render the correct block TODO: as I implement more of the API this will need to be a module
-		$content->{ucfirst($content->{"PostType"})}=1;
-	}
+	$content=specialCases($content);
 	my $result="";
 	foreach my $item (@{$block}) {
 		if(ref($item) eq "HASH") {
@@ -63,5 +61,12 @@ sub renderBlock #used by render to do most of the heavy lifting
 		}
 		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
 	}
+}
+sub specialCases
+{
+	(my $content)=@_;
+	$content->{ucfirst($content->{"PostType"})}=1 if($content->{"PostType"});
+	$content->{"Twitter"}=1 if($content->{"TwitterUsername"});
+	return($content);
 }
 1;
