@@ -98,8 +98,10 @@ if(defined($inline)) {
 	setIfUnset(\$inlineJS,  $inline);
 	setIfUnset(\$inlineIMG, $inline);
 }
+#figure out output
 #configure the modules according to CLI options
-my $contentRoot=getContentDir($content);
+my $contentRoot=setContentName($content);
+my $outputRoot=setOutputFile($outFile);
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
 TumblTool::Preview::configure({"contentRoot"=>$contentRoot});
@@ -112,16 +114,26 @@ my $theme=parseTheme($themeTxt);
 if($command eq "preview") {
 	my $content=decode_json(slurp(getContentFile($content)));
 	my $out=render($theme,$content);
-	$out=dataURI("text/html", $out) if($dataURI);
-	print("$out\n");
+	output("$out", $dataURI);
 }
 elsif($command eq "bundle") {
 	my $out=(bundle($theme));
-	print("$out\n");
+	output("$out");#no dataURI option here because why would you ever want that (ugh, that sounds like Apple)
 }
 exit(0);
 sub setIfUnset
 {
 	(my $var, my $val)=@_;
 	${$var}=${$var} // $val;
+}
+sub output
+{
+	(my $txt, my $dataURI)=@_;
+	print("$outFile\n\n");
+	$txt=dataURI("text/html", $txt) if($dataURI);
+	if($outFile) {
+		open(my $fh, ">:encoding(UTF-8)", $outFile);
+		select($fh);
+	}
+	print("$txt\n");
 }

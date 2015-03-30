@@ -2,20 +2,23 @@ use strict;
 #use warnings;
 package TumblTool::PathUtils;
 use base 'Exporter';
-our @EXPORT=('getContentDir', 'getContentFile', 'getFile', 'getLinkToFile');
+our @EXPORT=('setContentName', 'getContentFile', 'getFile', 'getLinkToFile', 'setOutputFile');
 use Cwd;
 use File::Basename;
+use File::Spec;
 
 my $home=$ENV{HOME};
 my $cwd=cwd();
 my $contentPath=[
 	"/etc/tumbltool",
-	"$home/.tumbltool",
-	"$cwd/.tumbltool",
-	"$cwd/example_content",
-	"$cwd"
+	File::Spec->catdir($home, ".tumbltool"),
+	File::Spec->rel2abs(".tumbltool"),
+	File::Spec->rel2abs("example_content"),
+	File::Spec->curdir()
 ];
+my $outputFile;
 my $outputRoot;
+my $contentFile;
 my $contentRoot;
 sub configure
 {
@@ -23,22 +26,30 @@ sub configure
 	$outputRoot  = $options->{"outputRoot" } // $outputRoot;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
-sub getContentDir
+sub setOutputFile
 {
-	return dirname(getContentFile(shift()));
+	(my $filename)=@_;
+	$outputRoot=$filename?dirname($filename):File::Spec->curdir();
+	return $outputRoot;
+}
+sub setContentName
+{
+	(my $filename)=@_;
+	$contentRoot=dirname(getContentFile($filename));
+	return $contentRoot;
 }
 sub getContentFile
 {
+	return $contentFile if($contentFile);
 	(my $name)=@_;
-	return $name if($name=~/^\//);
-	return "$cwd/$name" if($name=~/\.json$/);
+	return $name if(File::Spec->file_name_is_absolute($name));
+	return rel2abs($name) if($name=~/\.json$/);
+	my $file="";
 	foreach my $dir (@{$contentPath}) {
-		if(-e "$dir/$name.json") {
-			return "$dir/$name.json";
-		}
-		elsif(-e "$dir/$name/data.json") {
-			return "$dir/$name/data.json";
-		}
+		$file=File::Spec->catfile($dir, "$name.json");
+		return $contentFile=$file if(-e $file);
+		$file=File::Spec->catfile($dir, $name, "data.json");
+		return $contentFile=$file if(-e $file);
 	}
 	return;
 }
@@ -50,8 +61,6 @@ sub getFile
 sub getLinkToFile
 {
 	(my $file)=@_;
-	#turn it into a relative path
-	#if that involves traversing upward, copy/symlink it in??
-	return $file; #TODO: implement
+	return File::Spec->abs2rel($file, $outputRoot); #TODO: Figure out symlinking or copything
 }
 1;
