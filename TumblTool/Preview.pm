@@ -39,7 +39,7 @@ sub render #render a demo using $content for filler text, etc
 sub renderBlock #used by render to do most of the heavy lifting
 {
 	(my $block, my $content)=@_;
-	if($block->{"children"} and $content->{$block->{"name"}}) { #If the block has children, it's not just a placeholder, it's a block. Check if there is anything to go in the block, and if so, render it.
+	if($block->{"children"} and $content->{$block->{"name"}}) { #If the block has children, it's not just a var, it's a block. Check if there is anything to go in the block, and if so, render it.
 		if(ref($content->{$block->{"name"}}) eq "ARRAY") {#Is the relevant content an array (eg. posts, tags, etc)?
 			my $result="";
 			foreach my $contentItem (@{$content->{$block->{"name"}}}) { #iterate over said array
@@ -57,7 +57,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 			$result=processIncludes($includes);
 		}
 		else {
-			$result=printVar($content, $block->{"name"});
+			$result=printVar($block, $content);
 		}
 		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
 	}

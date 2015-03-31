@@ -14,12 +14,13 @@ sub configure
 }
 sub printVar
 {
-	(my $content, my $varName)=@_;
+	(my $var, my $content)=@_;
+	print("name:".$var->{"name"}.",\t\tvalue:".$content->{$var->{"name"}}."\n");
 	my $text=(
-		TumblTool::TumblrDate::printVar($varName, $content, $contentRoot) //
-		TumblTool::TumblrPortrait::printVar($varName, $content, $contentRoot) //
-		$content->{$varName}
+		TumblTool::TumblrDate::printVar($var, $content, $contentRoot) //
+		TumblTool::TumblrPortrait::printVar($var, $content, $contentRoot) //
+		$content->{$var->{"name"}}
 	);
-	return tumblrPrefix($varName, $text || "");
+	return tumblrPrefix($var->{"name"}, $text || "");
 }
 1;

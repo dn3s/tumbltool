@@ -30,11 +30,12 @@ my $formats={
 };
 sub printVar
 {
-	(my $varName, my $content)=@_;
+	(my $var, my $content)=@_;
+	my $name=$var->{"name"};
 	my $date=$content->{"date"};
-	return rand(1000) if($varName eq "Beats");
-	return ordinalSuffix($date) if($varName eq "DayOfMonthSuffix");
-	return localtime($date)->strftime($formats->{$varName}) if($formats->{$varName});
+	return rand(1000) if($name eq "Beats");
+	return ordinalSuffix($date) if($name eq "DayOfMonthSuffix");
+	return localtime($date)->strftime($formats->{$name}) if($formats->{$name});
 	return;
 }
 sub ordinalSuffix

@@ -27,11 +27,12 @@ use TumblTool::Slurp;
 use TumblTool::TextTransforms;
 use TumblTool::Fail;
 use TumblTool::ImageURL;
+use Data::Dumper;
 my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
 fail("No command spefified!") if(!$command);
 fail() if($command eq "help");
-fail("Unknown command: \"$command\"\n") if(!($command=~/preview|bundle/));
+fail("Unknown command: \"$command\"\n") if(!($command=~/preview|bundle|dbg/));
 #OK lets get started
 my $content='default';
 my $dataURI;
@@ -120,6 +121,9 @@ elsif($command eq "bundle") {
 	my $out=(bundle($theme));
 	output("$out");#no dataURI option here because why would you ever want that (ugh, that sounds like Apple)
 }
+elsif($command eq "dbg") {
+	output(Dumper($theme));
+}
 exit(0);
 sub setIfUnset
 {
@@ -129,7 +133,6 @@ sub setIfUnset
 sub output
 {
 	(my $txt, my $dataURI)=@_;
-	print("$outFile\n\n");
 	$txt=dataURI("text/html", $txt) if($dataURI);
 	if($outFile) {
 		open(my $fh, ">:encoding(UTF-8)", $outFile);
