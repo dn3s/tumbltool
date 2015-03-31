@@ -15,7 +15,6 @@ sub configure
 sub printVar
 {
 	(my $var, my $content)=@_;
-	print("name:".$var->{"name"}.",\t\tvalue:".$content->{$var->{"name"}}."\n");
 	my $text=(
 		TumblTool::TumblrDate::printVar($var, $content, $contentRoot) //
 		TumblTool::TumblrPortrait::printVar($var, $content, $contentRoot) //
