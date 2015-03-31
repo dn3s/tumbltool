@@ -23,7 +23,7 @@ sub bundleBlock
 	(my $block)=@_;
 	my $name=$block->{"name"};
 	return processIncludes() if($name eq "tumbltool_includes");
-	return "{block:$name".bundle($block->{"children"})."{/block:$name}" if($block->{"children"});
+	return "{block:$name}".bundle($block->{"children"})."{/block:$name}" if($block->{"children"});
 	return "{$name}";
 }
 1;
