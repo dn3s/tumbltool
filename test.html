@@ -110,7 +110,7 @@ div.collapsed > h3
 			<div><h3>TumblTool</h3><pre><!--{tumbltool_includes}--></pre></div>
 		</div>
 		<div>
-			<h2>body</h2>
+			<h2>global</h2>
 			<div><h3>PortraitURL</h3>
 				<img src="{PortraitURL-16}"></img>
 				<img src="{PortraitURL-24}"></img>
@@ -137,17 +137,63 @@ div.collapsed > h3
 			<div class="block"><h3>block:NextPage</h3>{block:NextPage}<div>
 				<div><h3>NextPage</h3><pre>{NextPage}</pre></div>
 			</div>{/block:NextPage}</div>
+			<div class="block"><h3>block:Following</h3>{block:Following}<div>
+				<div class="block"><h3>block:Following</h3>{block:Followed}<div>
+					<div><h3>FollowedName</h3><pre>{FollowedName}</pre></div>
+					<div><h3>FollowedTitle</h3><pre>{FollowedTitle}</pre></div>
+					<div><h3>FollowedURL</h3><pre>{FollowedURL}</pre></div>
+					<div><h3>FollowedPortraitURL</h3>
+						<img src="{FollowedPortraitURL-16}"></img>
+						<img src="{FollowedPortraitURL-24}"></img>
+						<img src="{FollowedPortraitURL-30}"></img>
+						<img src="{FollowedPortraitURL-40}"></img>
+						<img src="{FollowedPortraitURL-48}"></img>
+						<img src="{FollowedPortraitURL-64}"></img>
+						<img src="{FollowedPortraitURL-96}"></img>
+						<img src="{FollowedPortraitURL-128}"></img>
+					</div>
+				</div>{/block:Followed}</div>
+			</div>{/block:Following}</div>
 		</div>
 		<div>
 			<h2>posts</h2>
 			<div class="block"><h3>block:Posts</h3>{block:Posts}<div class="item">
 				<div><h3>PostType</h3><pre>{PostType}</pre></div>
 
+				<div><h3>PostAuthorName</h3>{PostAuthorName}</div>
+				<div><h3>PostAuthorTitle</h3>{PostAuthorTitle}</div>
+				<div><h3>PostAuthorURL</h3>{PostAuthorURL}</div>
+				<div><h3>PostAuthorPortraitURL</h3>
+					<img src="{PostAuthorPortraitURL-16}"></img>
+					<img src="{PostAuthorPortraitURL-24}"></img>
+					<img src="{PostAuthorPortraitURL-30}"></img>
+					<img src="{PostAuthorPortraitURL-40}"></img>
+					<img src="{PostAuthorPortraitURL-48}"></img>
+					<img src="{PostAuthorPortraitURL-64}"></img>
+					<img src="{PostAuthorPortraitURL-96}"></img>
+					<img src="{PostAuthorPortraitURL-128}"></img>
+				</div>
+
 				<div class="block"><h3>block:Title</h3>{block:Title}<div>
 					<div><h3>Title</h3><pre>{Title}</pre></div>
 					<div><h3>Permalink</h3><pre>{Permalink}</pre></div>
 				</div>{/block:Title}</div>
-
+				
+				<div><h3>Reblog Button</h3>{ReblogButton}</div>
+				<div><h3>Reblog Button color="Grey"</h3>{ReblogButton color="Grey"}</div>
+				<div><h3>Reblog Button color="White"</h3>{ReblogButton color="White"}</div>
+				<div><h3>Reblog Button color="Black"</h3>{ReblogButton color="Black"}</div>
+				<div><h3>Reblog Button size="20"</h3>{ReblogButton size="20"}</div>
+				<div><h3>Reblog Button size="100"</h3>{ReblogButton size="100"}</div>
+				<div><h3>Reblog Button color="Black" size="100"</h3>{ReblogButton color="black" size="100"}</div>
+				<div><h3>Like Button</h3>{LikeButton}</div>
+				<div><h3>Like Button color="Grey"</h3>{LikeButton color="Grey"}</div>
+				<div><h3>Like Button color="White"</h3>{LikeButton color="White"}</div>
+				<div><h3>Like Button color="Black"</h3>{LikeButton color="Black"}</div>
+				<div><h3>Like Button size="20"</h3>{LikeButton size="20"}</div>
+				<div><h3>Like Button size="100"</h3>{LikeButton size="100"}</div>
+				<div><h3>Like Button color="Black" size="100"</h3>{LikeButton color="black" size="100"}</div>
+				
 				<div class="block"><h3>block:Date</h3>{block:Date}<div>
 					<div><h3>DayOfMonth</h3><pre>{DayOfMonth}</pre></div>
 					<div><h3>DayOfMonthWithZero</h3><pre>{DayOfMonthWithZero}</pre></div>
@@ -243,6 +289,8 @@ div.collapsed > h3
 					<div><h3>NoteCount</h3><div>{NoteCount}</div></div>
 					<div><h3>NoteCountWithLabel</h3><div>{NoteCountWithLabel}</div></div>
 				</div>{/block:NoteCount}</div>
+					
+				<div><h3>TagsAsClasses</h3><div>{TagsAsClasses}</div></div>
 
 				<div class="block"><h3>block:HasTags</h3>{block:HasTags}<div>
 					<div class="block"><h3>block:Tags</h3>{block:Tags}<div class="item">
@@ -250,6 +298,16 @@ div.collapsed > h3
 						<div><h3>TagURL</h3><div>{TagURL}</div></div>
 					</div>{/block:Tags}</div>
 				</div>{/block:HasTags}</div>
+
+				<div class="block"><h3>block:Likes</h3>{block:Likes}<div>
+					<div><h3>Likes</h3><div>{Likes}</div></div>
+					<div><h3>Likes limit="5"</h3><div>{Likes limit="5"}</div></div>
+					<div><h3>Likes width="200"</h3><div>{Likes width="200"}</div></div>
+					<div><h3>Likes summarize="100"</h3><div>{Likes summarize="100"}</div></div>
+					<div><h3>Likes summarize="200"</h3><div>{Likes summarize="200"}</div></div>
+					<div><h3>Likes summarize="20"</h3><div>{Likes summarize="20"}</div></div>
+					<div><h3>TagURL</h3><div>{TagURL}</div></div>
+				</div>{/block:Likes}</div>
 
 			</div>{/block:Posts}</div>
 		</div>
