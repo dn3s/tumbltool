@@ -7,11 +7,11 @@
 	"PreviousPage":true,
 	"Archive":true,
 	"Portrait":"cat.jpg",
-	"Following":[
+	"Followed":[
 		{
-			"Name":"spaceTentacle",
-			"Title":"look out below!",
-			"URL":"http://example.com",
+			"FollowedName":"spaceTentacle",
+			"FollowedTitle":"look out below!",
+			"FollowedURL":"http://example.com",
 			"FollowedPortraitURL":"cat.jpg"
 		}
 	],

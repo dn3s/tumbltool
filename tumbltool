@@ -126,7 +126,7 @@ elsif($command eq "bundle") {
 elsif($command eq "dbg") {
 	my $content=parseContent($content);
 	render($theme,$content);
-	print(Dumper($content));
+	print(Dumper($content,$theme));
 }
 exit(0);
 sub setIfUnset
