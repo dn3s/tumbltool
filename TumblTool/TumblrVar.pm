@@ -14,6 +14,10 @@ sub configure
 	my $options=shift();
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
+sub dumpConfig
+{
+	return "TumblTool::TumblrVar Config:\ncontentRoot='$contentRoot'\n\n";
+}
 sub printVar
 {
 	(my $var, my $content)=@_;

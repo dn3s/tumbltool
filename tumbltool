@@ -28,6 +28,8 @@ use TumblTool::Fail;
 use TumblTool::ImageURL;
 use TumblTool::TumblrButton;
 use TumblTool::ContentParser;
+use TumblTool::Include;
+use TumblTool::TumblrVar;
 use Data::Dumper;
 my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
@@ -126,6 +128,12 @@ elsif($command eq "bundle") {
 elsif($command eq "dbg") {
 	my $content=parseContent($content);
 	render($theme,$content);
+	print(TumblTool::TumblrVar::dumpConfig);
+	print(TumblTool::PathUtils::dumpConfig);
+	print(TumblTool::Include::dumpConfig);
+	print(TumblTool::ImageURL::dumpConfig);
+	print(TumblTool::Preview::dumpConfig);
+	print(TumblTool::TumblrButtons::dumpConfig);
 	print(Dumper($content,$theme));
 }
 exit(0);

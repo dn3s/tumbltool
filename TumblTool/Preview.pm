@@ -22,6 +22,11 @@ sub configure
 	$strip       = $options->{"strip"      } // $strip;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
+sub dumpConfig
+{
+	my $inc=$includes?"['".join("', '",@{$includes})."']":"[]";
+	return "TumblTool::Preview Config:\nincludes=$inc\nstrip='$strip'\ncontentRoot='$contentRoot'\n\n";
+}
 sub render #render a demo using $content for filler text, etc
 {
 	(my $block, my $content)=@_;

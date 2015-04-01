@@ -26,6 +26,10 @@ sub configure
 	$outputRoot  = $options->{"outputRoot" } // $outputRoot;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 }
+sub dumpConfig
+{
+	return "TumblTool::PathUtils Config:\noutputFile='$outputFile'\noutputRoot='$outputRoot'\ncontentFile='$contentFile'\ncontentRoot='$contentRoot'\n\n";
+}
 sub setOutputFile
 {
 	(my $filename)=@_;

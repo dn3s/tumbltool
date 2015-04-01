@@ -13,6 +13,10 @@ sub configure
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 	$dataURI     = $options->{"dataURI"    } // $dataURI;
 }
+sub dumpConfig
+{
+	return "TumblTool::ImageURL Config:\ncontentRoot='$contentRoot'\ndataURI='$dataURI'\n\n";
+}
 sub imageURL
 {
 	(my $image, my $res)=@_;

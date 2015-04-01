@@ -9,13 +9,16 @@ sub wrangleVars
 	my $tags=$content->{"Tags"};
 	if($tags and !(ref(@{$tags}[0]) eq "HASH")) {
 		my $structuredTags=[];
+		my $classSafeTags=[];
 		foreach my $tag (@{$tags}) {
 			#TODO: properly sanitize tags for URLs and class names
-			my $hash={"Tag"=>$tag, "TagURL"=>"http://example.com/$tag"};
+			my $urlSafeTag=encodeURIComponent($tag);
+			my $hash={"Tag"=>$tag, "TagURL"=>"http://example.com/$urlSafeTag"};
 			push(@{$structuredTags}, $hash);
+			push(@{$classSafeTags}, HTMLAttributeSafe($tag));
 		}
 		$content->{"Tags"}=$structuredTags;
-		$content->{"TagsAsClasses"}=join(" ", @{$tags});
+		$content->{"TagsAsClasses"}=join(" ", @{$classSafeTags});
 	}
 	return $content;
 }

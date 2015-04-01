@@ -15,6 +15,10 @@ sub configure
 	$collapseHTML                = $options->{"collapse"     } // $collapseHTML;
 	$stripHTMLComments           = $options->{"stripComments"} // $stripHTMLComments;
 }
+sub dumpConfig
+{
+	return "TumblTool::TumblrButton Config:\ncollapseHTML='$collapseHTML'\nstripHTMLComments='$stripHTMLComments'\n\n";
+}
 sub printVar
 {
 	(my $var, my $content, my $root)=@_;

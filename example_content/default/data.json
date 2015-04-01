@@ -7,12 +7,26 @@
 	"PreviousPage":true,
 	"Archive":true,
 	"Portrait":"cat.jpg",
+	"GroupMembers":[
+		{
+			"GroupMemberName":"lazerdolfin",
+			"GroupMemberTitle":"Laser Dolphin",
+			"GroupMemberURL":"http://example.com",
+			"GroupMemberPortrait":"cat.jpg"
+		},
+		{
+			"GroupMemberName":"unicorncuddles32",
+			"GroupMemberTitle":"DARKNESS",
+			"GroupMemberURL":"http://example.com",
+			"GroupMemberPortrait":"cat.jpg"
+		}
+	],
 	"Followed":[
 		{
 			"FollowedName":"spaceTentacle",
 			"FollowedTitle":"look out below!",
 			"FollowedURL":"http://example.com",
-			"FollowedPortraitURL":"cat.jpg"
+			"FollowedPortrait":"cat.jpg"
 		}
 	],
 	"Posts":[
@@ -32,8 +46,17 @@
 		},
 		{
 			"PostType":"text",
-			"Title":"I Like Dogs",
-			"Body":"I really do like cats quite a lot, but I am also a fan of Dogs"
+			"PostAuthorName":"someone",
+			"PostAuthorURL":"http://something.tumblr.com",
+			"PostAuthorTitle":"something",
+			"PostAuthorPortrait":"cat.jpg",
+			"Permalink":"http://something.tumblr.com/something",
+			"Title":"Some Longer Content",
+			"Body":"<p>Here we go, this is what your theme looks like with a longer text post. However, in order for you to see a long text post, you need long text! That's what this is, and you will notice that if you read it through it makes very little sense.</p><p>Why is the world round? There are so many different shapes it could have been, but it's just round. This is just one fascinating aspect of existence on which I will be pontificating today. Another interesting thing you may have noticed is that trees exist. What are trees? Why are they there? Couldn't something else have been instead of trees?</p><p>Even weirder is when you think about what trees are made out of. I could be wrong about this, but I think most of the carbon in the tree comes from the air! (is this true??) For the longest time I imagined trees as a spontaneous(ish) re-arrangement of the atoms in dirt into a tree shape, but it turns out a good chunk of it is actually atoms from the air! And then the tree eventually dies and rots away and becomes dirt so dirt is actually made out of air!?!?!</p>",
+			"Date":"1427205399",
+			"NoteCount":"2381",
+			"HasTags":true,
+			"Tags":["Cool", "Content", "Web Scale"]
 		}
 	]
 }

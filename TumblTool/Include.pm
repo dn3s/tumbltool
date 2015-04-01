@@ -26,6 +26,11 @@ sub configure
 	$minifyJS     = $options->{"minifyJS"    } // $minifyJS;
 	$collapseHTML = $options->{"collapseHTML"} // $collapseHTML;
 }
+sub dumpConfig
+{
+	my $inc=$includes?"['".join("', '",@{$includes})."']":"[]";
+	return "TumblTool::Include Config:\nincludes=$inc\ninlineCSS='$inlineCSS'\ninlineJS='$inlineJS'\nminifyCSS='$minifyCSS'\nminifyJS='$minifyJS'\ncollapseHTML='$collapseHTML'\n\n";
+}
 sub processIncludes
 {
 	my $result="";

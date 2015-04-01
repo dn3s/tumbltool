@@ -7,7 +7,7 @@ use HTML::Strip;
 use HTML::Entities;
 use URI::Escape;
 use base 'Exporter';
-our @EXPORT=('collapseLines', 'removeHTMLComments', 'minifyCSS', 'minifyJS', 'jsQuote', 'stripHTML', 'encodeURIComponent', 'formatNumber');
+our @EXPORT=('collapseLines', 'removeHTMLComments', 'minifyCSS', 'minifyJS', 'jsQuote', 'stripHTML', 'encodeURIComponent', 'formatNumber', 'HTMLAttributeSafe');
 
 sub collapseLines
 {
@@ -57,5 +57,11 @@ sub formatNumber
 	$noun=" ".($number==1 ? $singularNoun : $pluralNoun) if($singularNoun);
 	$number=~s/(\d)(?=(?:[\d]{3})+$)/\1,/g;
 	return "${number}$noun";
+}
+sub HTMLAttributeSafe
+{
+	(my $txt)=@_;
+	$txt=~s/[^A-z0-9_-]/_/g;
+	return $txt;
 }
 1;
