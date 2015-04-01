@@ -8,6 +8,7 @@ use TumblTool::PathUtils;
 use TumblTool::Slurp;
 use TumblTool::Include;
 use TumblTool::TumblrVar;
+use TumblTool::TumblrTags;
 use Data::Dumper;
 use base 'Exporter';
 our @EXPORT=('render');
@@ -62,9 +63,10 @@ sub renderBlock #used by render to do most of the heavy lifting
 		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
 	}
 }
-sub specialCases
+sub specialCases #sets a few variables to True and stuff
 {
 	(my $content)=@_;
+	$content=TumblTool::TumblrTags::wrangleVars($content);
 	$content->{ucfirst($content->{"PostType"})}=1 if($content->{"PostType"});
 	$content->{"Twitter"}=1 if($content->{"TwitterUsername"});
 	return($content);

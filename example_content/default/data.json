@@ -20,20 +20,7 @@
 			"Date":"1427235399",
 			"NoteCount":"9001",
 			"HasTags":true,
-			"Tags":[
-				{
-					"TagURL":"",
-					"Tag":"Cool"
-				},
-				{
-					"TagURL":"",
-					"Tag":"Content"
-				},
-				{
-					"TagURL":"",
-					"Tag":"Web Scale"
-				}
-			]
+			"Tags":["Cool", "Content", "Web Scale"]
 		},
 		{
 			"PostType":"text",
