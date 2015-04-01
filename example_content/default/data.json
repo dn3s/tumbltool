@@ -7,6 +7,14 @@
 	"PreviousPage":true,
 	"Archive":true,
 	"Portrait":"cat.jpg",
+	"Following":[
+		{
+			"Name":"spaceTentacle",
+			"Title":"look out below!",
+			"URL":"http://example.com",
+			"FollowedPortraitURL":"cat.jpg"
+		}
+	],
 	"Posts":[
 		{
 			"PostType":"text",

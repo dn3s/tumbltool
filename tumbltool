@@ -16,7 +16,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 use strict;
 #use warnings;
-use JSON;
 use Getopt::Long;
 use TumblTool::ThemeParser;
 use TumblTool::Preview;
@@ -28,6 +27,7 @@ use TumblTool::TextTransforms;
 use TumblTool::Fail;
 use TumblTool::ImageURL;
 use TumblTool::TumblrButton;
+use TumblTool::ContentParser;
 use Data::Dumper;
 my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
@@ -115,7 +115,7 @@ $themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHT
 my $theme=parseTheme($themeTxt);
 #run appropriate command
 if($command eq "preview") {
-	my $content=decode_json(slurp(getContentFile($content)));
+	my $content=parseContent($content);
 	my $out=render($theme,$content);
 	output("$out", $dataURI);
 }
@@ -124,7 +124,9 @@ elsif($command eq "bundle") {
 	output("$out");#no dataURI option here because why would you ever want that (ugh, that sounds like Apple)
 }
 elsif($command eq "dbg") {
-	output(Dumper($theme));
+	my $content=parseContent($content);
+	render($theme,$content);
+	print(Dumper($content));
 }
 exit(0);
 sub setIfUnset
