@@ -7,10 +7,23 @@ use TumblTool::PathUtils;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
+my $content="";
+my $vars={};
+
+sub configure
+{
+	my $options=shift();
+	$content = $options->{"content"} // $content;
+	$vars    = $options->{"vars"   } // $vars;
+}
+sub dumpConfig
+{
+	return "TumblTool::ContentParser Config:\ncontent='$content'\nvars='$vars'\n\n";
+}
+
 sub parseContent
 {
-	(my $contentName)=@_;
-	my $content=decode_json(slurp(getContentFile($contentName)));
+	my $content=decode_json(slurp(getContentFile($content)));
 	if($content->{"GroupMembers"}) {
 		my $group=$content->{"GroupMembers"};
 		$content->{"GroupMembers"}=1;

@@ -15,12 +15,14 @@ our @EXPORT=('render');
 my $includes=[];
 my $strip=0;
 my $contentRoot='';
+my $vars={};
 sub configure
 {
 	my $options=shift();
 	$includes    = $options->{"includes"   } // $includes;
 	$strip       = $options->{"strip"      } // $strip;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
+	$vars        = $options->{"vars"       } // $vars;
 }
 sub dumpConfig
 {
