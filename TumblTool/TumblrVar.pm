@@ -4,6 +4,7 @@ package TumblTool::TumblrVar;
 use TumblTool::TumblrPrefix;
 use TumblTool::TumblrDate;
 use TumblTool::TumblrPortrait;
+use TumblTool::TumblrButton;
 use base 'Exporter';
 our @EXPORT=('printVar');
 my $contentRoot='';
@@ -18,6 +19,7 @@ sub printVar
 	my $text=(
 		TumblTool::TumblrDate::printVar($var, $content, $contentRoot) //
 		TumblTool::TumblrPortrait::printVar($var, $content, $contentRoot) //
+		TumblTool::TumblrButton::printVar($var, $content, $contentRoot) //
 		$content->{$var->{"name"}}
 	);
 	return tumblrPrefix($var->{"name"}, $text || "");

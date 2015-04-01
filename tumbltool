@@ -27,6 +27,7 @@ use TumblTool::Slurp;
 use TumblTool::TextTransforms;
 use TumblTool::Fail;
 use TumblTool::ImageURL;
+use TumblTool::TumblrButton;
 use Data::Dumper;
 my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
@@ -105,6 +106,7 @@ my $contentRoot=setContentName($content);
 my $outputRoot=setOutputFile($outFile);
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
+TumblTool::TumblrButton::configure({"collapseHTML"=>$collapseHTML, "stripHTMLComments"=>$stripHTMLComments, "preserveConditionalComments"=>$preserveConditionalComments});
 TumblTool::Preview::configure({"contentRoot"=>$contentRoot});
 #parse theme, compress as needed
 my $themeTxt=slurp($themeFile);
