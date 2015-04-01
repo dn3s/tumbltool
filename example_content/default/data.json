@@ -10,11 +10,15 @@
 	"Posts":[
 		{
 			"PostType":"text",
+			"PostAuthorName":"someone",
+			"PostAuthorURL":"http://something.tumblr.com",
+			"PostAuthorTitle":"something",
+			"PostAuthorPortrait":"cat.jpg",
+			"Permalink":"http://something.tumblr.com/something",
 			"Title":"Example Content",
 			"Body":"Here is some example content!",
 			"Date":"1427235399",
 			"NoteCount":"9001",
-			"NoteCountWithLabel":"9001 notes",
 			"HasTags":true,
 			"Tags":[
 				{
