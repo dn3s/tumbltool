@@ -24,10 +24,14 @@ sub dumpConfig
 sub parseContent
 {
 	my $content=decode_json(slurp(getContentFile($content)));
-	if($content->{"GroupMembers"}) {
+	if($content->{"GroupMembers"} and $vars->{"group"}) {
 		my $group=$content->{"GroupMembers"};
 		$content->{"GroupMembers"}=1;
 		$content->{"GroupMember"}=$group;
+	}
+	else
+	{
+		$content->{"GroupMembers"}=0;
 	}
 	$content->{"Following"}=1 if($content->{"Followed"});
 	$content->{"Twitter"}=1 if($content->{"TwitterUsername"});
