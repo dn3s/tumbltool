@@ -24,6 +24,7 @@ sub imageURL
 	if($image=~/^(.+)\.(gif|png|jpg|jpeg|bmp|tiff|svg)$/) {
 		my $name=$1;
 		my $extension=$2;
+		$res=~s/^(?:HighRes|Panorama)$//; #if it's a HighRes or Panorama photo, just return the file with no suffix
 		my $suffix=$res?"_$res":"";
 		my $filename="$contentRoot/${name}$suffix.$extension";
 		return dataURIFromFile($filename) if $dataURI;
