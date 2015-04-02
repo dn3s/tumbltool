@@ -11,7 +11,6 @@ sub wrangleVars
 		my $structuredTags=[];
 		my $classSafeTags=[];
 		foreach my $tag (@{$tags}) {
-			#TODO: properly sanitize tags for URLs and class names
 			my $urlSafeTag=encodeURIComponent($tag);
 			my $hash={"Tag"=>$tag, "TagURL"=>"http://example.com/$urlSafeTag"};
 			push(@{$structuredTags}, $hash);
