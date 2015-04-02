@@ -74,7 +74,10 @@ sub specialCases #re-juggles the content data
 {
 	(my $content)=@_;
 	$content=TumblTool::TumblrTags::wrangleVars($content);
-	$content->{ucfirst($content->{"PostType"})}=1 if($content->{"PostType"});
+	if($content->{"PostType"}) {
+		$content->{ucfirst($content->{"PostType"})}=1;
+		$content->{"PostType"}=~s/^(?:panorama|photoset)$/photo/g;
+	}
 	return($content);
 }
 1;
