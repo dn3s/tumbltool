@@ -67,7 +67,11 @@
 			"Permalink":"http://something.tumblr.com/something",
 			"Title":"I drew some shapes!",
 			"Date":"1427205269",
-			"PhotoURL":"Shapes.jpg"
+			"Photo":{
+				"file":"shapes.jpg",
+				"width":"500",
+				"height":"500"
+			}
 		}
 	]
 }
