@@ -18,6 +18,7 @@ sub wrangleVars
 		}
 		$content->{"Tags"}=$structuredTags;
 		$content->{"TagsAsClasses"}=join(" ", @{$classSafeTags});
+		$content->{"HasTags"}=1;
 	}
 	return $content;
 }
