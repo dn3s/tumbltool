@@ -23,7 +23,7 @@ else {
 			resize($name, $extension, $res);
 		}
 	}
-	resize($name, $extension, $res, 1, "sq");
+	resize($name, $extension, 75, 1, "sq");
 }
 print("All operations complete.\n");
 exit(0);
