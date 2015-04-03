@@ -1,6 +1,6 @@
 #Tumbltool
 
-Test and deploy tumblr themes with ease! Preview your theme offline, or pack it up into a single file, optionally inlining and minifying stylesheets and scripts for easy deployment to Tumblr.
+Test and deploy tumblr themes with ease! Preview your theme offline, or pack it up into a single file, optionally inlining and minifying stylesheets and scripts for easy deployment to Tumblr. NOTE: I am not affiliated with Tumblr in any way, and this app is not endorsed by Tumblr in any way.
 
 ##Caveats
 
