@@ -18,7 +18,7 @@ sub printVar
 		my $aspect=$width/$height;
 		my $highestRes=highestRes($width);
 		$res=$highestRes if ($highestRes<$res);#don't try to make a bigger image than the original
-		return imageURL($photo->{"file"}, ($res==$highestRes)?0:$res) if($type eq "URL");
+		return imageURL($photo->{"file"}, ($res==$width)?0:$res) if($type eq "URL");
 		return $res                             if($type eq "Width");
 		return $height*$res/$width              if($type eq "Height");
 	}
