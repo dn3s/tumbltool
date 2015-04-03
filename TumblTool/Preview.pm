@@ -9,6 +9,7 @@ use TumblTool::Slurp;
 use TumblTool::Include;
 use TumblTool::TumblrVar;
 use TumblTool::TumblrTags;
+use TumblTool::TextTransforms;
 use Data::Dumper;
 use base 'Exporter';
 our @EXPORT=('render');
@@ -77,6 +78,11 @@ sub specialCases #re-juggles the content data
 	if($content->{"PostType"}) {
 		$content->{ucfirst($content->{"PostType"})}=1;
 		$content->{"PostType"}=~s/^(?:panorama|photoset)$/photo/g;
+	}
+	if($content->{"Caption"} and !($content->{"PhotoAlt"})) {
+	
+		my $alt=stripHTML($content->{"Caption"});
+		$content->{"PhotoAlt"}=$alt;
 	}
 	return($content);
 }

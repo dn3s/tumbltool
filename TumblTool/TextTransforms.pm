@@ -44,7 +44,9 @@ sub stripHTML
 {
 	my $text=shift();
 	my $hs=HTML::Strip->new(emit_spaces=>0);
-	return $hs->parse(encode_entities($text));
+	$text=$hs->parse($text);
+	encode_entities($text);
+	return $text;
 }
 sub encodeURIComponent
 {
