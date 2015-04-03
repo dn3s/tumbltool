@@ -9,13 +9,6 @@ use File::Spec;
 
 my $home=$ENV{HOME};
 my $cwd=cwd();
-my $contentPath=[
-	"/etc/tumbltool",
-	File::Spec->catdir($home, ".tumbltool"),
-	File::Spec->rel2abs(".tumbltool"),
-	File::Spec->rel2abs("example_content"),
-	File::Spec->curdir()
-];
 my $outputFile;
 my $outputRoot;
 my $contentFile;
@@ -48,6 +41,14 @@ sub getContentFile
 	(my $name)=@_;
 	return $name if(File::Spec->file_name_is_absolute($name));
 	return rel2abs($name) if($name=~/\.json$/);
+	my $contentPath=[
+		File::Spec->catdir($outputRoot, "tumbltool_data"),
+		File::Spec->curdir(),
+		File::Spec->rel2abs("example_content"),
+		File::Spec->rel2abs(".tumbltool"),
+		File::Spec->catdir($home, ".tumbltool"),
+		"/etc/tumbltool",
+	];
 	my $file="";
 	foreach my $dir (@{$contentPath}) {
 		$file=File::Spec->catfile($dir, "$name.json");
