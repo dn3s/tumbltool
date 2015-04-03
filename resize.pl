@@ -1,14 +1,45 @@
 #!/usr/bin/perl
-my $file=@ARGV[0];
+use Getopt::Long;
+my $width=1280;
+my $file="";
+GetOptions(
+	"width|w=i" => \$width,
+	"file|f=s"  => \$file,
+	"portrait|p"=> \$portrait
+) or die();
+if(!($file)) {
+	print "No file specified! --file\n";
+	exit(1);
+}
 (my $name, my $extension)=$file=~/(.+)\.(png|jpg|jpeg|gif)/;
-foreach my $res (1280, 500, 400, 250, 100) {
-	if($res<@ARGV[1]) {
-		print("Resizing to $res...");
-		`convert '$name.$extension' -resize '${res}x$res' ${name}_$res.$extension`;
-		print(" Done. Filename: ${name}_$res.$extension\n");
+if($portrait) {
+	foreach my $res (128, 96, 64, 48, 40, 30, 24, 16) {
+		resize($name, $extension, $res, 1);
 	}
 }
-print("Resizing and Cropping to 75x75...");
-`convert '$name.$extension' -resize '75x75^' -gravity center -crop 75x75+0+0 +repage ${name}_75sq.$extension`;
-print(" Done. Filename: ${name}_75sq.$extension\n");
+else {
+	foreach my $res (1280, 500, 400, 250, 100) {
+		if($res<$width) {
+			resize($name, $extension, $res);
+		}
+	}
+	resize($name, $extension, $res, 1, "sq");
+}
 print("All operations complete.\n");
+exit(0);
+
+sub resize
+{
+	(my $name, my $extension, my $width, my $square, my $suffix)=@_;
+	$suffix=$suffix||"";
+	print("Resizing to ");
+	if($square) {
+		print("${name}_${res}$suffix.$extension...");
+		`convert '$name.$extension' -resize '${res}x${res}^' -gravity center -crop ${res}x$res+0+0 +repage ${name}_${res}$suffix.$extension`;
+	}
+	else {
+		print("${name}_${res}$suffix.$extension...");
+		`convert '$name.$extension' -resize '${res}x$res' ${name}_${res}_$suffix.$extension`;
+	}
+	print(" Done.\n");
+}
