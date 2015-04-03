@@ -10,11 +10,9 @@ sub printVar
 	return if(!(ref($var) eq "HASH"));
 	my $name=$var->{"name"};
 	if($name=~/^Photo(URL|Width|Height)-(1280|500|400|250|100|75sq|HighRes|Panorama)$/) {
-		print("PHOTO\n");
 		my $type=$1 || "";
 		my $res =$2;
 		my $photo=$content->{"Image"};
-		print(Dumper($photo));
 		my $width=$photo->{"width"};
 		my $height=$photo->{"height"};
 		my $aspect=$width/$height;
