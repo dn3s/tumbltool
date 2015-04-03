@@ -10,7 +10,7 @@ use File::Spec;
 my $home=$ENV{HOME};
 my $cwd=cwd();
 my $outputFile;
-my $outputRoot;
+my $outputRoot=cwd();
 my $contentFile;
 my $contentRoot;
 sub configure
@@ -43,6 +43,7 @@ sub getContentFile
 	return rel2abs($name) if($name=~/\.json$/);
 	my $contentPath=[
 		File::Spec->catdir($outputRoot, "tumbltool_data"),
+		File::Spec->catdir($outputRoot, ".tumbltool"),
 		File::Spec->curdir(),
 		File::Spec->rel2abs("example_content"),
 		File::Spec->rel2abs(".tumbltool"),
