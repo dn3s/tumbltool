@@ -30,16 +30,16 @@ exit(0);
 
 sub resize
 {
-	(my $name, my $extension, my $width, my $square, my $suffix)=@_;
-	$suffix=$suffix||"";
+	(my $name, my $extension, my $res, my $square, my $suffix)=@_;
+	my $suf=$suffix||"";
 	print("Resizing to ");
 	if($square) {
-		print("${name}_${res}$suffix.$extension...");
-		`convert '$name.$extension' -resize '${res}x${res}^' -gravity center -crop ${res}x$res+0+0 +repage ${name}_${res}$suffix.$extension`;
+		print("${name}_${res}$suf.$extension...");
+		`convert '$name.$extension' -resize '${res}x${res}^' -gravity center -crop ${res}x$res+0+0 +repage ${name}_${res}$suf.$extension`;
 	}
 	else {
-		print("${name}_${res}$suffix.$extension...");
-		`convert '$name.$extension' -resize '${res}x$res' ${name}_${res}_$suffix.$extension`;
+		print("${name}_${res}$suf.$extension...");
+		`convert '$name.$extension' -resize '${res}x$res' ${name}_${res}$suf.$extension`;
 	}
 	print(" Done.\n");
 }
