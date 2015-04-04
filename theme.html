@@ -66,9 +66,11 @@
 						</ul>
 				{/block:Chat}
 				{block:Video}
-						{Video-500}{block:Caption}
+						{Video-500}
+						{block:Caption}
 							<div class="caption">{Caption}</div>
 						{/block:Caption}
+						{PlayCountWithLabel}
 				{/block:Video}
 				{block:Audio}
 						{AudioEmbed}{block:Caption}
