@@ -11,6 +11,7 @@ my $mimeTypes={
 	png=>"image/png",
 	gif=>"image/gif",
 	bmp=>"image/bmp",
+	html=>"text/html",
 };
 sub dataURI
 {
