@@ -53,11 +53,23 @@
 			"PostAuthorTitle":"something",
 			"PostAuthorPortrait":"cat.jpg",
 			"Permalink":"http://something.tumblr.com/something",
-			"Title":"Example Content",
 			"Caption":"They have videos on the internet now?!",
 			"Date":"1427235389",
 			"PlayCount":39209,
 			"NoteCount":2093,
+			"Tags":["the wonders of technology"]
+		},
+		{
+			"PostType":"audio",
+			"PostAuthorName":"someone",
+			"PostAuthorURL":"http://something.tumblr.com",
+			"PostAuthorTitle":"something",
+			"PostAuthorPortrait":"cat.jpg",
+			"Permalink":"http://something.tumblr.com/something",
+			"Caption":"They have audios on the internet now also?!",
+			"Date":"1427235388",
+			"PlayCount":29,
+			"NoteCount":1,
 			"Tags":["the wonders of technology"]
 		},
 		{

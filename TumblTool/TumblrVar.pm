@@ -7,7 +7,7 @@ use TumblTool::TumblrPortrait;
 use TumblTool::TumblrButton;
 use TumblTool::TumblrNumber;
 use TumblTool::TumblrPhoto;
-use TumblTool::TumblrVideo;
+use TumblTool::TumblrPlayer;
 use base 'Exporter';
 our @EXPORT=('printVar');
 my $contentRoot='';
@@ -29,7 +29,7 @@ sub printVar
 		TumblTool::TumblrButton::printVar($var, $content, $contentRoot) //
 		TumblTool::TumblrNumber::printVar($var, $content, $contentRoot) //
 		TumblTool::TumblrPhoto::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrVideo::printVar($var, $content, $contentRoot) //
+		TumblTool::TumblrPlayer::printVar($var, $content, $contentRoot) //
 		$content->{$var->{"name"}}
 	);
 	return tumblrPrefix($var->{"name"}, $text || "");

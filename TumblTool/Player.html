@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			*
+			{
+				overflow:hidden;
+				margin:0;
+				background:#000;
+				color:#fff;
+				font-family:sans-serif;
+				line-height:100vh;
+				font-weight:bold;
+				font-size:90vh
+			}
+			*:active
+			{
+				background:#111
+			}
+			@media(max-width:350vh) {
+				*
+				{
+					font-size: 20vw;
+					text-align: center
+				}
+			}
+			p:not(:target) {
+				display: none;
+			}
+		</style>
+	</head>
+	<body><p id="audio">AUDIO</p><p id="video">VIDEO</p></body>
+</html>
