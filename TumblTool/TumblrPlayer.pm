@@ -6,6 +6,7 @@ use File::Spec;
 use File::Basename;
 my $dir=dirname(__FILE__);
 my $inlineIframe=0;
+my $audioPlayerHeight=85;
 sub configure
 {
 	my $options=shift();
@@ -22,7 +23,7 @@ sub printVar
 	if($var->{"name"}=~/^(Video|Audio)(?:Embed)?-(\d+)?$/) {
 		my $type=lc($1);
 		my $width=$2;
-		my $height=$type eq "video"?$width*9/16:20;
+		my $height=$type eq "video"?$width*9/16:$audioPlayerHeight;
 		my $src=File::Spec->rel2abs(File::Spec->catfile($dir, "Player.html"));
 		$src=dataURIFromFile($src) if($inlineIframe);
 		return "<iframe src=\"$src#$type\" width=\"$width\" height=\"$height\" frameborder=\"no\" scrolling=\"no\"></iframe>";
