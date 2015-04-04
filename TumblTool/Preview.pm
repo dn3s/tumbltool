@@ -48,6 +48,7 @@ sub render #render a demo using $content for filler text, etc
 sub renderBlock #used by render to do most of the heavy lifting
 {
 	(my $block, my $content)=@_;
+	return render($block->{"children"}| $content) if($block->{"name"}=~/^English|Not(?:German|French|Italian|Japanese|Turkish|Spanish|Russian|Polish|PortuguesePT|PortugueseBR|Dutch|Korean)$/);#if english| or at least not another language| render block. OTHERWISE DONT
 	if($block->{"children"} and $content->{$block->{"name"}}) { #If the block has children, it's not just a var, it's a block. Check if there is anything to go in the block, and if so, render it.
 		if(ref($content->{ $block->{"name"} }) eq "ARRAY") {#Is the relevant content an array (eg. posts, tags, etc)?
 			my $result="";
