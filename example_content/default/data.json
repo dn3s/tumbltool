@@ -34,6 +34,36 @@
 	],
 	"Posts":[
 		{
+			"PostType":"chat",
+			"PostAuthorName":"someone",
+			"PostAuthorURL":"http://something.tumblr.com",
+			"PostAuthorTitle":"something",
+			"PostAuthorPortrait":"cat.jpg",
+			"Permalink":"http://something.tumblr.com/something",
+			"Title":"Test Chat",
+			"Lines":[
+				{
+					"Label":"me",
+					"Line":"Hello, I would like to order a blog!"
+				},
+				{
+					"Label":"The Internet",
+					"Line":"Would that be a regular blog or a tumblelog?"
+				},
+				{
+					"Label":"me",
+					"Line":"What is a tumble...log?"
+				},
+				{
+					"Label":"users",
+					"Line":"tumbltumbltumbltumbltumbltumbl"
+				}
+			],
+			"Date":"1527235399",
+			"NoteCount":"7",
+			"Tags":["Cool", "Content", "Web Scale"]
+		},
+		{
 			"PostType":"text",
 			"PostAuthorName":"someone",
 			"PostAuthorURL":"http://something.tumblr.com",

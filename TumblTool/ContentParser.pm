@@ -4,6 +4,7 @@ package TumblTool::ContentParser;
 use JSON;
 use TumblTool::Slurp;
 use TumblTool::PathUtils;
+use TumblTool::TumblrChat;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
@@ -41,6 +42,7 @@ sub parseContent
 		$post->{"Even"}=!$odd;
 		$odd=!$odd;
 	}
+	TumblTool::TumblrChat::processContent($content);
 	return $content;
 }
 1;
