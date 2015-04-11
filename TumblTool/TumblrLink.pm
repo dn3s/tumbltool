@@ -20,6 +20,7 @@ sub printVar
 	return $content->{"Name"} or $content->{"URL"} if($name eq "Name");
 	return target() if($name eq "Target");
 	return host($content->{"URL"}) if($name eq "Host");
+	return imageURL($content->{"Thumbnail"}) if($content->{"Thumbnail"} and $name eq "Thumbnail");
 	return;
 }
 sub processContent

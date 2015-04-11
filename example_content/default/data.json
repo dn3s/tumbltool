@@ -43,6 +43,7 @@
 			"Name":"webxploration!",
 			"URL":"http://example.com/linked_content",
 			"Description":"A cool website I found while browsing the www",
+			"Thumbnail":"shapes.png",
 			"Date":"1527235399",
 			"NoteCount":"7",
 			"Tags":["wow"]
@@ -79,10 +80,9 @@
 		},
 		{
 			"PostType":"text",
-			"PostAuthorName":"someone",
-			"PostAuthorURL":"http://something.tumblr.com",
-			"PostAuthorTitle":"something",
-			"PostAuthorPortrait":"cat.jpg",
+			"Submitter":"My Cool Friend!",
+			"SubmitterURL":"http://example.com!",
+			"PostAuthorPortrait":"onions.jpg",
 			"Permalink":"http://something.tumblr.com/something",
 			"Title":"Example Content",
 			"Body":"Here is some example content!",

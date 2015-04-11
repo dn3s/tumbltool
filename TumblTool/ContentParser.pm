@@ -42,6 +42,7 @@ sub parseContent
 		$post->{"Odd"}=$odd;
 		$post->{"Even"}=!$odd;
 		$odd=!$odd;
+		$post->{"Submission"}=1 if($post->{"Submitter"});
 	}
 	TumblTool::TumblrChat::processContent($content);
 	TumblTool::TumblrLink::processContent($content);
