@@ -2,7 +2,6 @@ use strict;
 #use warnings;
 package TumblTool::TumblrPhoto;
 use TumblTool::ImageURL;
-use Data::Dumper;
 my $resolutions=[1280,500,400,250,100,75];
 sub printVar
 {
