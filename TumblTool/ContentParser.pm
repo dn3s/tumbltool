@@ -5,6 +5,7 @@ use JSON;
 use TumblTool::Slurp;
 use TumblTool::PathUtils;
 use TumblTool::TumblrChat;
+use TumblTool::TumblrLink;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
@@ -43,6 +44,7 @@ sub parseContent
 		$odd=!$odd;
 	}
 	TumblTool::TumblrChat::processContent($content);
+	TumblTool::TumblrLink::processContent($content);
 	return $content;
 }
 1;

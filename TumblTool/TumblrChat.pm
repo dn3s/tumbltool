@@ -26,8 +26,7 @@ sub processLines
 		$line->{"name"}=$name;
 		if($label) {
 			if(!$users->{$label}) {
-				$users->{$label}="$nextId";
-				$nextId++;
+				$users->{$label}=$nextId++;
 			}
 			$line->{"UserNumber"}=$users->{$label};
 		}
