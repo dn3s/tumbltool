@@ -8,7 +8,18 @@ sub parseTheme
 	(my $theme)=@_;
 	my $root={ "children" => [] };
 	my $currBlock=$root;
-	while((my $match, my $html, my $isBlock, my $closing, my $name, my $paramStr) = $theme =~ /(^(.*?){((\/)?block:)?([^}]+)((?: [A-z]+\=\"[A-z0-9]+\")*)})/s) {
+	while((my $match, my $html, my $isBlock, my $closing, my $name, my $paramStr) = $theme =~ /
+		(                             #capture ALL OF IT in a group. to get length of processed string
+			^(.*?)                     #non-tumblr-variable code, such as HTML is captured into its own group
+			{                           #the magic token we seek is braces.
+				((\/)?block:)?           #block declaration, optionally a closing block
+				([^}]+)                   #followed by ABSOLUTELY ANYTHING THAT ISN'T A CLOSING BRACE??!? That's fucked up.
+				((?:                       #param group
+					\ [A-z]+\=\"[A-z0-9]+\" #ParamName="ParamValue"
+				)*)                          #non-capturing group WITHIN a capturing group. Any number of repetitions of the inner group will be captured to the outer group.
+			}
+		)
+	/sx) {
 		$theme=substr($theme,length($match));#remove the part of the string we "consumed"
 		push(@{$currBlock->{"children"}}, $html) if $html;#if we slurped up any HTML lets deal with that before we do anything else
 		my $params=parseParams($paramStr);
