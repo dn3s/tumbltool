@@ -13,10 +13,10 @@ sub parseTheme
 			^(.*?)                     #non-tumblr-variable code, such as HTML is captured into its own group
 			{                           #the magic token we seek is braces.
 				((\/)?block:)?           #block declaration, optionally a closing block
-				([^}]+)                   #followed by ABSOLUTELY ANYTHING THAT ISN'T A CLOSING BRACE??!? That's fucked up.
+				([A-z0-9-]+)              #valid var or block name
 				((?:                       #param group
 					\ [A-z]+\=\"[A-z0-9]+\" #ParamName="ParamValue"
-				)*)                          #non-capturing group WITHIN a capturing group. Any number of repetitions of the inner group will be captured to the outer group.
+				)*)
 			}
 		)
 	/sx) {
