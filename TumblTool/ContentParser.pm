@@ -35,6 +35,12 @@ sub parseContent
 	}
 	$content->{"Following"}=1 if($content->{"Followed"});
 	$content->{"Twitter"}=1 if($content->{"TwitterUsername"});
+	my $odd=1;
+	for my $post (@{$content->{"Posts"}}) {
+		$post->{"Odd"}=$odd;
+		$post->{"Even"}=!$odd;
+		$odd=!$odd;
+	}
 	return $content;
 }
 1;
