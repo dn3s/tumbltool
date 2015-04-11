@@ -1,7 +1,6 @@
 use strict;
 #use warnings;
 package TumblTool::TumblrChat;
-use Data::Dumper;
 
 sub processContent
 {
@@ -32,7 +31,6 @@ sub processLines
 			$line->{"UserNumber"}=$users->{$label};
 		}
 	}
-	print(Dumper($lines));
 }
 
 1;
