@@ -69,7 +69,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 		else {
 			$result=printVar($block, $content);
 		}
-		return (($result eq "1")?"":$result); #if the text is just "1" don't print anything though
+		return $result;
 	}
 }
 sub specialCases #re-juggles the content data
