@@ -3,7 +3,7 @@ use strict;
 package TumblTool::TumblrTags;
 use TumblTool::TextTransforms;
 use Data::Dumper;
-sub wrangleVars
+sub wrangleVars #TODO: fit this into the standard interface
 {
 	(my $content)=@_;
 	my $tags=$content->{"Tags"};
