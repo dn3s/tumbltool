@@ -34,6 +34,20 @@
 	],
 	"Posts":[
 		{
+			"PostType":"link",
+			"PostAuthorName":"someone",
+			"PostAuthorURL":"http://something.tumblr.com",
+			"PostAuthorTitle":"something",
+			"PostAuthorPortrait":"cat.jpg",
+			"Permalink":"http://something.tumblr.com/something",
+			"Name":"webxploration!",
+			"URL":"http://example.com/linked_content",
+			"Description":"A cool website I found while browsing the www",
+			"Date":"1527235399",
+			"NoteCount":"7",
+			"Tags":["wow"]
+		},
+		{
 			"PostType":"chat",
 			"PostAuthorName":"someone",
 			"PostAuthorURL":"http://something.tumblr.com",
