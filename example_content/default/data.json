@@ -46,7 +46,15 @@
 			"Thumbnail":"shapes.png",
 			"Date":"1527235399",
 			"NoteCount":"7",
-			"Tags":["wow"]
+			"Tags":["wow"],
+			"ReblogParentName":"catshark",
+			"ReblogParentTitle":"catshark",
+			"ReblogParentURL":"http://example.com",
+			"ReblogParentPortrait":"cat.jpg",
+			"ReblogRootName":"seacucumberlover",
+			"ReblogRootTitle":"Sally The Astronaut",
+			"ReblogRootURL":"http://example.com",
+			"ReblogRootPortrait":"onions.jpg"
 		},
 		{
 			"PostType":"chat",

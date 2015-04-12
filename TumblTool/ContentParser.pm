@@ -6,6 +6,7 @@ use TumblTool::Slurp;
 use TumblTool::PathUtils;
 use TumblTool::TumblrChat;
 use TumblTool::TumblrLink;
+use TumblTool::TumblrReblog;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
@@ -46,6 +47,7 @@ sub parseContent
 	}
 	TumblTool::TumblrChat::processContent($content);
 	TumblTool::TumblrLink::processContent($content);
+	TumblTool::TumblrReblog::processContent($content);
 	return $content;
 }
 1;
