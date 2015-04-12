@@ -27,15 +27,15 @@ sub printVar
 {
 	(my $var, my $content)=@_;
 	my $text=(
-		TumblTool::TumblrDate::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrPortrait::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrButton::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrNumber::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrPhoto::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrPlayer::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrLang::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrLink::printVar($var, $content, $contentRoot) //
-		TumblTool::TumblrReblog::printVar($var, $content, $contentRoot) //
+		TumblTool::TumblrDate::printVar($var, $content) //
+		TumblTool::TumblrPortrait::printVar($var, $content) //
+		TumblTool::TumblrButton::printVar($var, $content) //
+		TumblTool::TumblrNumber::printVar($var, $content) //
+		TumblTool::TumblrPhoto::printVar($var, $content) //
+		TumblTool::TumblrPlayer::printVar($var, $content) //
+		TumblTool::TumblrLang::printVar($var, $content) //
+		TumblTool::TumblrLink::printVar($var, $content) //
+		TumblTool::TumblrReblog::printVar($var, $content) //
 		$content->{$var->{"name"}}
 	);
 	return tumblrPrefix($var->{"name"}, $text || "");

@@ -21,7 +21,7 @@ sub dumpConfig
 }
 sub printVar
 {
-	(my $var, my $content, my $root)=@_;
+	(my $var, my $content)=@_;
 	if($var->{"name"}=~/^(Like|Reblog)Button$/) {
 		my $type=$1;
 		return button($type, $var->{"params"}->{"size"} || 20, $var->{"params"}->{"color"} || "#ccc", "")

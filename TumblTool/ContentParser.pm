@@ -12,6 +12,8 @@ our @EXPORT=('parseContent');
 
 my $content="";
 my $vars={};
+my $users={};
+my $blog={};
 
 sub configure
 {
@@ -27,27 +29,29 @@ sub dumpConfig
 sub parseContent
 {
 	my $content=decode_json(slurp(getContentFile($content)));
-	if($content->{"GroupMembers"} and $vars->{"group"}) {
-		my $group=$content->{"GroupMembers"};
-		$content->{"GroupMembers"}=1;
-		$content->{"GroupMember"}=$group;
+	$users=$content->{"users"};
+	$blog=$content->{"blog"};
+	if($blog->{"GroupMembers"} and $vars->{"group"}) {
+		my $group=$blog->{"GroupMembers"};
+		$blog->{"GroupMembers"}=1;
+		$blog->{"GroupMember"}=$group;
 	}
 	else
 	{
-		$content->{"GroupMembers"}=0;
+		$blog->{"GroupMembers"}=0;
 	}
-	$content->{"Following"}=1 if($content->{"Followed"});
-	$content->{"Twitter"}=1 if($content->{"TwitterUsername"});
+	$blog->{"Following"}=1 if($blog->{"Followed"});
+	$blog->{"Twitter"}=1 if($blog->{"TwitterUsername"});
 	my $odd=1;
-	for my $post (@{$content->{"Posts"}}) {
+	for my $post (@{$blog->{"Posts"}}) {
 		$post->{"Odd"}=$odd;
 		$post->{"Even"}=!$odd;
 		$odd=!$odd;
 		$post->{"Submission"}=1 if($post->{"Submitter"});
 	}
-	TumblTool::TumblrChat::processContent($content);
-	TumblTool::TumblrLink::processContent($content);
-	TumblTool::TumblrReblog::processContent($content);
+	TumblTool::TumblrChat::processContent($blog, $users);
+	TumblTool::TumblrLink::processContent($blog, $users);
+	TumblTool::TumblrReblog::processContent($blog, $users);
 	return $content;
 }
 1;

@@ -18,7 +18,7 @@ sub dumpConfig
 }
 sub printVar
 {
-	(my $var, my $content, my $root)=@_;
+	(my $var, my $content)=@_;
 	$var->{"name"}="AudioEmbed-500" if($var->{"name"} eq "AudioEmbed");
 	if($var->{"name"}=~/^(Video|Audio)(?:Embed)?-(\d+)?$/) {
 		my $type=lc($1);
