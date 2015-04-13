@@ -24,10 +24,6 @@ sub printVar
 		my $prefix=$1 || "";
 		my $attribute=$2 || "";
 		my $res=$3;
-		print("Prefix: $prefix\n");
-		print("User: $content->{$prefix}\n");
-		print(Dumper(TumblTool::ContentParser::getUser($content->{$prefix})));
-		print("Attribute: $attribute\n");
 		my $user=TumblTool::ContentParser::getUser($content->{$prefix});
 		print("Portrait: $user->{Portrait}\n");
 		return imageURL($user->{"Portrait"}, $res) if($attribute eq "PortraitURL");
