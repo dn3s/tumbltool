@@ -7,6 +7,7 @@ use TumblTool::PathUtils;
 use TumblTool::TumblrChat;
 use TumblTool::TumblrLink;
 use TumblTool::TumblrReblog;
+use TumblTool::TextTransforms;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
@@ -52,6 +53,16 @@ sub parseContent
 		$post->{"Even"}=!$odd;
 		$odd=!$odd;
 		$post->{"Submission"}=1 if($post->{"Submitter"});
+
+		TumblTool::TumblrTags::wrangleVars($post);
+		if($post->{"PostType"}) {
+			$post->{ucfirst($post->{"PostType"})}=1;
+			$post->{"PostType"}=~s/^(?:panorama|photoset)$/photo/g;
+		}
+		if($post->{"Caption"} and !($post->{"PhotoAlt"})) {
+			my $alt=stripHTML($post->{"Caption"});
+			$post->{"PhotoAlt"}=$alt;
+		}
 	}
 	TumblTool::TumblrChat::processContent($blog, $users);
 	TumblTool::TumblrLink::processContent($blog, $users);

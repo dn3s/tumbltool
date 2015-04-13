@@ -33,7 +33,6 @@ sub dumpConfig
 sub render #render a demo using $content for filler text, etc
 {
 	(my $block, my $content)=@_;
-	$content=specialCases($content);
 	my $result="";
 	foreach my $item (@{$block}) {
 		if(ref($item) eq "HASH") {
@@ -71,20 +70,5 @@ sub renderBlock #used by render to do most of the heavy lifting
 		}
 		return $result;
 	}
-}
-sub specialCases #re-juggles the content data
-{
-	(my $content)=@_;
-	$content=TumblTool::TumblrTags::wrangleVars($content);
-	if($content->{"PostType"}) {
-		$content->{ucfirst($content->{"PostType"})}=1;
-		$content->{"PostType"}=~s/^(?:panorama|photoset)$/photo/g;
-	}
-	if($content->{"Caption"} and !($content->{"PhotoAlt"})) {
-	
-		my $alt=stripHTML($content->{"Caption"});
-		$content->{"PhotoAlt"}=$alt;
-	}
-	return($content);
 }
 1;
