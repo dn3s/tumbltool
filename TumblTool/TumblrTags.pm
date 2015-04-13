@@ -21,4 +21,8 @@ sub wrangleVars #TODO: make this "lazier"-- convert this into a printVar method 
 	}
 	return $content;
 }
+sub printVar
+{
+	(my $var, my $content)=@_;
+}
 1;
