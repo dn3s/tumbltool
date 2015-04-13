@@ -11,7 +11,7 @@ sub printVar
 	if($name=~/^
 		(
 			ReblogParent|ReblogRoot|Asker|Answerer|Submitter|GroupMember|PostAuthor|Followed
-		)
+		)?
 		(
 			Name|
 			Title|
@@ -20,13 +20,12 @@ sub printVar
 		)?
 		(?:-(16|24|30|40|48|64|96|128))?
 		$
-	/x) {
+	/x and length($name)>0) { #all the groups are optional, but if none of them are there then string length will be zero
 		my $prefix=$1 || "";
 		my $attribute=$2 || "";
-		my $res=$3;
 		my $username=(ref($content) eq "HASH"?$content->{$prefix}:$content) || TumblTool::ContentParser::getOwner();
 		my $user=TumblTool::ContentParser::getUser($username);
-		return imageURL($user->{"Portrait"}, $res) if($attribute eq "PortraitURL");
+		return imageURL($user->{"Portrait"}, $3) if($attribute eq "PortraitURL");
 		return $user->{"URL"} if($attribute eq "URL");
 		return $user->{"Title"} if($attribute eq "Title");
 		return $username;

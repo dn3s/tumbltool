@@ -24,5 +24,8 @@ sub wrangleVars #TODO: make this "lazier"-- convert this into a printVar method 
 sub printVar
 {
 	(my $var, my $content)=@_;
+	if((my $name) = $var=~/n/x) {
+		
+	}
 }
 1;
