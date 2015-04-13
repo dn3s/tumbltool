@@ -8,6 +8,7 @@ use TumblTool::PathUtils;
 use TumblTool::TumblrChat;
 use TumblTool::TumblrLink;
 use TumblTool::TumblrReblog;
+use TumblTool::TumblrGroup;
 use TumblTool::TextTransforms;
 use base 'Exporter';
 our @EXPORT=('parseContent');
@@ -38,15 +39,6 @@ sub parseContent
 	my $content=decode_json(slurp(getContentFile($content)));
 	$users=$content->{"users"};
 	$blog=$content->{"blog"};
-	if($blog->{"GroupMembers"} and $vars->{"group"}) {
-		my $group=$blog->{"GroupMembers"};
-		$blog->{"GroupMembers"}=1;
-		$blog->{"GroupMember"}=$group;
-	}
-	else
-	{
-		$blog->{"GroupMembers"}=0;
-	}
 	$blog->{"Following"}=1 if($blog->{"Followed"});
 	$blog->{"Twitter"}=1 if($blog->{"TwitterUsername"});
 	my $odd=1;
@@ -66,6 +58,7 @@ sub parseContent
 			$post->{"PhotoAlt"}=$alt;
 		}
 	}
+	TumblTool::TumblrGroup::processContent($blog, $users);
 	TumblTool::TumblrChat::processContent($blog, $users);
 	TumblTool::TumblrLink::processContent($blog, $users);
 	TumblTool::TumblrReblog::processContent($blog, $users);
