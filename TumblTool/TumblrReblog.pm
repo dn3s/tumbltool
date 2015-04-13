@@ -16,7 +16,7 @@ sub processContent
 }
 sub printVar
 {
-	(my $var, my $content, my $root)=@_;
+	(my $var, my $content)=@_;
 	return if(!(ref($var) eq "HASH"));
 	my $name=$var->{"name"};
 

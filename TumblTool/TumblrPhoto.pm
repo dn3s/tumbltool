@@ -5,7 +5,7 @@ use TumblTool::ImageURL;
 my $resolutions=[1280,500,400,250,100,75];
 sub printVar
 {
-	(my $var, my $content, my $root)=@_;
+	(my $var, my $content)=@_;
 	return if(!(ref($var) eq "HASH"));
 	my $name=$var->{"name"};
 	if($name=~/^Photo(URL|Width|Height)-(1280|500|400|250|100|75sq|HighRes|Panorama)$/) {
