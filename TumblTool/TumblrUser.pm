@@ -8,7 +8,6 @@ sub printVar
 {
 	(my $var, my $content)=@_;
 	my $name=$var->{"name"};
-	print("$name\n");
 	if($name=~/^
 		(
 			ReblogParent|ReblogRoot|Asker|Answerer|Submitter|GroupMember|PostAuthor|Followed
@@ -25,17 +24,9 @@ sub printVar
 		my $prefix=$1 || "";
 		my $attribute=$2 || "";
 		my $res=$3;
-		print("$prefix\n");
-		if($prefix eq "GroupMember") {
-			print(Dumper($content));
-		}
-		my $user={};
-		if(ref($content) eq "HASH") {
-			$user=TumblTool::ContentParser::getUser($content->{$prefix});
-		}
-		else {
-			$user=TumblTool::ContentParser::getUser($content);
-		}
+		my $username=ref($content) eq "HASH"?$content->{$prefix}:$content;
+		my $user=TumblTool::ContentParser::getUser($username);
+		print("$prefix: $content->{$prefix}\n");
 		return imageURL($user->{"Portrait"}, $res) if($attribute eq "PortraitURL");
 		return $user->{"URL"} if($attribute eq "URL");
 		return $user->{"Title"} if($attribute eq "Title");
