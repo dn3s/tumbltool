@@ -26,6 +26,7 @@ sub dumpConfig
 sub printVar
 {
 	(my $var, my $content)=@_;
+	return "" if(!(ref($content) eq "HASH"));
 	my $text=(
 		TumblTool::TumblrDate::printVar($var, $content) //
 		TumblTool::TumblrPortrait::printVar($var, $content) //

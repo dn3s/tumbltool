@@ -6,6 +6,7 @@ use Data::Dumper;
 sub wrangleVars #TODO: fit this into the standard interface
 {
 	(my $content)=@_;
+	print(Dumper($content));
 	my $tags=$content->{"Tags"};
 	if($tags and !(ref(@{$tags}[0]) eq "HASH")) {
 		my $structuredTags=[];

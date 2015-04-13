@@ -26,6 +26,10 @@ sub dumpConfig
 	return "TumblTool::ContentParser Config:\ncontent='$content'\nvars='$vars'\n\n";
 }
 
+sub getUser
+{
+	return $users->{shift()};
+}
 sub parseContent
 {
 	my $content=decode_json(slurp(getContentFile($content)));
@@ -52,6 +56,6 @@ sub parseContent
 	TumblTool::TumblrChat::processContent($blog, $users);
 	TumblTool::TumblrLink::processContent($blog, $users);
 	TumblTool::TumblrReblog::processContent($blog, $users);
-	return $content;
+	return $content->{"blog"};
 }
 1;
