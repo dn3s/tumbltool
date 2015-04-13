@@ -53,7 +53,7 @@ sub parseContent
 		$odd=!$odd;
 		$post->{"Submission"}=1 if($post->{"Submitter"});
 
-		TumblTool::TumblrTags::wrangleVars($post);
+		#TumblTool::TumblrTags::wrangleVars($post);
 		if($post->{"PostType"}) {
 			$post->{ucfirst($post->{"PostType"})}=1;
 			$post->{"PostType"}=~s/^(?:panorama|photoset)$/photo/g;
@@ -62,6 +62,7 @@ sub parseContent
 			my $alt=stripHTML($post->{"Caption"});
 			$post->{"PhotoAlt"}=$alt;
 		}
+		$post->{"HasTags"}=1 if($post->{"Tags"});
 	}
 	TumblTool::TumblrGroup::processContent($blog, $users);
 	TumblTool::TumblrChat::processContent($blog, $users);

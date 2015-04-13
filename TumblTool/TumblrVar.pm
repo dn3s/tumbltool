@@ -11,6 +11,7 @@ use TumblTool::TumblrPlayer;
 use TumblTool::TumblrLang;
 use TumblTool::TumblrLink;
 use TumblTool::TumblrReblog;
+use TumblTool::TumblrTags;
 use base 'Exporter';
 our @EXPORT=('printVar');
 my $contentRoot='';
@@ -32,12 +33,13 @@ sub printVar
 		TumblTool::TumblrUser::printVar($var, $content) //
 		TumblTool::TumblrButton::printVar($var, $content) //
 		TumblTool::TumblrNumber::printVar($var, $content) //
+		TumblTool::TumblrTags::printVar($var, $content) //
 		TumblTool::TumblrPhoto::printVar($var, $content) //
 		TumblTool::TumblrPlayer::printVar($var, $content) //
 		TumblTool::TumblrLang::printVar($var, $content) //
 		TumblTool::TumblrLink::printVar($var, $content) //
 		TumblTool::TumblrReblog::printVar($var, $content) //
-		$content->{$var->{"name"}}
+		((ref($content) eq "HASH")?($content->{$var->{"name"}}):($content))
 	);
 	return tumblrPrefix($var->{"name"}, $text || "");
 }

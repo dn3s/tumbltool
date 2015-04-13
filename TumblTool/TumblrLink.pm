@@ -15,7 +15,7 @@ sub dumpConfig
 sub printVar
 {
 	(my $var, my $content)=@_;
-	return if(!(ref($var) eq "HASH"));
+	return if(!(ref($var) eq "HASH" and ref($content) eq "HASH"));
 	my $name=$var->{"name"};
 	return $content->{"Name"} or $content->{"URL"} if($name eq "Name");
 	return target() if($name eq "Target");
