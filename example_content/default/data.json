@@ -48,7 +48,6 @@
 		"Posts":[
 			{
 				"PostType":"link",
-				"PostAuthor":"someone",
 				"Permalink":"http://something.tumblr.com/something",
 				"Name":"webxploration!",
 				"URL":"http://example.com/linked_content",

@@ -17,6 +17,7 @@ my $content="";
 my $vars={};
 my $users={};
 my $blog={};
+my $owner="";
 
 sub configure
 {
@@ -28,17 +29,21 @@ sub dumpConfig
 {
 	return "TumblTool::ContentParser Config:\ncontent='$content'\nvars='$vars'\n\n";
 }
-
 sub getUser
 {
 	(my $user)=@_;
 	return $users->{$user};
+}
+sub getOwner
+{
+	return $owner;
 }
 sub parseContent
 {
 	my $content=decode_json(slurp(getContentFile($content)));
 	$users=$content->{"users"};
 	$blog=$content->{"blog"};
+	$owner=$content->{"blog"}->{"Owner"};
 	$blog->{"Following"}=1 if($blog->{"Followed"});
 	$blog->{"Twitter"}=1 if($blog->{"TwitterUsername"});
 	my $odd=1;

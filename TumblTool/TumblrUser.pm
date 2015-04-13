@@ -24,13 +24,12 @@ sub printVar
 		my $prefix=$1 || "";
 		my $attribute=$2 || "";
 		my $res=$3;
-		my $username=ref($content) eq "HASH"?$content->{$prefix}:$content;
+		my $username=(ref($content) eq "HASH"?$content->{$prefix}:$content) || TumblTool::ContentParser::getOwner();
 		my $user=TumblTool::ContentParser::getUser($username);
 		return imageURL($user->{"Portrait"}, $res) if($attribute eq "PortraitURL");
 		return $user->{"URL"} if($attribute eq "URL");
 		return $user->{"Title"} if($attribute eq "Title");
-		return $content->{$prefix} if(ref($content) eq "HASH");
-		return $content;
+		return $username;
 	}
 	return;
 }
