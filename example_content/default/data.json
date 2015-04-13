@@ -29,6 +29,31 @@
 			"Title":"Sally The Astronaut",
 			"URL":"http://example.com",
 			"Portrait":"onions.jpg"
+		},
+		"unchainedmelody": {
+			"a forest,",
+			"URL":"http://example.com",
+			"Portrait":"onions.jpg"
+		},
+		"d3thTr3nch": {
+			"Title":"dont put me in a box with them",
+			"URL":"http://example.com",
+			"Portrait":"onions.jpg"
+		},
+		"dreamwaiver": {
+			"Title":"a girl running thru a corn field",
+			"URL":"http://example.com",
+			"Portrait":"onions.jpg"
+		},
+		"chamomileeclipse": {
+			"Title":"I can't make you love me",
+			"URL":"http://example.com",
+			"Portrait":"onions.jpg"
+		},
+		"fireflyforest": {
+			"Title":"A sea of twinkling lamps",
+			"URL":"http://example.com",
+			"Portrait":"onions.jpg"
 		}
 	},
 	"blog": {
