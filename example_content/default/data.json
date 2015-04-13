@@ -1,42 +1,36 @@
 {
-	"users": [
-		{
-			"Name":"lazerdolfin",
+	"users": {
+		"lazerdolfin": {
 			"Title":"Laser Dolphin",
 			"URL":"http://example.com",
 			"Portrait":"onions.jpg"
 		},
-		{
-			"Name":"unicorncuddles32",
+		"unicorncuddles32": {
 			"Title":"DARKNESS",
 			"URL":"http://example.com",
 			"Portrait":"cat.jpg"
 		},
-		{
-			"Name":"spaceTentacle",
+		"spaceTentacle": {
 			"Title":"look out below!",
 			"URL":"http://example.com",
 			"Portrait":"cat.jpg"
 		},
-		{
-			"Name":"someone",
+		"someone": {
 			"URL":"http://something.tumblr.com",
 			"Title":"something",
 			"Portrait":"cat.jpg"
 		},
-		{
-			"Name":"catshark",
+		"catshark": {
 			"Title":"catshark",
 			"URL":"http://example.com",
 			"Portrait":"cat.jpg"
 		},
-		{
-			"Name":"seacucumbersandwich",
+		"seacucumbersandwich": {
 			"Title":"Sally The Astronaut",
 			"URL":"http://example.com",
 			"Portrait":"onions.jpg"
 		}
-	],
+	},
 	"blog": {
 		"Title":"Example Blog",
 		"TwitterUsername":"spaceCat70",

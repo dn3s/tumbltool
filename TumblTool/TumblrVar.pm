@@ -3,7 +3,7 @@ use strict;
 package TumblTool::TumblrVar;
 use TumblTool::TumblrPrefix;
 use TumblTool::TumblrDate;
-use TumblTool::TumblrPortrait;
+use TumblTool::TumblrUser;
 use TumblTool::TumblrButton;
 use TumblTool::TumblrNumber;
 use TumblTool::TumblrPhoto;
@@ -29,7 +29,7 @@ sub printVar
 	return "" if(!(ref($content) eq "HASH"));
 	my $text=(
 		TumblTool::TumblrDate::printVar($var, $content) //
-		TumblTool::TumblrPortrait::printVar($var, $content) //
+		TumblTool::TumblrUser::printVar($var, $content) //
 		TumblTool::TumblrButton::printVar($var, $content) //
 		TumblTool::TumblrNumber::printVar($var, $content) //
 		TumblTool::TumblrPhoto::printVar($var, $content) //

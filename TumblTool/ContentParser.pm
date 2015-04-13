@@ -1,6 +1,7 @@
 use strict;
 #use warnings;
 package TumblTool::ContentParser;
+use Data::Dumper;
 use JSON;
 use TumblTool::Slurp;
 use TumblTool::PathUtils;
@@ -29,7 +30,8 @@ sub dumpConfig
 
 sub getUser
 {
-	return $users->{shift()};
+	(my $user)=@_;
+	return $users->{$user};
 }
 sub parseContent
 {
