@@ -60,7 +60,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 			return render($block->{"children"}, $content);
 		}
 	}
-	else { #since it's not a block, it's a placeholder.
+	else { #since it's not a block, it's a variable.
 		my $result="";
 		if($block->{"name"} eq "tumbltool_includes") {
 			$result=processIncludes($includes);
