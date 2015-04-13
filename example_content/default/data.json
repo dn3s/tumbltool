@@ -62,6 +62,7 @@
 			},
 			{
 				"PostType":"chat",
+				"PostAuthor":"someone",
 				"Permalink":"http://something.tumblr.com/something",
 				"Title":"Test Chat",
 				"Lines":[

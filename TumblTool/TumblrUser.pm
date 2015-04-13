@@ -26,7 +26,6 @@ sub printVar
 		my $res=$3;
 		my $username=ref($content) eq "HASH"?$content->{$prefix}:$content;
 		my $user=TumblTool::ContentParser::getUser($username);
-		print("$prefix: $content->{$prefix}\n");
 		return imageURL($user->{"Portrait"}, $res) if($attribute eq "PortraitURL");
 		return $user->{"URL"} if($attribute eq "URL");
 		return $user->{"Title"} if($attribute eq "Title");
