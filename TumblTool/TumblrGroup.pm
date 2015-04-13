@@ -21,12 +21,4 @@ sub processContent
 		$blog->{"GroupMembers"}=0;
 	}
 }
-sub printVar
-{
-	(my $var, my $content)=@_;
-	return if(!(ref($var) eq "HASH"));
-	my $name=$var->{"name"};
-	#TODO: implement
-	return;
-}
 1;

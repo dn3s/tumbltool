@@ -2,7 +2,7 @@ use strict;
 #use warnings;
 package TumblTool::TumblrTags;
 use TumblTool::TextTransforms;
-sub wrangleVars #TODO: fit this into the standard interface
+sub wrangleVars #TODO: make this "lazier"-- convert this into a printVar method so only wnat's needed is computed
 {
 	(my $content)=@_;
 	my $tags=$content->{"Tags"};

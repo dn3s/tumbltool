@@ -26,8 +26,8 @@ sub dumpConfig
 sub printVar
 {
 	(my $var, my $content)=@_;
+	#WARNING! $content can be either a HASH or a SCALAR; it is the module's responsibility to check for that.
 	my $text=(
-		TumblTool::TumblrGroup::printVar($var, $content) //
 		TumblTool::TumblrDate::printVar($var, $content) //
 		TumblTool::TumblrUser::printVar($var, $content) //
 		TumblTool::TumblrButton::printVar($var, $content) //
