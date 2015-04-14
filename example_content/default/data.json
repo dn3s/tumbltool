@@ -41,7 +41,7 @@
 			"Portrait":"onions.jpg"
 		},
 		"dreamwaiver": {
-			"Title":"a girl running thru a corn field",
+			"Title":"sign here",
 			"URL":"http://example.com",
 			"Portrait":"onions.jpg"
 		},
@@ -51,7 +51,7 @@
 			"Portrait":"onions.jpg"
 		},
 		"fireflyforest": {
-			"Title":"A sea of twinkling lamps",
+			"Title":"A sea of twinkling lanterns",
 			"URL":"http://example.com",
 			"Portrait":"onions.jpg"
 		}
@@ -70,6 +70,16 @@
 
 		],
 		"Posts":[
+			{
+				"PostType":"answer",
+				"Permalink":"http://something.tumblr.com/something",
+				"Question":"How do questions look?",
+				"Answer":"Like this",
+				"Asker":"catshark",
+				"Answerer":"fireflyforest",
+				"NoteCount":"7",
+				"Tags":["wow"]
+			},
 			{
 				"PostType":"link",
 				"Permalink":"http://something.tumblr.com/something",

@@ -55,7 +55,9 @@ sub parseContent
 
 		#TumblTool::TumblrTags::wrangleVars($post);
 		if($post->{"PostType"}) {
-			$post->{ucfirst($post->{"PostType"})}=1;
+			if(!$post->{ucfirst($post->{"PostType"})}) { #only if the post's variable named after the post type isn't truthy. for example: Answer
+				$post->{ucfirst($post->{"PostType"})}=1;
+			}
 			$post->{"PostType"}=~s/^(?:panorama|photoset)$/photo/g;
 		}
 		if($post->{"Caption"} and !($post->{"PhotoAlt"})) {
