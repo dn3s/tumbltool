@@ -6,6 +6,9 @@ body
 {
 	font-family: sans-serif;
 	color: #eee;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 a
 {
@@ -27,6 +30,7 @@ header, footer
 main
 {
 	background: #111;
+	flex-grow: 1;
 }
 footer
 {
