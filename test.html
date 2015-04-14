@@ -304,7 +304,33 @@ div.collapsed > h3
 				</div>{/block:Text}</div>
 
 				<div class="block"><h3>block:Answer</h3>{block:Answer}<div>
-					<div><h3>Body</h3><pre>{Body}</pre></div>
+					<div><h3>Question</h3><pre>{Question}</pre></div>
+					<div><h3>Answer</h3><pre>{Answer}</pre></div>
+					<div><h3>Asker</h3><pre>{Asker}</pre></div>
+					<div><h3>AskerPortraitURL</h3>
+						<img src="{AskerPortraitURL-16}"></img>
+						<img src="{AskerPortraitURL-24}"></img>
+						<img src="{AskerPortraitURL-30}"></img>
+						<img src="{AskerPortraitURL-40}"></img>
+						<img src="{AskerPortraitURL-48}"></img>
+						<img src="{AskerPortraitURL-64}"></img>
+						<img src="{AskerPortraitURL-96}"></img>
+						<img src="{AskerPortraitURL-128}"></img>
+					</div>
+					<div class="block"><h3>block:Answerer</h3>{block:Answerer}<div>
+						<div><h3>Answerer</h3><pre>{Answerer}</pre></div>
+						<div><h3>AnswererPortraitURL</h3>
+							<img src="{AnswererPortraitURL-16}"></img>
+							<img src="{AnswererPortraitURL-24}"></img>
+							<img src="{AnswererPortraitURL-30}"></img>
+							<img src="{AnswererPortraitURL-40}"></img>
+							<img src="{AnswererPortraitURL-48}"></img>
+							<img src="{AnswererPortraitURL-64}"></img>
+							<img src="{AnswererPortraitURL-96}"></img>
+							<img src="{AnswererPortraitURL-128}"></img>
+						</div>
+					</div>{/block:Answerer}</div>
+					<div><h3>Replies</h3><pre>{Replies}</pre></div>
 				</div>{/block:Answer}</div>
 
 				<div class="block"><h3>block:Photo</h3>{block:Photo}<div>
