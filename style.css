@@ -1,0 +1,35 @@
+*
+{
+	margin: 0;
+}
+body
+{
+	font-family: sans-serif;
+	color: #eee;
+}
+a
+{
+	color: #eee;
+	background: #555;
+	border-radius: 0.25em;
+	padding: 0 0.2em;
+	text-decoration: none;
+}
+a:hover
+{
+	background: #666;
+	color: #fff;
+}
+header, footer
+{
+	background: #333;
+}
+main
+{
+	background: #111;
+}
+footer
+{
+	font-size: 0.7em;
+	padding: 0.5em;
+}
