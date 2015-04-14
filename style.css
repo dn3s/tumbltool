@@ -8,30 +8,34 @@ body
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+	color: #333;
+}
+a
+{
+	text-decoration: none;
 }
 header > h1
 {
 	font-size: 3em;
 }
+h1
+{
+	color: #ddd;
+}
 header, footer
 {
 	background: #333;
-	color: #eee;
+	color: #aaa;
 	padding: 2em 0.5em 1em 0.5em;
 }
 header a,
 footer a
 {
 	color: #eee;
-	background: #555;
-	border-radius: 0.25em;
-	padding: 0 0.2em;
-	text-decoration: none;
 }
 header a:hover,
 footer a:hover
 {
-	background: #666;
 	color: #fff;
 }
 footer
@@ -48,4 +52,13 @@ main
 {
 	background: #eee;
 	flex-grow: 1;
+	padding: 1em 0;
+}
+main h1
+{
+	margin: 0.1em 0;
+	padding: 0.5em 0.5em 0.2em 0.5em;
+	background: #333;
+	display: inline-block;
+	border-radius: 0 0.2em 0.2em 0;
 }
