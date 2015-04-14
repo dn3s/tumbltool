@@ -5,12 +5,21 @@
 body
 {
 	font-family: sans-serif;
-	color: #eee;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 }
-a
+header > h1
+{
+	font-size: 3em;
+}
+header, footer
+{
+	background: #333;
+	color: #eee;
+}
+header a,
+footer a
 {
 	color: #eee;
 	background: #555;
@@ -18,19 +27,11 @@ a
 	padding: 0 0.2em;
 	text-decoration: none;
 }
-a:hover
+header a:hover,
+footer a:hover
 {
 	background: #666;
 	color: #fff;
-}
-header, footer
-{
-	background: #333;
-}
-main
-{
-	background: #111;
-	flex-grow: 1;
 }
 footer
 {
@@ -44,4 +45,9 @@ footer > p
 	min-width: 80%;
 	max-width: 100%;
 	width: 20em;
+}
+main
+{
+	background: #eee;
+	flex-grow: 1;
 }
