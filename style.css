@@ -17,6 +17,7 @@ header, footer
 {
 	background: #333;
 	color: #eee;
+	padding: 2em 0.5em 1em 0.5em;
 }
 header a,
 footer a
@@ -36,12 +37,9 @@ footer a:hover
 footer
 {
 	font-size: 0.7em;
-	padding: 3em 0.5em 1em 0.5em;
-	text-align: center;
 }
 footer > p
 {
-	margin: 0 auto;
 	min-width: 80%;
 	max-width: 100%;
 	width: 20em;
