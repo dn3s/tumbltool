@@ -347,10 +347,10 @@ div.collapsed > h3
 					<div class="block"><h3>block:Host</h3>{block:Host}<div>
 						<div><h3>Host</h3><pre>{Host}</pre></div>
 					</div>{/block:Host}</div>
-					<div><h3>Thumbnail</h3><pre>{Thumbnail}</pre><img src="{Thumbnail}"></img>
+					<div><h3>Thumbnail</h3><pre>{Thumbnail}</pre><img src="{Thumbnail}"></img></div>
 					<div class="block"><h3>block:Description</h3>{block:Description}<div>
-						<div><h3>Description</h3><pre>{Description}</pre>
-					</div>{/block:Description}</div></div>
+						<div><h3>Description</h3><pre>{Description}</pre></div>
+					</div>{/block:Description}</div>
 				</div>{/block:Link}</div>
 
 				<div class="block"><h3>block:Chat</h3>{block:Chat}<div>
@@ -409,7 +409,7 @@ div.collapsed > h3
 			var divs=document.querySelectorAll(".block, .item");
 			console.log(divs);
 			for(var i=0; i<divs.length; i++) {
-				console.log(divs[i]);
+				divs[i].classList.toggle("collapsed");
 				divs[i].onclick=function(e){this.classList.toggle("collapsed");e.stopPropagation();return false;}
 			}
 	</script>
