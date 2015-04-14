@@ -72,10 +72,13 @@
 		"Posts":[
 			{
 				"PostType":"answer",
+				"Permalink":"http://something.tumblr.com/something",
 				"Question":"How do questions look?",
 				"Answer":"Like this",
 				"Asker":"catshark",
-				"Answerer":"fireflyforest"
+				"Answerer":"fireflyforest",
+				"NoteCount":"7",
+				"Tags":["wow"]
 			},
 			{
 				"PostType":"link",
