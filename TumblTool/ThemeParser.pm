@@ -1,6 +1,7 @@
 use strict;
 #use warnings;
 package TumblTool::ThemeParser;
+use TumblTool::TumblrAnswer;
 use base 'Exporter';
 our @EXPORT=('parseTheme');
 sub parseTheme
@@ -36,6 +37,7 @@ sub parseTheme
 				"parent"=>$currBlock, #We'll need this later to back out of the block once it's done.
 				"children"=>[]
 			};
+			TumblTool::TumblrAnswer::config({answerBlock=>1}) if($name eq "Answer"); #SHOULD NOT EXIST IF TUMBLR'S API WAS SANE
 			my $i=push(@{$currBlock->{"children"}}, $newBlock);
 			$currBlock=$newBlock;
 		}
