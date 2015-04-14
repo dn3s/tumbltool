@@ -433,7 +433,6 @@ div.collapsed > h3
 		</div>
 	<script>
 			var divs=document.querySelectorAll(".block, .item");
-			console.log(divs);
 			for(var i=0; i<divs.length; i++) {
 				divs[i].classList.toggle("collapsed");
 				divs[i].onclick=function(e){this.classList.toggle("collapsed");e.stopPropagation();return false;}

@@ -4,6 +4,10 @@ package TumblTool::TumblrUser;
 use Data::Dumper;
 use TumblTool::ImageURL;
 use TumblTool::ContentParser;
+sub getUser #just because it makes a ton more sense for others to call it from here than from contentParser
+{
+	return TumblTool::ContentParser::getUser(shift());
+}
 sub printVar
 {
 	(my $var, my $content)=@_;
@@ -24,7 +28,7 @@ sub printVar
 		my $prefix=$1 || "";
 		my $attribute=$2 || "";
 		my $username=(ref($content) eq "HASH"?$content->{$prefix}:$content) || TumblTool::ContentParser::getOwner();
-		my $user=TumblTool::ContentParser::getUser($username);
+		my $user=getUser($username);
 		return imageURL($user->{"Portrait"}, $3) if($attribute eq "PortraitURL");
 		return $user->{"URL"} if($attribute eq "URL");
 		return $user->{"Title"} if($attribute eq "Title" and $prefix);
