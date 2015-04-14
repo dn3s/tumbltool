@@ -62,3 +62,8 @@ main h1
 	display: inline-block;
 	border-radius: 0 0.2em 0.2em 0;
 }
+main p
+{
+	margin: 0.5em 0.5em 0.2em 0.5em;
+	color: #111;
+}
