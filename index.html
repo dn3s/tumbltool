@@ -34,11 +34,28 @@
 				Written in Perl 5, TumblTool performs the parsing, and renders your theme as if it were applied to an "imaginary blog", with a variety of example content, all in a split second.
 				As development continues, the "imaginary blog" will become filled with more content and you will be given more choices for what sort of content you want in your previews.
 			</p>
-			<h2>Focused on Accuracy</h2>
+			<h2>Flexible Output</h2>
 			<p>
-				Of course, this would all be useless if you got your theme looking great, and then uploaded it to Tumblr just to discover that TumblTool got it wrong and it actually looks completely different.
-				TumblTool is being developed with an obsessive focus on emulating Tumblr's theme rendering as closely as possible.
-			</p?
+				TumblTool gives you plenty of options for output. It can inline and optionally minify CSS and JS files, strip whitespace, and even wrap everything up in a base64-encoded <code>data: URI</code> for piping into your browser directly!
+			</p><p>
+				Aside from rendering previews, TumblTool can parse and minify your theme, inline and minify your external files, and bundle it up to be pasted into the Tumblr's HTML editor once the time comes to deploy.
+			</p><p>
+				 TumblTool gives extensive options regarding which files should be included inline, and which should be left as <code>href</code>s, <code>src</code>s, etc.
+			</p>
+		</section><section>
+			<h1>TumblTool is a Work In Progress</h1>
+			<p>
+				TumblTool is under active development. At the moment it is a perfectly useable program, but the previews aren't perfect.
+				It takes a lot of work to reverse-engineer and re-implement an API, and some of the more complicated features aren't yet ready.
+				Any un-implemented variable or block in your theme will simply be left blank, and unsupported parameters will simply not take effect.
+			</p><p>
+				I've covered most of the basics, to the point that I believe it is a useful tool in this state, but there's still a lot of work to be done. You can see a list of incomplete features <a href="features.html">here</a>.
+			</p>
+		</section><section>
+			<h1>How to Contribute</h1>
+			<p>
+				TumblTool is designed in a modular fashion, so it's easy to contribute. There's work to be done <strong>whether you are a Perl developer or not.</strong> Read more about it <a href="contributing.html">here</a>!
+			</p>
 		</section>
 	</main>
 	<footer>
