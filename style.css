@@ -111,10 +111,51 @@ h3
 ul.supported
 {
 	padding: 0;
+	margin-left: 2.5em;
 }
-li.yes,
-li.no,
-li.partial
+ul.supported > li
 {
 	list-style-type: none;
+	position: relative;
+	min-height: 1.5em;
+	margin-bottom: 0.5em;
+	margin-right: 0.25em;
+	background: #ddd;
+	padding: 0.25em 0.5em;
+	border-radius: 0.5em;
+}
+ul.supported > li::before
+{
+	font-size: 2em;
+	content: "";
+	position: absolute;
+	right: 100%;
+	top: 50%;
+	margin-top: -0.5em;
+	background: #000;
+	margin-right: 0.125em;
+	width: 1em;
+	height: 1em;
+	border-radius: 0.25em;
+	color: #eee;
+	text-align: center;
+	line-height: 1em;
+}
+ul.supported > li.yes::before
+{
+	content: "\2713";
+	background: #8c0;
+	line-height: 1.05em;
+}
+ul.supported > li.no::before
+{
+	content: "\2718";
+	background: #f66;
+	line-height: 1.1em;
+}
+ul.supported > li.partial::before
+{
+	content: "\25D0";
+	background: #fa0;
+	line-height: 0.9em;
 }
