@@ -76,23 +76,7 @@ main h1
 	background: #111;
 	display: inline-block;
 	position: relative;
-}
-main h1::before,
-main h1::after
-{
-	content:"";
-	position: absolute;
-	top: 0;
-	left: 100%;
-	bottom: 0;
-	width: 0.4em;
-	background: #111;
 	border-radius: 0 0.4em 0.4em 0;
-}
-main h1::before
-{
-	background: #ddd;
-	width: 1em;
 }
 main p
 {
