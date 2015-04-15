@@ -23,7 +23,6 @@ code
 	border-radius: 0.2em;
 	font-size: 1rem;
 	font-family: DejaVu Sans Mono, monospace;
-	border: 1px dotted #aaa;
 }
 header > h1
 {
@@ -130,8 +129,7 @@ ul.supported > li::before
 	content: "";
 	position: absolute;
 	right: 100%;
-	top: 50%;
-	margin-top: -0.5em;
+	top: 0;
 	background: #000;
 	margin-right: 0.125em;
 	width: 1em;
@@ -157,5 +155,22 @@ ul.supported > li.partial::before
 {
 	content: "\25D0";
 	background: #fa0;
-	line-height: 0.9em;
+	line-height: 0.85em;
+}
+ul.supported h1::before,
+ul.supported h1::after
+{
+	display: none;
+}
+ul.supported h1
+{
+	margin: 0;
+	padding: 0;
+	font-size: 1.1em;
+	background: none;
+	color: #111;
+}
+ul.supported code
+{
+	background: #eee;
 }
