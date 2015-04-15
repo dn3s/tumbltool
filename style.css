@@ -13,6 +13,17 @@ body
 a
 {
 	text-decoration: none;
+	color: #111;
+	border-bottom: 1px dotted #111;
+}
+code
+{
+	background: #ddd;
+	padding: 0 0.4em;
+	border-radius: 0.2em;
+	font-size: 1rem;
+	font-family: DejaVu Sans Mono, monospace;
+	border: 1px dotted #aaa;
 }
 header > h1
 {
