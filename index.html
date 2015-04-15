@@ -52,6 +52,11 @@
 				I've covered most of the basics, to the point that I believe it is a useful tool in this state, but there's still a lot of work to be done. You can see a list of incomplete features <a href="features.html">here</a>.
 			</p>
 		</section><section>
+			<h1>Installation</h1>
+			<p>A better system will be figured out at some point. Until then, it's still pretty easy. Checkout the <a href="https://github.com/dn3s/tumbltool">Github repo</a>. As long as you have the dependencies installed, you can try it out right as it is before installing.</p>
+			<p>You will need Perl 5, as well as the <code>JSON</code>, <code>CSS::Minify</code>, <code>JavaScript::Minify</code>, <code>HTML::Entities</code>, <code>HTML::Escape</code>, and <code>URI::Escape</code> modules from CPAN (your distribution should also provide packages).</p>
+			<p>Put the <code>TumblTool</code> directory somewhere in your Perl installation's <code>@INC</code> path, put the <code>tumbltool</code> executable somewhere in your shell's <code>$PATH</code>, and rename the <code>example_content</code> directory either to <code>/etc/tumbltool</code> or <code>$HOME/.tumbltool</code> (or just keep it somewhere else and specify its location on the CLI, but that's messy).
+		</section><section>
 			<h1>How to Contribute</h1>
 			<p>
 				TumblTool is designed in a modular fashion, so it's easy to contribute. There's work to be done <strong>whether you are a Perl developer or not.</strong> Read more about it <a href="contributing.html">here</a>!
