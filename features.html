@@ -9,17 +9,106 @@
 	</header>
 	<main>
 		<section>
-			<h1>Feature Support</h1>
+			<h1>Features Supported</h1>
 			<p>
 				This is a list of TumblTool's support status of various Tumblr features.
 			</p>
 			<ul class="supported">
-				<li class="yes">something</li>
+				<li class="yes">
+					<h1>Global Blog Attributes</h1>
+					<p>This includes things like <code>{Title}</code> and <code>{Description}</code></p>
+				</li>
+				<li class="yes">
+					<h1>Users</h1>
+					<p>Usernames, user URLs, user titles, portraits, etc.</p>
+					<p>These are all available for things like Group Blogs, Reblogs, Submitted Posts, Following, etc.</p>
+				</li>
+				<li class="yes">
+					<h1>Like and Reblog Buttons</h1>
+					<p>These are provided, but this may change if Tumblr doesn't like my use of their SVGs for it. In which case I will need to figure out another solution. Either I will provide an "install script" that grabs the SVGs from their site that the user runs, or I'll make my own buttons. Or both.</p>
+				</li>
+				<li class="yes">
+					<h1>Text Posts</h1>
+				</li>
+				<li class="yes">
+					<h1>Photo Posts</h1>
+				</li>
+				<li class="yes">
+					<h1>Video Posts</h1>
+					<p>To keep things lightweight, a "dummy" video player is used (an <code>&lt;iframe></code> with the word "VIDEO" in it)</p>
+				</li>
+				<li class="yes">
+					<h1>Audio Posts</h1>
+					<p>To keep things lightweight, a "dummy" audio player is used (an <code>&lt;iframe></code> with the word "AUDIO" in it)</p>
+				</li>
+				<li class="yes">
+					<h1>Chat Posts</h1>
+				</li>
+				<li class="yes">
+					<h1>Post Dates</h1>
+					<p>This is really slick. In the data file, all you provide is a UNIX-style timestamp and it computes any needed date values.</p>
+				</li>
+				<li class="yes">
+					<h1>Link Posts</h1>
+					<p>Note that the <code>{Target}</code> attribute is computed, but will return blank because an option has not yet been added to the CLI to specify its behavior</p>
+				</li>
+				<li class="yes">
+					<h1>Quote Posts</h1>
+				</li>
+				<li class="yes">
+					<h1>Answer Posts</h1>
+				</li>
+				<li class="yes">
+					<h1>Tags</h1>
+					<p>Everything Tag related (except for tag pages and <code>{TagsAsClasses}</code>)</p>
+				</li>
+				<li class="partial">
+					<h1>Localization</h1>
+					<p>"Fake" support is provided. Pretends language is always English. Will just print out whatever string it is you want localized, whether or not it is in the <a href="https://www.tumblr.com/docs/en/localizing_themes">dictionary</a></p>
+				</li>
+				<li class="partial">
+					<h1>Reblogs</h1>
+					<p>Works completely except for including reblog status in <code>{TagsAsClasses}</code></p>
+				</li>
+				<li class="partial">
+					<h1>TagsAsClasses</h1>
+					<p>Works completely except it doesn't yet include post sources as a tag, or reblog status</p>
+				</li>
+				<li class="partial">
+					<h1>Content Sources</h1>
+					<p>Basically anything under <a href="https://www.tumblr.com/docs/en/custom_themes#content-sources">Post Sources</a></p>
+				</li>
+				<li class="partial">
+					<h1>Pagination</h1>
+					<p>"next" and "prev" pages are supported, and have corresponding CLI options, but nothing else is supported at the moment, including <a href="https://www.tumblr.com/docs/en/custom_themes#jump-pagination">"jump pagination"</a></p>
+				</li>
+				<li class="partial">
+					<h1>Post IDs and Offsets</h1>
+					<p>Things like <code>{block:Post[1-15]}</code> or <code>{PostID}</code> don't work, but <code>{block:Even}</code> and <code>{block:Odd}</code> do.</p>
+				</li>
+				<li class="no">
+					<h1>Panorama Posts</h1>
+				</li>
+				<li class="no">
+					<h1>Photoset Posts</h1>
+				</li>
+				<li class="no">
+					<h1>Notes and "Reblog Chains"</h1>
+					<p>Tumblr spits out some sort of big messy <code>&lt;ul></code> for this which will take some work to replicate accurately.</p>
+					<p>However, <code>{NoteCount}</code> and <code>{NoteCountWithLabel}</code> work. (WAIT, DO THEY? I CAN'T REMEMBER)</p>
+				</li>
+				<li class="no">
+					<h1>Auto-Generated Summaries</h1>
+					<p><code>{PostSummary}</code></p>
+				</li>
+				<li class="no">
+					<h1>Non-Index Pages</h1>
+					<p>Search pages, Tag pages, Date pages, etc. This includes custom pages, which is super not supported.</p>
+				</li>
 				<li class="no">
 					<h1>Custom Variables</h1>
-					<p>Tumblr allows you to define <a href="https://www.tumblr.com/docs/en/custom_themes#theme-options">custom variables</a> using <code>meta</code> tags in your theme's <code>head</code>.
+					<p>Tumblr allows you to define <a href="https://www.tumblr.com/docs/en/custom_themes#theme-options">custom variables</a> using <code>meta</code> tags in your theme's <code>head</code>, for custom colors, images, booleans, etc.</p>
 				</li>
-				<li class="partial">something</li>
 			</ul>
 		</section>
 	</main>
