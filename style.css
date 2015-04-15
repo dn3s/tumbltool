@@ -8,7 +8,7 @@ body
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	color: #333;
+	color: #111;
 }
 a
 {
@@ -81,6 +81,10 @@ main h1::before
 }
 main p
 {
-	margin: 0.5em 0.5em 0.2em 0.5em;
-	color: #111;
+	margin: 0.2em 0.5em 0.5em 0.5em;
+}
+h2, h3, h4, h5, h6
+{
+	font-size: 1.2em;
+	margin-top: 0.5em;
 }
