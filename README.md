@@ -1,12 +1,4 @@
-#Tumbltool
-
-Test and deploy tumblr themes with ease! Preview your theme offline, or pack it up into a single file, optionally inlining and minifying stylesheets and scripts for easy deployment to Tumblr. NOTE: I am not affiliated with Tumblr in any way, and this app is not endorsed by Tumblr in any way.
-
-##Caveats
-
-The preview feature works by providing a quick and dirty re-implementation of Tumblr's whole Theme API, which is a lot of work. At this point only a small portion of the API is actually implemented. This will change over time, though. [This file](https://github.com/dn3s/tumbltool/blob/master/vars.html) should roughly track what's supported.
-
-Also, this has only been tested on Linux (Specifically ArchLinux). Theoretically it shouldn't be too hard to port to Windows/OSX, but I don't have the time to do that. Pull requests welcome though!
+#[TumblTool](http://dn3s.github.io/tumbltool/)
 
 ##Installation
 
