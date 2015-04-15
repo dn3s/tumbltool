@@ -108,3 +108,13 @@ h3
 {
 	font-size: 1em;
 }
+ul.supported
+{
+	padding: 0;
+}
+li.yes,
+li.no,
+li.partial
+{
+	list-style-type: none;
+}
