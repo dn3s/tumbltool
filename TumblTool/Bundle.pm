@@ -4,6 +4,7 @@ package TumblTool::Bundle;
 use base 'Exporter';
 our @EXPORT=('bundle');
 use TumblTool::Include;
+use TumblTool::TumblrSettings;
 sub bundle
 {
 	(my $block)=@_;
@@ -22,6 +23,7 @@ sub bundleBlock
 {
 	(my $block)=@_;
 	my $name=$block->{"name"};
+	return TumblTool::TumblrSettings::settingsTags() if ($name eq "tumbltool_settings");
 	return processIncludes() if($name eq "tumbltool_includes");
 	return "{block:$name}".bundle($block->{"children"})."{/block:$name}" if($block->{"children"});
 	return "{$name}";

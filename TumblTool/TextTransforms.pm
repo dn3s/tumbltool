@@ -12,7 +12,7 @@ our @EXPORT=('collapseLines', 'removeHTMLComments', 'minifyCSS', 'minifyJS', 'js
 sub collapseLines
 {
 	my $txt=shift();
-	$txt=~s/[\r\n\t]//g;#remove newlines, tabs
+	$txt=~s/\n+\s*//g;#remove newlines, leading space
 	return $txt;
 }
 sub removeHTMLComments

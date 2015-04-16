@@ -11,7 +11,20 @@ sub configure
 	(my $options)=@_;
 	$settingsFile=$options->{"settingsFile"} // $settingsFile;
 	$collapseHTML=$options->{"collapseHTML"} // $collapseHTML;
-	$settings=decode_json(slurp($settingsFile));
+	$settings=parseSettings($settingsFile);
+}
+sub parseSettings
+{
+	(my $settingsFile)=@_;
+	my $in=decode_json(slurp($settingsFile));
+	my $out={};
+	foreach my $label (keys %{$in}) {
+		my $varname=$label;
+		$varname=~s/ //g;
+		$out->{$varname}=$in->{$label};
+		$out->{$varname}->{"label"}=$label; #unused at the moment, but maybe it'll render a "settings panel" at some point
+	}
+	return $out;
 }
 sub settingsTags
 {
@@ -19,9 +32,10 @@ sub settingsTags
 	my $out="$n";
 	foreach my $setting (keys %{$settings}) {
 		my $type=$settings->{$setting}->{"type"};
+		my $label=$settings->{$setting}->{"label"};
 		my $default=$settings->{$setting}->{"default"};
 		$default="0" if(!$default and $type eq "if");
-		$out.=("<meta name=\"$type:$setting\" content=\"$default\" />$n");
+		$out.=("<meta name=\"$type:$label\" content=\"$default\" />$n");
 	}
 }
 1;
