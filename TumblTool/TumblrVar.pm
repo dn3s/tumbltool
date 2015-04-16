@@ -13,6 +13,7 @@ use TumblTool::TumblrLink;
 use TumblTool::TumblrReblog;
 use TumblTool::TumblrTags;
 use TumblTool::TumblrAnswer;
+use TumblTool::TumblrSettings;
 use base 'Exporter';
 our @EXPORT=('printVar');
 my $contentRoot='';
@@ -30,6 +31,7 @@ sub printVar
 	(my $var, my $content)=@_;
 	#WARNING! $content can be either a HASH or a SCALAR; it is the module's responsibility to check for that.
 	my $text=(
+		TumblTool::TumblrSettings::printVar($var, $content) //
 		TumblTool::TumblrAnswer::printVar($var, $content) //
 		TumblTool::TumblrDate::printVar($var, $content) //
 		TumblTool::TumblrUser::printVar($var, $content) //
