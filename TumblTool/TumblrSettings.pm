@@ -38,13 +38,14 @@ sub settingsTags
 		$default="0" if(!$default and $type eq "if");
 		$out.=("<meta name=\"$type:$label\" content=\"$default\" />$n");
 	}
-	print(Dumper($settings));
 	return $out;
 }
 sub printVar
 {
 	(my $var, my $content)=@_;
-	print("$var->{name}, ");
+	if((my $type, my $name)=$var->{"name"}=~/^(color|image|font|text|select):(.+)$/) {
+		print("$type, $name\n");
+	}
 	print ("$settings->{$var->{name}}->{varname}");
 }
 1;
