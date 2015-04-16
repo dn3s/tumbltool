@@ -30,7 +30,6 @@ sub settingsTags
 		$default="0" if(!$default and $default=~/^if/);
 		$out.=("<meta name=\"$label\" content=\"$default\" />$n");
 	}
-	print(Dumper($settings));
 	return $out;
 }
 sub printVar
