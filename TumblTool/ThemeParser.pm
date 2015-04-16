@@ -14,7 +14,7 @@ sub parseTheme
 			^(.*?)                     #non-tumblr-variable code, such as HTML is captured into its own group
 			{                           #the magic token we seek is braces.
 				((\/)?block:)?           #block declaration, optionally a closing block
-				([A-z0-9-]+)              #valid var or block name
+				((?:lang:)?[A-z0-9- ]+)   #valid var or block name, optionally starting with lang:
 				((?:                       #param group
 					\ [A-z]+\=\"[A-z0-9]+\" #ParamName="ParamValue"
 				)*)
