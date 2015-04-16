@@ -21,11 +21,12 @@ sub parseSettings
 	my $out={};
 	for my $setting (keys %{$settings}) {
 		my $val=$settings->{$setting};
-		if($setting=~s/^if:/If/g) {
+		if($setting=~s/^if://) {
 			$setting=~s/ //g;
 		}
 		$out->{$setting}=$val;
 	}
+	print(Dumper($out));
 	return $out;
 }
 sub settingsTags
@@ -51,9 +52,19 @@ sub printVar
 sub ifBlockEnabled
 {
 	(my $var)=@_;
-	if($var=~/^If/) {
-		return $settings->{$var};
+	if($var=~s/^IfNot//) {
+		return !$settings->{blockify($var)};
+	}
+	elsif($var=~s/^If//) {
+		return $settings->{blockify($var)};
 	}
 	return 0;
+}
+sub blockify
+{
+	(my $in)=@_;
+	if(( my $name, my $type)=$in=~/^(.+)(Image|Text)$/) {
+		return lc($type).":$name";
+	}
 }
 1;

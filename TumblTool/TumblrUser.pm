@@ -31,7 +31,7 @@ sub printVar
 		my $user=getUser($username);
 		return imageURL($user->{"Portrait"}, $3) if($attribute eq "PortraitURL");
 		return $user->{"URL"} if($attribute eq "URL");
-		return $user->{"Title"} if($attribute eq "Title" and $prefix);
+		return $user->{"Title"} if($attribute eq "Title");
 		return $username if($prefix);
 	}
 	return;
