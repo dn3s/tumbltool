@@ -18,34 +18,27 @@ sub parseSettings
 {
 	(my $settingsFile)=@_;
 	my $in=decode_json(slurp($settingsFile));
-	my $out={};
-	foreach my $label (keys %{$in}) {
-		my $varname=$label;
-		$varname=~s/ //g;
-		$out->{$varname}=$in->{$label};
-		$out->{$varname}->{"label"}=$label; #unused at the moment, but maybe it'll render a "settings panel" at some point
-	}
-	return $out;
+	return $in;
 }
 sub settingsTags
 {
 	my $n=$collapseHTML?"":"\n";
 	my $out="$n";
 	foreach my $setting (keys %{$settings}) {
-		my $type=$settings->{$setting}->{"type"};
-		my $label=$settings->{$setting}->{"label"};
-		my $default=$settings->{$setting}->{"default"};
-		$default="0" if(!$default and $type eq "if");
-		$out.=("<meta name=\"$type:$label\" content=\"$default\" />$n");
+		my $label=$settings->{$setting};
+		my $default=$settings->{$setting};
+		$default="0" if(!$default and $default=~/^if/);
+		$out.=("<meta name=\"$label\" content=\"$default\" />$n");
 	}
+	print(Dumper($settings));
 	return $out;
 }
 sub printVar
 {
 	(my $var, my $content)=@_;
 	if((my $type, my $name)=$var->{"name"}=~/^(color|image|font|text|select):(.+)$/) {
-		print("$type, $name\n");
+		return $settings->{"$type:$name"};
 	}
-	print ("$settings->{$var->{name}}->{varname}");
+	return;
 }
 1;
