@@ -17,15 +17,23 @@ sub configure
 sub parseSettings
 {
 	(my $settingsFile)=@_;
-	my $in=decode_json(slurp($settingsFile));
-	return $in;
+	my $settings=decode_json(slurp($settingsFile));
+	my $out={};
+	for my $setting (keys %{$settings}) {
+		my $val=$settings->{$setting};
+		if($setting=~s/^if:/If/g) {
+			$setting=~s/ //g;
+		}
+		$out->{$setting}=$val;
+	}
+	return $out;
 }
 sub settingsTags
 {
 	my $n=$collapseHTML?"":"\n";
 	my $out="$n";
 	foreach my $setting (keys %{$settings}) {
-		my $label=$settings->{$setting};
+		my $label=$setting;
 		my $default=$settings->{$setting};
 		$default="0" if(!$default and $default=~/^if/);
 		$out.=("<meta name=\"$label\" content=\"$default\" />$n");
@@ -39,5 +47,13 @@ sub printVar
 		return $settings->{"$type:$name"};
 	}
 	return;
+}
+sub ifBlockEnabled
+{
+	(my $var)=@_;
+	if($var=~/^If/) {
+		return $settings->{$var};
+	}
+	return 0;
 }
 1;
