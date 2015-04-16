@@ -26,7 +26,6 @@ sub parseSettings
 		}
 		$out->{$setting}=$val;
 	}
-	print(Dumper($out));
 	return $out;
 }
 sub settingsTags
@@ -66,5 +65,6 @@ sub blockify
 	if(( my $name, my $type)=$in=~/^(.+)(Image|Text)$/) {
 		return lc($type).":$name";
 	}
+	return $in;
 }
 1;
