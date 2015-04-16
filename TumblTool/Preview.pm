@@ -13,22 +13,19 @@ use TumblTool::TextTransforms;
 use Data::Dumper;
 use base 'Exporter';
 our @EXPORT=('render');
-my $includes=[];
 my $strip=0;
 my $contentRoot='';
 my $vars={};
 sub configure
 {
 	my $options=shift();
-	$includes    = $options->{"includes"   } // $includes;
 	$strip       = $options->{"strip"      } // $strip;
 	$contentRoot = $options->{"contentRoot"} // $contentRoot;
 	$vars        = $options->{"vars"       } // $vars;
 }
 sub dumpConfig
 {
-	my $inc=$includes?"['".join("', '",@{$includes})."']":"[]";
-	return "TumblTool::Preview Config:\nincludes=$inc\nstrip='$strip'\ncontentRoot='$contentRoot'\n\n";
+	return "TumblTool::Preview Config:\nstrip='$strip'\ncontentRoot='$contentRoot'\n\n";
 }
 sub render #render a demo using $content for filler text, etc
 {
@@ -63,7 +60,10 @@ sub renderBlock #used by render to do most of the heavy lifting
 	else { #since it's not a block, it's a variable.
 		my $result="";
 		if($block->{"name"} eq "tumbltool_includes") {
-			$result=processIncludes($includes);
+			$result=TumblTool::Include::processIncludes();
+		}
+		elsif($block->{"name"} eq "tumbltool_settings") {
+			$result=TumblTool::TumblrSettings::processSettings();
 		}
 		else {
 			$result=printVar($block, $content);
