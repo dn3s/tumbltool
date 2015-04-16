@@ -30,6 +30,7 @@ use TumblTool::TumblrButton;
 use TumblTool::ContentParser;
 use TumblTool::Include;
 use TumblTool::TumblrVar;
+use TumblTool::TumblrSettings;
 use Data::Dumper;
 my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
@@ -38,6 +39,7 @@ fail() if($command eq "help");
 fail("Unknown command: \"$command\"\n") if(!($command=~/preview|bundle|dbg/));
 #OK lets get started
 my $content='default';
+my $settingsFile;
 my $dataURI;
 my $includes=[];
 my $inline;
@@ -57,6 +59,7 @@ my $pipe;
 my $outFile;
 GetOptions(
 	"content|c=s"             => \$content,
+	"settings|s=s"            => \$settingsFile,
 	"data-uri|d"              => \$dataURI,
 	"outfile|o=s"             => \$outFile,
 	"include|i=s{1,}"         =>  $includes,
@@ -106,6 +109,7 @@ if(defined($inline)) {
 #configure the modules according to CLI options
 my $contentRoot=setContentName($content);
 my $outputRoot=setOutputFile($outFile);
+TumblTool::TumblrSettings::configure({"settingsFile"=>$settingsFile, "collapseHTML"=>$collapseHTML});
 TumblTool::ContentParser::configure({"content"=>$content, "vars"=>$vars});
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});

@@ -10,6 +10,7 @@ use TumblTool::Include;
 use TumblTool::TumblrVar;
 use TumblTool::TumblrTags;
 use TumblTool::TextTransforms;
+use TumblTool::TumblrSettings;
 use Data::Dumper;
 use base 'Exporter';
 our @EXPORT=('render');
@@ -63,7 +64,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 			$result=TumblTool::Include::processIncludes();
 		}
 		elsif($block->{"name"} eq "tumbltool_settings") {
-			$result=TumblTool::TumblrSettings::processSettings();
+			$result=TumblTool::TumblrSettings::settingsTags();
 		}
 		else {
 			$result=printVar($block, $content);
