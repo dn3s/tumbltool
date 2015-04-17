@@ -47,16 +47,17 @@ header > nav a
 	border-bottom: none;
 	text-align: center;
 	position: relative;
+	width: 5em;
 }
 header > nav a::before
 {
 	content: "";
 	opacity: 0.9;
 	background-repeat: no-repeat;
-	background-size: 5em auto;
-	width: 5em;
-	height: 5em;
-	margin-bottom: 0.5em;
+	background-size: 4em auto;
+	width: 4em;
+	height: 4em;
+	margin: 0 auto 0.5em auto;
 	display: block;
 	background-image: url("icons.png");
 }
@@ -70,19 +71,19 @@ header > nav a:hover
 }
 header > nav a[href^="features"]::before
 {
-	background-position: 0 -20em;
+	background-position: 0 -16em;
 }
 header > nav a[href^="examples"]::before
 {
-	background-position: 0 -25em;
+	background-position: 0 -20em;
 }
 header > nav a[href^="usage"]::before
 {
-	background-position: 0 -5em;
+	background-position: 0 -4em;
 }
 header > nav a[href^="install"]::before
 {
-	background-position: 0 -10em;
+	background-position: 0 -8em;
 }
 header > nav a[href^="contribute"]::before
 {
@@ -90,7 +91,7 @@ header > nav a[href^="contribute"]::before
 }
 header > nav a[href*="github"]::before
 {
-	background-position: 0 -15em;
+	background-position: 0 -12em;
 }
 h1
 {
