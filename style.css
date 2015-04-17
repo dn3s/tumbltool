@@ -15,6 +15,7 @@ a
 	text-decoration: none;
 	color: #111;
 	border-bottom: 1px dotted #111;
+	border-radius: 0.25em;
 }
 code
 {
@@ -27,6 +28,61 @@ code
 header > h1
 {
 	font-size: 3em;
+	display: inline-block;
+}
+header > nav
+{
+	display: inline-block;
+	float: right;
+}
+header > nav a
+{
+	font-size: 0.6em;
+	display: inline-block;
+	line-height: 1em;
+	border-bottom: none;
+	text-align: center;
+	position: relative;
+}
+header > nav a::before
+{
+	content: "";
+	opacity: 0.9;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	width: 5em;
+	height: 4em;
+	margin-bottom: 0.5em;
+	display: block;
+}
+header > nav a:hover::before
+{
+	opacity: 1;
+}
+header > nav a:hover
+{
+	color: #fff;
+}
+header > nav a[href^="features"]::before
+{
+	background-image: url("features.png");
+}
+header > nav a[href^="examples"]::before
+{
+	background-image: url("examples.png");
+}
+header > nav a[href^="usage"]::before
+{
+	background-image: url("usage.png");
+}
+header > nav a[href^="install"]::before
+{
+	background-image: url("down-arrow.png");
+}
+header > nav a[href*="github"]::before
+{
+	background-image: url("GitHub-Mark-Light-120px-plus.png");
 }
 h1
 {
