@@ -1,0 +1,9 @@
+{
+	"color:Background":"#f3e",
+	"font:Title":"sans-serif",
+	"font:Body":"sans-serif",
+	"if:Show People I Follow":true,
+	"Show Tags":true,
+	"image:Header":"",
+	"image:Background":""
+}
