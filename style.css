@@ -84,6 +84,10 @@ header > nav a[href^="install"]::before
 {
 	background-image: url("down-arrow.png");
 }
+header > nav a[href^="contribute"]::before
+{
+	background-image: url("up-arrow.png");
+}
 header > nav a[href*="github"]::before
 {
 	background-image: url("GitHub-Mark-Light-120px-plus.png");
