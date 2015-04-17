@@ -19,7 +19,7 @@ a
 }
 main a:hover
 {
-	background: linear-gradient(to top, #ddd, transparent 20%);
+	background: linear-gradient(to top, rgba(0,0,0,0.08), transparent 20%);
 }
 code
 {
