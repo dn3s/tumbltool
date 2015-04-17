@@ -164,6 +164,7 @@ ul.supported > li
 	margin-bottom: 0.5em;
 	margin-right: 0.25em;
 	background: #ddd;
+	background: linear-gradient(to top, #ccc, #ddd 0.25em);
 	padding: 0.25em 0.5em;
 	border-radius: 0.5em;
 }
