@@ -17,6 +17,10 @@ a
 	border-bottom: 1px dotted #111;
 	border-radius: 0.25em;
 }
+main a:hover
+{
+	background: linear-gradient(to top, #ddd, transparent 20%);
+}
 code
 {
 	background: #ddd;
