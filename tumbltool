@@ -46,6 +46,7 @@ my $inline;
 my $inlineCSS;
 my $inlineJS;
 my $inlineIMG;
+my $inlinePlayers;
 my $tiny;
 my $themeFile;
 my $vars={};
@@ -67,6 +68,7 @@ GetOptions(
 	"inline-css|lc!"          => \$inlineCSS,
 	"inline-js|lj!"           => \$inlineJS,
 	"inline-img|li!"          => \$inlineIMG,
+	"inline-players|lp!"      => \$inlinePlayers,
 	"minify-css|mc!"          => \$minifyCSS,
 	"minify-js|mj!"           => \$minifyJS,
 	"minify-html|mh!"         => \$minifyHTML,
@@ -101,9 +103,10 @@ if($dataURI) {#force everything inline; linking doesn't work in data URIs
 	$inlineIMG=1;
 }
 if(defined($inline)) {
-	setIfUnset(\$inlineCSS, $inline);
-	setIfUnset(\$inlineJS,  $inline);
-	setIfUnset(\$inlineIMG, $inline);
+	setIfUnset(\$inlineCSS,     $inline);
+	setIfUnset(\$inlineJS,      $inline);
+	setIfUnset(\$inlineIMG,     $inline);
+	setIfUnset(\$inlinePlayers, $inline);
 }
 #figure out output
 #configure the modules according to CLI options
@@ -112,6 +115,7 @@ my $outputRoot=setOutputFile($outFile);
 TumblTool::TumblrSettings::configure({"settingsFile"=>$settingsFile, "collapseHTML"=>$collapseHTML});
 TumblTool::ContentParser::configure({"content"=>$content, "vars"=>$vars});
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
+TumblTool::TumblrPlayer::configure({"inlineIframe"=>$inlinePlayers});
 TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
 TumblTool::TumblrButton::configure({"collapseHTML"=>$collapseHTML, "stripHTMLComments"=>$stripHTMLComments, "preserveConditionalComments"=>$preserveConditionalComments});
 TumblTool::Preview::configure({"contentRoot"=>$contentRoot, "vars"=>$vars});
