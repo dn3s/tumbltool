@@ -16,13 +16,14 @@ sub processContent
 sub processLines
 {
 	(my $lines, my $name)=@_;
-	my $users={};
+	my $users={}; #a hash of usernames to IDs
 	my $nextId=1;
 	my $odd=1;
 	for my $line (@{$lines}) {
 		$line->{"Alt"}=$odd?"odd":"even";
 		$odd=!$odd;
 		my $label=$line->{"Label"};
+		$line->{"Label"}=$label.": ";
 		$line->{"name"}=$name;
 		if($label) {
 			if(!$users->{$label}) {
