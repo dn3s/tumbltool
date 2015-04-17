@@ -69,6 +69,15 @@ header > nav a:hover
 {
 	color: #fff;
 }
+header > nav a.current
+{
+	color: #888;
+	pointer-events: none;
+}
+header > nav a.current::before
+{
+	opacity: 0.5;
+}
 header > nav a[href^="features"]::before
 {
 	background-position: 0 -16em;
@@ -160,10 +169,10 @@ ul.supported
 {
 	padding: 0;
 	margin-left: 2.5em;
-}
-ul.supported > li
-{
 	list-style-type: none;
+}
+li
+{
 	position: relative;
 	min-height: 1.5em;
 	margin-bottom: 0.5em;
@@ -172,15 +181,16 @@ ul.supported > li
 	background: linear-gradient(to top, #ccc, #ddd 0.25em);
 	padding: 0.25em 0.5em;
 	border-radius: 0.5em;
+	counter-increment: list-counter;
 }
-ul.supported > li::before
+li::before
 {
 	font-size: 2em;
 	content: "";
 	position: absolute;
 	right: 100%;
 	top: 0;
-	background: #000;
+	background: #111;
 	margin-right: 0.125em;
 	width: 1em;
 	height: 1em;
@@ -188,6 +198,10 @@ ul.supported > li::before
 	color: #eee;
 	text-align: center;
 	line-height: 1em;
+}
+li::before
+{
+	content:counter(list-counter);
 }
 ul.supported > li.yes::before
 {
@@ -207,12 +221,12 @@ ul.supported > li.partial::before
 	background: #fa0;
 	line-height: 0.85em;
 }
-ul.supported h1::before,
-ul.supported h1::after
+li h1::before,
+li h1::after
 {
 	display: none;
 }
-ul.supported h1
+li h1
 {
 	margin: 0;
 	padding: 0;
@@ -220,7 +234,7 @@ ul.supported h1
 	background: none;
 	color: #111;
 }
-ul.supported code
+li code
 {
 	background: #eee;
 }
