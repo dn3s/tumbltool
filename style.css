@@ -1,10 +1,11 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,900,300,400italic&subset=latin,latin-ext);
 *
 {
 	margin: 0;
 }
 body
 {
-	font-family: sans-serif;
+	font-family: Lato;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -198,6 +199,7 @@ li::before
 	color: #eee;
 	text-align: center;
 	line-height: 1em;
+	vertical-align: middle;
 }
 li::before
 {
@@ -207,19 +209,17 @@ ul.supported > li.yes::before
 {
 	content: "\2713";
 	background: #8c0;
-	line-height: 1.05em;
 }
 ul.supported > li.no::before
 {
 	content: "\2718";
 	background: #f66;
-	line-height: 1.1em;
 }
 ul.supported > li.partial::before
 {
 	content: "\25D0";
 	background: #fa0;
-	line-height: 0.85em;
+	line-height: 0.75em;
 }
 li h1::before,
 li h1::after
