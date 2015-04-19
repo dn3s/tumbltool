@@ -128,7 +128,7 @@ $themeTxt=collapseLines($themeTxt) if($collapseHTML);
 $themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHTMLComments);
 my $theme=parseTheme($themeTxt);
 TumblTool::HtmlInteraction::configure({"theme"=>$theme});
-TumblTool::HtmlInteraction::insert("</body>","TEST");
+TumblTool::Include::insertIncludes();
 #run appropriate command
 if($command eq "preview") {
 	my $content=parseContent();
