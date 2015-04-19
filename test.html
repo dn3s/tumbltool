@@ -182,7 +182,6 @@ div.collapsed > h3
 			<h2>posts</h2>
 			<div class="block"><h3>block:Posts</h3>{block:Posts}<div class="item">
 				<div><h3>PostType</h3><pre>{PostType}</pre></div>
-
 				<div class="block"><h3>block:Odd</h3>{block:Odd}<div>
 					<div><h3>Odd!</h3></div>
 				</div>{/block:Even}</div>
@@ -204,6 +203,18 @@ div.collapsed > h3
 					<img src="{PostAuthorPortraitURL-128}"></img>
 				</div>
 
+				<div class="block"><h3>block:ContentSource</h3>{block:ContentSource}<div>
+					<div><h3>SourceURL</h3>{SourceURL}</div>
+					<div><h3>SourceTitle</h3>{SourceTitle}</div>
+					<div class="block"><h3>block:SourceLogo</h3>{block:SourceLogo}<div>
+						<div><h3>BlackLogoURL</h3>{BlackLogoURL}</div>
+						<div><h3>LogoWidth</h3>{LogoWidth}</div>
+						<div><h3>LogoHeight</h3>{LogoHeight}</div>
+					</div>{/block:SourceLogo}</div>
+					<div class="block"><h3>block:NoSourceLogo</h3>{block:NoSourceLogo}<div>
+						<h3>No Source Logo!</h3>
+					</div>{/block:NoSourceLogo}</div>
+				</div>{/block:ContentSource}</div>
 				<div class="block"><h3>block:RebloggedFrom</h3>{block:RebloggedFrom}<div>
 					<div><h3>ReblogParentName</h3>{ReblogParentName}</div>
 					<div><h3>ReblogParentTitle</h3>{ReblogParentTitle}</div>
