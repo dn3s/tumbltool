@@ -59,9 +59,14 @@ all local files to be inlined, as relative paths don't work in a data
 URI page.
 
 -i -include <FILES>
-specify CSS or Javscript file(s) to add to the theme, included at the
-special {tumbltool_includes} tag in your theme file (so make sure to add
-it, presumably at the end of your theme's <head>. Multiple files can
+Specify CSS or Javscript file(s) to add to the theme, included at
+the end of your theme's <head>. Multiple files can be specified as a
+space-separated list, or this argument can be added multiple times. You
+can supply absolute paths, relative paths, or URIs.
+
+-ti -tail-include <FILES>
+Specify file(s) to add to the theme, included at the end of your theme's
+<body> (if you're too lazy to use load events). Multiple files can
 be specified as a space-separated list, or this argument can be added
 multiple times. You can supply absolute paths, relative paths, or URIs.
 
