@@ -10,6 +10,7 @@ use TumblTool::TumblrLink;
 use TumblTool::TumblrReblog;
 use TumblTool::TumblrGroup;
 use TumblTool::TextTransforms;
+use TumblTool::TumblrSource;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
@@ -70,6 +71,7 @@ sub parseContent
 	TumblTool::TumblrChat::processContent($blog, $users);
 	TumblTool::TumblrLink::processContent($blog, $users);
 	TumblTool::TumblrReblog::processContent($blog, $users);
+	TumblTool::TumblrSource::processContent($content);
 	return $content->{"blog"};
 }
 1;
