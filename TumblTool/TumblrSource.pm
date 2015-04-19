@@ -13,7 +13,7 @@ sub printVar
 	return $src->{"url"} if($name eq "SourceURL");
 	return $src->{"title"} if($name eq "SourceTitle");
 	return if(!$src->{"logo"});
-	return $src->{"logo"}->{"url"} if($name eq "BlackLogoURL");
+	return imageURL($src->{"logo"}->{"file"}) if($name eq "BlackLogoURL");
 	return $src->{"logo"}->{"width"} if($name eq "LogoWidth");
 	return $src->{"logo"}->{"height"} if($name eq "LogoHeight");
 	return;

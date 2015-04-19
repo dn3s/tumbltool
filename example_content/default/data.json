@@ -3,17 +3,17 @@
 		"Popular News Website": {
 			"url":"http://example.com",
 			"logo":{
-				"width":0,
-				"height":0,
-				"file":""
+				"width":100,
+				"height":100,
+				"file":"popularNewsWebsite.png"
 			}
 		},
 		"Social Media Plus!": {
 			"url":"http://example.com",
 			"logo":{
-				"width":0,
-				"height":0,
-				"file":""
+				"width":120,
+				"height":60,
+				"file":"socialMediaPlus.png"
 			}
 		},
 		"a blog": {
