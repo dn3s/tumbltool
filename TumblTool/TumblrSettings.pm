@@ -18,9 +18,17 @@ sub configure
 }
 sub parseSettings
 {
-	my $tags=TumblTool::HtmlInteraction::extract("<meta\\s*name=\"([a-z]+):([^\"]+)\"\\s*content=(\".+?\")\\s/?>");
-	my $out={};
-	return $out;
+	$settings={};
+	my $tags=TumblTool::HtmlInteraction::extract(
+"<meta\\s*name=\"([a-z]+:[A-z_ -]+)\"(?:\\s*content=\"([^\">]*?)\")?\\s?/?>"
+);
+	foreach my $tag (@{$tags}) {
+		shift(@{$tag});#get rid of first entry which is just the whole match
+		(my $name, my $default)=@{$tag};
+		$name=~s/ //g if($name=~/^if:/);
+		$name=~s/^if://;
+		$settings->{$name}=$default;
+	}
 }
 sub printVar
 {
