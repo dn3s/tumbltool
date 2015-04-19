@@ -18,7 +18,7 @@ sub configure
 }
 sub parseSettings
 {
-	my $tags=TumblTool::HtmlInteraction::extract("<meta\\s*name=(\".+?\")\\s*content=(\".+?\")\\s/?>");
+	my $tags=TumblTool::HtmlInteraction::extract("<meta\\s*name=\"([a-z]+):([^\"]+)\"\\s*content=(\".+?\")\\s/?>");
 	print(Dumper($tags));
 	my $out={};
 	return $out;
