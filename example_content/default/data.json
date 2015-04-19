@@ -1,4 +1,25 @@
 {
+	"sources": {
+		"Popular News Website": {
+			"url":"http;//example.com",
+			"logo":{
+				"width":0,
+				"height":0,
+				"file":""
+			}
+		},
+		"Social Media Plus!": {
+			"url":"http;//example.com",
+			"logo":{
+				"width":0,
+				"height":0,
+				"file":""
+			}
+		},
+		"a blog": {
+			"url":"http;//example.com"
+		}
+	},
 	"users": {
 		"lazerdolfin": {
 			"Title":"Laser Dolphin",
