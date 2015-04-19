@@ -8,6 +8,7 @@ use TumblTool::TextTransforms;
 use TumblTool::TumblrDate;
 use TumblTool::PathUtils;
 use TumblTool::Slurp;
+use TumblTool::HtmlInteraction;
 use base 'Exporter';
 our @EXPORT=('processIncludes');
 my $headIncludes=[];
@@ -73,3 +74,8 @@ sub include
 	return "${n}${before}${include}${after}${n}";
 }
 1;
+sub insertIncludes
+{
+	TumblTool::HtmlInteraction::insert("</head>",processIncludes());
+	TumblTool::HtmlInteraction::insert("</body>",processIncludes(1));
+}

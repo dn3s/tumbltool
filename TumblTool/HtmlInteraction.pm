@@ -54,7 +54,10 @@ sub insert
 			insert($expr, $insert, $code->{"children"}) if($code->{"children"});
 		}
 		else{
-			$code=~s/($expr)/$insert\1/;
+			if((my $match)=$code=~/($expr)/) {
+				(my $before, my $after)=split(/$expr/,$code);
+				$code="$before$insert$match$after";
+			}
 		}
 	}
 }
