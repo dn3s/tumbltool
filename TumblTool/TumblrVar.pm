@@ -14,6 +14,7 @@ use TumblTool::TumblrReblog;
 use TumblTool::TumblrTags;
 use TumblTool::TumblrAnswer;
 use TumblTool::TumblrSettings;
+use TumblTool::TumblrSource;
 use base 'Exporter';
 our @EXPORT=('printVar');
 my $contentRoot='';
@@ -43,6 +44,7 @@ sub printVar
 		TumblTool::TumblrLang::printVar($var, $content) //
 		TumblTool::TumblrLink::printVar($var, $content) //
 		TumblTool::TumblrReblog::printVar($var, $content) //
+		TumblTool::TumblrSource::printVar($var, $content) //
 		((ref($content) eq "HASH")?($content->{$var->{"name"}}):($content))
 	);
 	return tumblrPrefix($var->{"name"}, $text || "");

@@ -9,7 +9,7 @@ sub printVar
 	return if();
 	return $content if($name eq "Tag");
 	return tagURL($content) if($name eq "TagURL");
-	return tagsAsClasses($content->{"Tags"}) if($name eq "TagsAsClasses");
+	return tagsAsClasses($content->{"Tags"}, $content->{"RebloggedFrom"}, $content->{"ContentSource"}) if($name eq "TagsAsClasses");
 	return;
 }
 sub tagURL
@@ -19,12 +19,14 @@ sub tagURL
 }
 sub tagsAsClasses
 {
-	(my $tags)=@_;
+	(my $tags, my $reblog, my $source)=@_;
 	my $out="";
 	foreach my $tag(@{$tags}) {
 		$out.=" " if($out); #add space if this isn't the first one
 		$out.=HTMLAttributeSafe($tag);
 	}
+	$out.=" reblog" if($reblog);
+	$out.=" ".$source->{"url"} if($source);
 	return $out;
 }
 1;
