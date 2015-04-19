@@ -3,41 +3,24 @@ use strict;
 package TumblTool::TumblrSettings;
 use JSON;
 use TumblTool::Slurp;
+use TumblTool::HtmlInteraction;
 use Data::Dumper;
 my $settingsFile="";
 my $collapseHTML=0;
 my $settings={};
+my $theme={};
 sub configure
 {
 	(my $options)=@_;
-	$settingsFile=$options->{"settingsFile"} // $settingsFile;
+	$theme=$options->{"theme"} // $theme;
 	$collapseHTML=$options->{"collapseHTML"} // $collapseHTML;
-	$settings=parseSettings($settingsFile);
+	parseSettings() if($options->{"theme"});
 }
 sub parseSettings
 {
-	(my $settingsFile)=@_;
-	my $settings=decode_json(slurp($settingsFile));
+	my $tags=TumblTool::HtmlInteraction::extract("<meta\\s*name=(\".+?\")\\s*content=(\".+?\")\\s/?>");
+	print(Dumper($tags));
 	my $out={};
-	for my $setting (keys %{$settings}) {
-		my $val=$settings->{$setting};
-		if($setting=~s/^if://) {
-			$setting=~s/ //g;
-		}
-		$out->{$setting}=$val;
-	}
-	return $out;
-}
-sub settingsTags
-{
-	my $n=$collapseHTML?"":"\n";
-	my $out="$n";
-	foreach my $setting (keys %{$settings}) {
-		my $label=$setting;
-		my $default=$settings->{$setting};
-		$default="0" if(!$default and $default=~/^if/);
-		$out.=("<meta name=\"$label\" content=\"$default\" />$n");
-	}
 	return $out;
 }
 sub printVar

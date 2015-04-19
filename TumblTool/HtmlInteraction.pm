@@ -40,7 +40,7 @@ sub extractAll
 	my $result=[];
 	while(my @matches=$txt=~/^(.*?($expr))/) {
 		my $len=length(shift(@matches)); #first match is EVERYTHING.
-		push(@{$result}, @matches);
+		push(@{$result}, \@matches);
 		$txt=substr($txt,$len);
 	}
 	return $result;

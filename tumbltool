@@ -115,7 +115,6 @@ if(defined($inline)) {
 #configure the modules according to CLI options
 my $contentRoot=setContentName($content);
 my $outputRoot=setOutputFile($outFile);
-TumblTool::TumblrSettings::configure({"settingsFile"=>$settingsFile, "collapseHTML"=>$collapseHTML});
 TumblTool::ContentParser::configure({"content"=>$content, "vars"=>$vars});
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::TumblrPlayer::configure({"inlineIframe"=>$inlinePlayers});
@@ -129,6 +128,7 @@ $themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHT
 my $theme=parseTheme($themeTxt);
 TumblTool::HtmlInteraction::configure({"theme"=>$theme});
 TumblTool::Include::insertIncludes();
+TumblTool::TumblrSettings::configure({"theme"=>$theme, "collapseHTML"=>$collapseHTML});
 #run appropriate command
 if($command eq "preview") {
 	my $content=parseContent();

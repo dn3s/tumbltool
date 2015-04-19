@@ -60,14 +60,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 		}
 	}
 	else { #since it's not a block, it's a variable.
-		my $result="";
-		if($block->{"name"} eq "tumbltool_settings") {
-			$result=TumblTool::TumblrSettings::settingsTags();
-		}
-		else {
-			$result=printVar($block, $content);
-		}
-		return $result;
+		return printVar($block, $content);
 	}
 }
 1;
