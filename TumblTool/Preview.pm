@@ -61,10 +61,7 @@ sub renderBlock #used by render to do most of the heavy lifting
 	}
 	else { #since it's not a block, it's a variable.
 		my $result="";
-		if($block->{"name"} eq "tumbltool_includes") {
-			$result=TumblTool::Include::processIncludes();
-		}
-		elsif($block->{"name"} eq "tumbltool_settings") {
+		if($block->{"name"} eq "tumbltool_settings") {
 			$result=TumblTool::TumblrSettings::settingsTags();
 		}
 		else {
