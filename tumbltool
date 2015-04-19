@@ -31,6 +31,7 @@ use TumblTool::ContentParser;
 use TumblTool::Include;
 use TumblTool::TumblrVar;
 use TumblTool::TumblrSettings;
+use TumblTool::HtmlInteraction;
 use Data::Dumper;
 my $command = shift(); #command comes first, not subject to Getopt stuff
 #here are a couple chances to bail out before doing anything
@@ -41,7 +42,8 @@ fail("Unknown command: \"$command\"\n") if(!($command=~/preview|bundle|dbg/));
 my $content='default';
 my $settingsFile;
 my $dataURI;
-my $includes=[];
+my $headIncludes=[];
+my $tailIncludes=[];
 my $inline;
 my $inlineCSS;
 my $inlineJS;
@@ -63,7 +65,8 @@ GetOptions(
 	"settings|s=s"            => \$settingsFile,
 	"data-uri|d"              => \$dataURI,
 	"outfile|o=s"             => \$outFile,
-	"include|i=s{1,}"         =>  $includes,
+	"include|i=s{1,}"         =>  $headIncludes,
+	"tail-include|ti=s{1,}"   =>  $tailIncludes,
 	"inline|l!"               => \$inline,
 	"inline-css|lc!"          => \$inlineCSS,
 	"inline-js|lj!"           => \$inlineJS,
@@ -116,7 +119,7 @@ TumblTool::TumblrSettings::configure({"settingsFile"=>$settingsFile, "collapseHT
 TumblTool::ContentParser::configure({"content"=>$content, "vars"=>$vars});
 TumblTool::ImageURL::configure({"contentRoot"=>$contentRoot, "dataURI"=>$inlineIMG});
 TumblTool::TumblrPlayer::configure({"inlineIframe"=>$inlinePlayers});
-TumblTool::Include::configure({"collapseHTML"=>$collapseHTML,"includes"=>$includes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
+TumblTool::Include::configure({"collapseHTML"=>$collapseHTML, "headIncludes"=>$headIncludes, "tailIncludes"=>$tailIncludes, "inlineCSS"=>$inlineCSS, "inlineJS"=>$inlineJS, "minifyCSS"=>$minifyCSS, "minifyJS"=>$minifyJS});
 TumblTool::TumblrButton::configure({"collapseHTML"=>$collapseHTML, "stripHTMLComments"=>$stripHTMLComments, "preserveConditionalComments"=>$preserveConditionalComments});
 TumblTool::Preview::configure({"contentRoot"=>$contentRoot, "vars"=>$vars});
 #parse theme, compress as needed
@@ -124,6 +127,8 @@ my $themeTxt=slurp($themeFile);
 $themeTxt=collapseLines($themeTxt) if($collapseHTML);
 $themeTxt=removeHTMLComments($themeTxt,$preserveConditionalComments) if($stripHTMLComments);
 my $theme=parseTheme($themeTxt);
+TumblTool::HtmlInteraction::configure({"theme"=>$theme});
+TumblTool::HtmlInteraction::insert("</body>","TEST");
 #run appropriate command
 if($command eq "preview") {
 	my $content=parseContent();

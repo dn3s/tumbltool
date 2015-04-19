@@ -10,7 +10,8 @@ use TumblTool::PathUtils;
 use TumblTool::Slurp;
 use base 'Exporter';
 our @EXPORT=('processIncludes');
-my $includes=[];
+my $headIncludes=[];
+my $tailIncludes=[];
 my $inlineCSS=0;
 my $inlineJS=0;
 my $minifyCSS=0;
@@ -19,7 +20,8 @@ my $collapseHTML=0;
 sub configure
 {
 	my $options=shift();
-	$includes     = $options->{"includes"    } // $includes;
+	$headIncludes     = $options->{"headIncludes"} // $headIncludes;
+	$tailIncludes     = $options->{"tailIncludes"} // $tailIncludes;
 	$inlineCSS    = $options->{"inlineCSS"   } // $inlineCSS;
 	$inlineJS     = $options->{"inlineJS"    } // $inlineJS;
 	$minifyCSS    = $options->{"minifyCSS"   } // $minifyCSS;
@@ -28,13 +30,15 @@ sub configure
 }
 sub dumpConfig
 {
-	my $inc=$includes?"['".join("', '",@{$includes})."']":"[]";
-	return "TumblTool::Include Config:\nincludes=$inc\ninlineCSS='$inlineCSS'\ninlineJS='$inlineJS'\nminifyCSS='$minifyCSS'\nminifyJS='$minifyJS'\ncollapseHTML='$collapseHTML'\n\n";
+	my $hinc=$headIncludes?"['".join("', '",@{$headIncludes})."']":"[]";
+	my $tinc=$tailIncludes?"['".join("', '",@{$tailIncludes})."']":"[]";
+	return "TumblTool::Include Config:\nheadIncludes=$hinc\ntailIncludes=$tinc\ninlineCSS='$inlineCSS'\ninlineJS='$inlineJS'\nminifyCSS='$minifyCSS'\nminifyJS='$minifyJS'\ncollapseHTML='$collapseHTML'\n\n";
 }
 sub processIncludes
 {
+	(my $tail)=@_;
 	my $result="";
-	foreach my $name (@{$includes}) {
+	foreach my $name (@{($tail?$tailIncludes:$headIncludes)}) {
 		$result.=include($name);
 	}
 	return $result;
