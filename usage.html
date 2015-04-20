@@ -32,7 +32,32 @@
 				</li>
 				<li>
 					<h1>Preview Your Theme</h1>
-					<p>Run <code>tumbltool</code> for a detailed list of options. For starters, try <code class="shell">tumbltool preview -theme (your_theme_file) -pipe | xargs firefox</code>. This will pipe a data: URI into firefox.</p>
+					<p>
+						Run <code>tumbltool</code> for a detailed list of options. For starters, try this:
+						<code class="shell">tumbltool preview -theme <span class="placeholder">your_theme_file</span> -pipe | xargs firefox</code>
+					</p><p>
+						This will render your theme and pipe it as a <code>data:URI</code> into firefox.
+					</p><p>
+						To help keep things tidy, you don't need to write all of your code in one theme file. You can write scripts and stylesheets in external files, and have TumblTool take care of including them. <code>-include</code> will include files at the end of your <code>&lt;head></code>, and <code>-tail-include</code> will include files at the end of your <code>&lt;body></code>.
+					</p>
+					<h2>Warning!</h2>
+					<p>
+						Especially if you're doing anything complicated, like previewing with a web server or emailing previews to your client, you'll want to think about how TumblTool includes external files in your previews. TumblTool can either reference the files using <code>&lt;link></code> and <code>&lt;script></code> tags, or read in the files, wrap them in the appropriate tags, and insert them directly into the output inline. Inlining is handy because you don't have to worry about "breaking" relative URLs by moving the file around, or viewing it on another machine. You can specify this behavior with <code>-inline-css</code> and <code>-inline-js</code> (these can be negated as <code>-no-inline-css</code> and <code>-no-inline-js</code>). Aside from simplicity, inlining scripts and stylesheets with TumblTool also has the benefit of optionally minifying your code, with <code>-minify-js</code> and <code>-minify-css</code>.
+					</p><p>
+						TumblTool has a stash of images for things like portraits, photo posts, etc, as well as some HTML files to fill <code>&lt;iframe></code>s for things like video players and like buttons. You can choose how those will be written into your theme (inline, or as URLs) with <code>-inline-image</code>, <code>-no-inline-image</code>,  <code>-inline-iframe</code>, and <code>-no-inline-iframe</code>.
+					</p>
+					<p><strong>If you don't want to worry about all that, just use the more general <code>-inline</code> or <code>-no-inline</code></strong> to specify inlining behavior, and <code>-tiny</code> to minify everything. Or use that as a starting point and override a couple specifics if you want.</p>
+					<h2>An Example</h2>
+					<p> Let's say you are working in a directory accessible by your web server. You have a couple other PCs or VMs or whatever, as well as a mobile device that you want to test out your theme on. In this example, you also have a bunch of scripts and stylesheets to include.</p>
+					<code class="shell">tumbltool preview -theme theme.html -inline -tiny -include fonts.css colors.css layouts.css a-library.js -tail-include scroll-effects.js -out index.html</code>
+					<p>In this example, everything is inline, so you don't have to worry about any file being accessible by your sever other than the preview itself (<code>index.html</code> in this case).
+				</li>
+				<li>
+					<h1>Upload Your Theme</h1>
+					<p>TumblTool has a <code>bundle</code> function, which basically does whatever inlining and minification you want, without rendering a preview. You can run your theme through this before posting to Tumblr for a bit of free optimization.</p>
+					<p>TumblTool's inlining functions can accept URLs too, not just paths. So if you post some stylesheets to Tumblr's static file hosting, and want to pull a JS library from a CDN, just specify the URLs; you don't need to dirty your code with that.</p>
+					<code class="shell">tumbltool bundle -tiny -inline -include http://static.tumblr.com/my-file http://static.tumblr.com/my-file1 https://some-cdn.com/a-library.js fonts.css -tail-include scroll-effects.js</code>
+					<p>In this rather contrived example, <code>fonts.css?</code> will be included inline, and <code>my-file</code>, <code>my-file1</code> and <code>a-library.js</code> will be included by URL in the <code>&lt;head></code>, and <code>scroll-effects.js</code> will be included inline at the end of the <code>&lt;body></code>.</p>
 				</li>
 			</ol>
 		</section><section>
