@@ -11,6 +11,7 @@ use TumblTool::TumblrReblog;
 use TumblTool::TumblrGroup;
 use TumblTool::TextTransforms;
 use TumblTool::TumblrSource;
+use TumblTool::TumblrPostId;
 use base 'Exporter';
 our @EXPORT=('parseContent');
 
@@ -47,11 +48,7 @@ sub parseContent
 	$owner=$content->{"blog"}->{"Owner"};
 	$blog->{"Following"}=1 if($blog->{"Followed"});
 	$blog->{"Twitter"}=1 if($blog->{"TwitterUsername"});
-	my $odd=1;
 	for my $post (@{$blog->{"Posts"}}) {
-		$post->{"Odd"}=$odd;
-		$post->{"Even"}=!$odd;
-		$odd=!$odd;
 		$post->{"Submission"}=1 if($post->{"Submitter"});
 
 		#TumblTool::TumblrTags::wrangleVars($post);
@@ -72,6 +69,7 @@ sub parseContent
 	TumblTool::TumblrLink::processContent($blog, $users);
 	TumblTool::TumblrReblog::processContent($blog, $users);
 	TumblTool::TumblrSource::processContent($content);
+	TumblTool::TumblrPostId::processContent($content);
 	return $content->{"blog"};
 }
 1;
