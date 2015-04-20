@@ -83,13 +83,9 @@ header > nav a[href^="features"]::before
 {
 	background-position: 50% -160px;
 }
-header > nav a[href^="examples"]::before
-{
-	background-position: 50% -200px;
-}
 header > nav a[href^="usage"]::before
 {
-	background-position: 50% -40px;
+	background-position: 50% -200px;
 }
 header > nav a[href^="install"]::before
 {
