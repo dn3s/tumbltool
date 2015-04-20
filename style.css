@@ -27,7 +27,7 @@ code
 	background: #ddd;
 	padding: 0 0.4em;
 	border-radius: 0.2em;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	font-family: DejaVu Sans Mono, monospace;
 }
 header > h1
@@ -237,4 +237,18 @@ li h1
 li code
 {
 	background: #eee;
+}
+code.shell
+{
+	background: #111;
+	color: #ccc;
+}
+code.shell::before
+{
+	content: "# ";
+	color: #888;
+}
+code > .placeholder
+{
+	color: #666;
 }
