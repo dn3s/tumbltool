@@ -56,7 +56,7 @@
 					<p>TumblTool has a <code>bundle</code> function, which basically does whatever inlining and minification you want, without rendering a preview. You can run your theme through this before posting to Tumblr for a bit of free optimization.</p>
 					<p>TumblTool's inlining functions can accept URLs too, not just paths. So if you post some stylesheets to Tumblr's static file hosting, and want to pull a JS library from a CDN, just specify the URLs; you don't need to dirty your code with that.</p>
 					<code class="shell">tumbltool bundle -tiny -inline -include http://static.tumblr.com/my-file http://static.tumblr.com/my-file1 https://some-cdn.com/a-library.js fonts.css -tail-include scroll-effects.js</code>
-					<p>In this rather contrived example, <code>fonts.css?</code> will be included inline, and <code>my-file</code>, <code>my-file1</code> and <code>a-library.js</code> will be included by URL in the <code>&lt;head></code>, and <code>scroll-effects.js</code> will be included inline at the end of the <code>&lt;body></code>.</p>
+					<p>In this rather contrived example, <code>fonts.css</code> will be included inline, and <code>my-file</code>, <code>my-file1</code> and <code>a-library.js</code> will be included by URL in the <code>&lt;head></code>, and <code>scroll-effects.js</code> will be included inline at the end of the <code>&lt;body></code>.</p>
 				</li>
 			</ol>
 		</section><section>
