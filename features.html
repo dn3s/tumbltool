@@ -85,6 +85,10 @@
 					<h1>Content Sources</h1>
 					<p>Basically anything under <a href="https://www.tumblr.com/docs/en/custom_themes#content-sources">Post Sources</a></p>
 				</li>
+				<li class="yes">
+					<h1>Post IDs and Offsets</h1>
+					<p>Things like <code>{block:Post[1-15]}</code>, <code>{PostID}</code>, <code>{block:Even}</code> and <code>{block:Odd}</code>.</p>
+				</li>
 				<li class="partial">
 					<h1>Localization</h1>
 					<p>"Fake" support is provided. Pretends language is always English. Will just print out whatever string it is you want localized, whether or not it is in the <a href="https://www.tumblr.com/docs/en/localizing_themes">dictionary</a></p>
@@ -92,10 +96,6 @@
 				<li class="partial">
 					<h1>Pagination</h1>
 					<p>"next" and "prev" pages are supported, and have corresponding CLI options, but nothing else is supported at the moment, including <a href="https://www.tumblr.com/docs/en/custom_themes#jump-pagination">"jump pagination"</a></p>
-				</li>
-				<li class="partial">
-					<h1>Post IDs and Offsets</h1>
-					<p>Things like <code>{block:Post[1-15]}</code> or <code>{PostID}</code> don't work, but <code>{block:Even}</code> and <code>{block:Odd}</code> do.</p>
 				</li>
 				<li class="partial">
 					<h1>Notes and "Reblog Chains"</h1>
