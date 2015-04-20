@@ -5,7 +5,7 @@ package TumblTool::TumblrChat;
 sub processContent
 {
 	(my $content)=@_;
-	for my $post (@{$content->{"Posts"}})
+	for my $post (@{$content->{"blog"}->{"Posts"}})
 	{
 		if($post->{"PostType"} and $post->{"PostType"} eq "chat" and $post->{"Lines"}) {
 			processLines($post->{"Lines"}, $post->{"PostAuthor"});

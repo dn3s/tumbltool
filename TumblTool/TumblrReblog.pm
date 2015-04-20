@@ -5,7 +5,7 @@ package TumblTool::TumblrReblog;
 sub processContent
 {
 	(my $content)=@_;
-	for my $post (@{$content->{"Posts"}}) {
+	for my $post (@{$content->{"blog"}->{"Posts"}}) {
 		if($post->{"ReblogParentName"}) {
 			$post->{"RebloggedFrom"}=1;
 		}

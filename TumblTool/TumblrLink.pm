@@ -26,7 +26,7 @@ sub printVar
 sub processContent
 {
 	(my $content)=@_;
-	for my $post (@{$content->{"Posts"}}) {
+	for my $post (@{$content->{"blog"}->{"Posts"}}) {
 		if($post->{"URL"}) {
 			$post->{"Host"}=1;
 		}

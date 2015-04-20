@@ -10,8 +10,8 @@ sub config
 }
 sub processContent
 {
-	(my $blog)=@_;
-	if($blog->{"GroupMembers"} and $group) {
+	(my $content)=@_;
+	if($content->{"blog"}->{"GroupMembers"} and $group) {
 		my $group=$blog->{"GroupMembers"};
 		$blog->{"GroupMembers"}=1;
 		$blog->{"GroupMember"}=$group;

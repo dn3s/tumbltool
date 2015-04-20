@@ -64,10 +64,10 @@ sub parseContent
 		}
 		$post->{"HasTags"}=1 if($post->{"Tags"});
 	}
-	TumblTool::TumblrGroup::processContent($blog, $users);
-	TumblTool::TumblrChat::processContent($blog, $users);
-	TumblTool::TumblrLink::processContent($blog, $users);
-	TumblTool::TumblrReblog::processContent($blog, $users);
+	TumblTool::TumblrGroup::processContent($content);
+	TumblTool::TumblrChat::processContent($content);
+	TumblTool::TumblrLink::processContent($content);
+	TumblTool::TumblrReblog::processContent($content);
 	TumblTool::TumblrSource::processContent($content);
 	TumblTool::TumblrPostId::processContent($content);
 	return $content->{"blog"};
