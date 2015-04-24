@@ -262,3 +262,20 @@ code > .placeholder::after
 {
 	content: ">";
 }
+aside
+{
+	border-left: 0.3em solid #333;
+	font-size: 0.9em;
+	margin-left: 0.8em;
+}
+aside h1,
+aside h2,
+aside h3,
+aside p
+{
+	color: #333;
+}
+aside p
+{
+	font-style: italic;
+}
