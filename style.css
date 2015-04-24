@@ -214,9 +214,9 @@ ul.supported > li.no::before
 }
 ul.supported > li.partial::before
 {
-	content: "\25D0";
+	content: "\223C";
 	background: #fa0;
-	line-height: 0.75em;
+	line-height: 0.85em;
 }
 li h1::before,
 li h1::after
